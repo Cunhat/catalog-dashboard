@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useState, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { NextPageWithLayout } from '@/types';
 import { DashboardLayout } from '@/components/Layouts';
 
@@ -9,14 +9,7 @@ const Home: NextPageWithLayout = () => {
     <>
       <div className='h-[200px] w-[400px] bg-cyan-500'></div>
       <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
+     
     </>
   );
 };
