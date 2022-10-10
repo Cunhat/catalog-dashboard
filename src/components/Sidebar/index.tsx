@@ -81,11 +81,12 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
       <div
         onClick={() => setShowItems(!showItems)}
         className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
-          showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe]'
+          showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe] rounded-md'
         } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
       >
         <FontAwesomeIcon icon={icon} className='text-base' />
         <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
+        <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
       </div>
       {showItems && open && (
         <div className='px-2.5 bg-[#efebfe] flex flex-col rounded-b-md'>
