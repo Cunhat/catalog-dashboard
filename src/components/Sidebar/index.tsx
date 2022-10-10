@@ -1,7 +1,7 @@
 import React, { useState, PropsWithChildren } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { formatTitle } from '@/utils/utils';
 
@@ -24,7 +24,8 @@ export const Sidebar: React.FC = () => {
       </SidebarSection>
       <SidebarSeparator />
       <SidebarSection title='CATALOG MANAGEMENT' open={open}>
-        <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
+        {/* <SidebarItem text='Create New Catalog' icon={faPlus} open={open} /> */}
+        <SidebarExpandableItem text='Create New Catalog' icon={faPlus} open={open} />
         <SidebarItem text='List Categories' icon={faSearch} open={open} />
         <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
       </SidebarSection>
@@ -69,6 +70,37 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
   );
 };
 
+const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = ({ icon, text, open }) => {
+  const [showItems, setShowItems] = useState<boolean>(true);
+  const ExpandableItem = () => {
+    return <span className={`text-sm py-2 text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>;
+  };
+
+  return (
+    <div>
+      <div
+        onClick={() => setShowItems(!showItems)}
+        className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
+          showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe]'
+        } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
+      >
+        <FontAwesomeIcon icon={icon} className='text-base' />
+        <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
+      </div>
+      {showItems && open && (
+        <div className='px-2.5 bg-[#efebfe] flex flex-col rounded-b-md'>
+          <ExpandableItem />
+          <ExpandableItem />
+          <ExpandableItem />
+          <ExpandableItem />
+          <ExpandableItem />
+          <ExpandableItem />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const SidebarSeparator: React.FC = () => {
   return <div className='bg-neutral-100 h-[2px]'></div>;
 };
@@ -82,6 +114,7 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
   return (
     <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
       {title && <b className={`p-2.5 text-[#613aeb] text-[8px]`}>{formatTitle(title, open)}</b>}
+      {/* <FontAwesomeIcon icon={faChevronDown} className='text-[10px]' /> */}
       {children}
     </div>
   );
