@@ -14,7 +14,7 @@ export const Sidebar: React.FC = () => {
         initial='collapsed'
         animate={{
           width: open ? '240px' : '80px',
-          //transition: { duration: 0.5, type: 'spring' },
+          transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
         className={`h-full bg-white rounded-xl  flex flex-col gap-2 py-5`}
       >
@@ -112,7 +112,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
           <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
         )}
       </div>
-      <AnimatePresence initial={false} mode='wait'>
+      {/* <AnimatePresence initial={false} mode='wait'> */}
         {showItems && open && (
           <motion.div
             className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
@@ -156,7 +156,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
             <ExpandableItem text='Pricing' />
           </motion.div>
         )}
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
     </div>
   );
 };
@@ -193,12 +193,12 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
   );
 
   return (
-    <AnimatePresence initial={false} mode='wait'>
+    // <AnimatePresence initial={false} mode='wait'>
       <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
         {open && title && <AnimatedTitle text={title} />}
         {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />}
         {children}
       </div>
-    </AnimatePresence>
+    // </AnimatePresence>
   );
 };
