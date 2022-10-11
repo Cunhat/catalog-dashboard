@@ -7,10 +7,17 @@ import { formatTitle } from '@/utils/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Sidebar: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   return (
-    <div className={`h-full bg-white rounded-xl ${open ? 'w-60' : 'w-20'} flex flex-col gap-2 py-5`}>
-      <AnimatePresence initial={false} mode='wait'>
+    <AnimatePresence initial={false} mode='wait'>
+      <motion.div
+        initial='collapsed'
+        animate={{
+          width: open ? '240px' : '80px',
+          //transition: { duration: 0.5, type: 'spring' },
+        }}
+        className={`h-full bg-white rounded-xl  flex flex-col gap-2 py-5`}
+      >
         <div className=' flex justify-center'>
           <motion.div
             className={`${open ? 'ml-auto mr-3' : ''}`}
@@ -29,31 +36,31 @@ export const Sidebar: React.FC = () => {
             ></FontAwesomeIcon>
           </motion.div>
         </div>
-      </AnimatePresence>
 
-      <SidebarSection open={open}>
-        <SidebarItem text='Dashboard' icon={faHouse} open={open} />
-      </SidebarSection>
-      <SidebarSeparator />
-      <SidebarSection title='CATALOG MANAGEMENT' open={open}>
-        {/* <SidebarItem text='Create New Catalog' icon={faPlus} open={open} /> */}
-        <SidebarExpandableItem text='Create New Catalog' icon={faPlus} open={open} />
-        <SidebarItem text='List Categories' icon={faSearch} open={open} />
-        <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-      </SidebarSection>
-      <SidebarSeparator />
-      <SidebarSection title='CATALOG COMPONENTS' open={open}>
-        <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-        <SidebarItem text='List Categories' icon={faSearch} open={open} />
-        <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-      </SidebarSection>
-      <SidebarSeparator />
-      <SidebarSection title='PRODUCT DIMENSIONS' open={open}>
-        <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-        <SidebarItem text='List Categories' icon={faSearch} open={open} />
-        <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-      </SidebarSection>
-    </div>
+        <SidebarSection open={open}>
+          <SidebarItem text='Dashboard' icon={faHouse} open={open} />
+        </SidebarSection>
+        <SidebarSeparator />
+        <SidebarSection title='CATALOG MANAGEMENT' open={open}>
+          {/* <SidebarItem text='Create New Catalog' icon={faPlus} open={open} /> */}
+          <SidebarExpandableItem text='Create New Catalog' icon={faPlus} open={open} />
+          <SidebarItem text='List Categories' icon={faSearch} open={open} />
+          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
+        </SidebarSection>
+        <SidebarSeparator />
+        <SidebarSection title='CATALOG COMPONENTS' open={open}>
+          <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
+          <SidebarItem text='List Categories' icon={faSearch} open={open} />
+          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
+        </SidebarSection>
+        <SidebarSeparator />
+        <SidebarSection title='PRODUCT DIMENSIONS' open={open}>
+          <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
+          <SidebarItem text='List Categories' icon={faSearch} open={open} />
+          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
+        </SidebarSection>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
@@ -66,7 +73,9 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
         }`}
       >
         <FontAwesomeIcon icon={icon} className='text-base' />
-        <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
+        <motion.span animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }} className={`${open ? 'block' : 'hidden'} text-sm`}>
+          {text}
+        </motion.span>
       </div>
     </Link>
   );
@@ -92,7 +101,9 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
         } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
       >
         <FontAwesomeIcon icon={icon} className='text-base' />
-        <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
+        <motion.span animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }} className={`${open ? 'block' : 'hidden'} text-sm`}>
+          {text}
+        </motion.span>
         {!open ? (
           <></>
         ) : showItems ? (
@@ -168,11 +179,26 @@ type SidebarSectionProps = {
 };
 
 const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ title, open, children }) => {
+  
+  const AnimatedTitle: React.FC<{ text: string }> = ({ text }) => (
+    <motion.b
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className={`p-2.5 text-[#613aeb] text-[8px]`}
+    >
+      {text}
+    </motion.b>
+  );
+
   return (
-    <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
-      {title && <b className={`p-2.5 text-[#613aeb] text-[8px]`}>{formatTitle(title, open)}</b>}
-      {/* <FontAwesomeIcon icon={faChevronDown} className='text-[10px]' /> */}
-      {children}
-    </div>
+    <AnimatePresence initial={false} mode='wait'>
+      <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
+        {open && title && <AnimatedTitle text={title} />}
+        {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />}
+        {children}
+      </div>
+    </AnimatePresence>
   );
 };
