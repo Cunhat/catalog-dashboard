@@ -41,16 +41,6 @@ export const Sidebar: React.FC = () => {
         <SidebarItem text='List Categories' icon={faSearch} open={open} />
         <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
       </SidebarSection>
-      <SidebarSection title='DATA REFERENCES' open={open}>
-        <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-        <SidebarItem text='List Categories' icon={faSearch} open={open} />
-        <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-      </SidebarSection>
-      <SidebarSection title='ADMINISTRATION' open={open}>
-        <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-        <SidebarItem text='List Categories' icon={faSearch} open={open} />
-        <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-      </SidebarSection>
     </div>
   );
 };
@@ -71,25 +61,38 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
 };
 
 const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = ({ icon, text, open }) => {
-  const [showItems, setShowItems] = useState<boolean>(true);
-  const ExpandableItem = () => {
-    return <span className={`text-sm py-2 text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>;
+  const [showItems, setShowItems] = useState<boolean>(false);
+
+  const expandItem = () => {
+    if (open) setShowItems(!showItems);
   };
+
+  const ExpandableItem = () => {
+    return (
+      <Link href={'/'}>
+        <span className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>
+      </Link>
+    );
+  };
+
+  React.useEffect(() => {
+    if (!open) setShowItems(false);
+  }, [open]);
 
   return (
     <div>
       <div
-        onClick={() => setShowItems(!showItems)}
+        onClick={expandItem}
         className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
           showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe] rounded-md'
         } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
       >
         <FontAwesomeIcon icon={icon} className='text-base' />
         <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
-        <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
+        {open && <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />}
       </div>
       {showItems && open && (
-        <div className='px-2.5 bg-[#efebfe] flex flex-col rounded-b-md'>
+        <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
           <ExpandableItem />
           <ExpandableItem />
           <ExpandableItem />
