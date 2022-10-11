@@ -1,23 +1,35 @@
 import React, { useState, PropsWithChildren } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { formatTitle } from '@/utils/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Sidebar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div className={`h-full bg-white rounded-xl ${open ? 'w-60' : 'w-20'} flex flex-col gap-2 py-5`}>
-      <div className=' flex justify-center'>
-        <FontAwesomeIcon
-          icon={faAnglesLeft}
-          className={`bg-neutral-100 text-neutral-500 h-3 w-3 rounded-full p-3 flex ${
-            open ? 'ml-auto mr-3' : ''
-          } hover:cursor-pointer hover:text-[#613aeb] hover:bg-[#efebfe]`}
-          onClick={() => setOpen(!open)}
-        ></FontAwesomeIcon>
-      </div>
+      <AnimatePresence initial={false} mode='wait'>
+        <div className=' flex justify-center'>
+          <motion.div
+            className={`${open ? 'ml-auto mr-3' : ''}`}
+            animate={{
+              rotate: open ? 0 : 180,
+              transition: {
+                duration: 0.5,
+                delay: 0.1,
+              },
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faAnglesLeft}
+              className={`bg-neutral-100 text-neutral-500 h-3 w-3 rounded-full p-3 flex  hover:cursor-pointer hover:text-[#613aeb] hover:bg-[#efebfe]`}
+              onClick={() => setOpen(!open)}
+            ></FontAwesomeIcon>
+          </motion.div>
+        </div>
+      </AnimatePresence>
 
       <SidebarSection open={open}>
         <SidebarItem text='Dashboard' icon={faHouse} open={open} />
@@ -67,14 +79,6 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
     if (open) setShowItems(!showItems);
   };
 
-  const ExpandableItem = () => {
-    return (
-      <Link href={'/'}>
-        <span className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>
-      </Link>
-    );
-  };
-
   React.useEffect(() => {
     if (!open) setShowItems(false);
   }, [open]);
@@ -89,19 +93,68 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
       >
         <FontAwesomeIcon icon={icon} className='text-base' />
         <span className={`${open ? 'block' : 'hidden'} text-sm`}>{text}</span>
-        {open && <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />}
+        {!open ? (
+          <></>
+        ) : showItems ? (
+          <FontAwesomeIcon icon={faMinus} className='text-[10px] ml-auto'></FontAwesomeIcon>
+        ) : (
+          <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
+        )}
       </div>
-      {showItems && open && (
-        <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
-          <ExpandableItem />
-          <ExpandableItem />
-          <ExpandableItem />
-          <ExpandableItem />
-          <ExpandableItem />
-          <ExpandableItem />
-        </div>
-      )}
+      <AnimatePresence initial={false} mode='wait'>
+        {showItems && open && (
+          <motion.div
+            className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
+            key='expandItem'
+            initial='initial'
+            animate='open'
+            exit='collapsed'
+            variants={{
+              open: {
+                height: 'auto',
+                opacity: 1,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                    delay: 0.05,
+                  },
+                },
+              },
+              collapsed: {
+                height: 0,
+                opacity: 0,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                  },
+                },
+              },
+              initial: { height: 0, opacity: 0 },
+            }}
+          >
+            <ExpandableItem text='List Products' />
+            <ExpandableItem text='Create New Product' />
+            <ExpandableItem text='Edit Product' />
+            <ExpandableItem text='Configuration Allowed Combos' />
+            <ExpandableItem text='Pricing' />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
+  );
+};
+
+const ExpandableItem: React.FC<{ text: string }> = ({ text }) => {
+  return (
+    <Link href={'/'}>
+      <span className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>
+    </Link>
   );
 };
 
