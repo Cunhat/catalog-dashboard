@@ -1,10 +1,11 @@
-import React, { useState, PropsWithChildren } from 'react';
+import React, { useState, PropsWithChildren, createRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { formatTitle } from '@/utils/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Tooltip } from '@/components/Tooltip';
 
 export const Sidebar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true);
@@ -16,7 +17,7 @@ export const Sidebar: React.FC = () => {
           width: open ? '240px' : '80px',
           transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
-        className={`h-full bg-white rounded-xl  flex flex-col gap-2 py-5`}
+        className={`h-full bg-white rounded-xl flex flex-col gap-2 py-5 overflow-auto`}
       >
         <div className=' flex justify-center'>
           <motion.div
@@ -65,19 +66,28 @@ export const Sidebar: React.FC = () => {
 };
 
 const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = ({ icon, text, open }) => {
+  const [openTooltip, setOpenTooltip] = useState<boolean>(false);
   return (
-    <Link href={'/'}>
-      <div
-        className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 hover:text-[#613aeb] hover:bg-[#efebfe] hover:cursor-pointer rounded-md ${
-          open ? '' : 'justify-center w-10'
-        }`}
-      >
-        <FontAwesomeIcon icon={icon} className='text-base' />
-        <motion.span animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }} className={`${open ? 'block' : 'hidden'} text-sm`}>
-          {text}
-        </motion.span>
-      </div>
-    </Link>
+    <>
+      <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
+      <Link href={'/'}>
+        <div
+        onMouseEnter={() => setOpenTooltip(true)}
+        onMouseLeave={() => setOpenTooltip(false)}
+          className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 hover:text-[#613aeb] hover:bg-[#efebfe] hover:cursor-pointer rounded-md ${
+            open ? '' : 'justify-center w-10'
+          }`}
+        >
+          <FontAwesomeIcon icon={icon} className='text-base' />
+          <motion.span
+            animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }}
+            className={`${open ? 'block' : 'hidden'} text-sm`}
+          >
+            {text}
+          </motion.span>
+        </div>
+      </Link>
+    </>
   );
 };
 
@@ -113,49 +123,49 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
         )}
       </div>
       {/* <AnimatePresence initial={false} mode='wait'> */}
-        {showItems && open && (
-          <motion.div
-            className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
-            key='expandItem'
-            initial='initial'
-            animate='open'
-            exit='collapsed'
-            variants={{
-              open: {
-                height: 'auto',
-                opacity: 1,
-                transition: {
-                  height: {
-                    duration: 0.4,
-                  },
-                  opacity: {
-                    duration: 0.25,
-                    delay: 0.05,
-                  },
+      {showItems && open && (
+        <motion.div
+          className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
+          key='expandItem'
+          initial='initial'
+          animate='open'
+          exit='collapsed'
+          variants={{
+            open: {
+              height: 'auto',
+              opacity: 1,
+              transition: {
+                height: {
+                  duration: 0.4,
+                },
+                opacity: {
+                  duration: 0.25,
+                  delay: 0.05,
                 },
               },
-              collapsed: {
-                height: 0,
-                opacity: 0,
-                transition: {
-                  height: {
-                    duration: 0.4,
-                  },
-                  opacity: {
-                    duration: 0.25,
-                  },
+            },
+            collapsed: {
+              height: 0,
+              opacity: 0,
+              transition: {
+                height: {
+                  duration: 0.4,
+                },
+                opacity: {
+                  duration: 0.25,
                 },
               },
-              initial: { height: 0, opacity: 0 },
-            }}
-          >
-            <ExpandableItem text='List Products' />
-            <ExpandableItem text='Create New Product' />
-            <ExpandableItem text='Edit Product' />
-            <ExpandableItem text='Configuration Allowed Combos' />
-            <ExpandableItem text='Pricing' />
-          </motion.div>
-        )}
+            },
+            initial: { height: 0, opacity: 0 },
+          }}
+        >
+          <ExpandableItem text='List Products' />
+          <ExpandableItem text='Create New Product' />
+          <ExpandableItem text='Edit Product' />
+          <ExpandableItem text='Configuration Allowed Combos' />
+          <ExpandableItem text='Pricing' />
+        </motion.div>
+      )}
       {/* </AnimatePresence> */}
     </div>
   );
@@ -179,7 +189,6 @@ type SidebarSectionProps = {
 };
 
 const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ title, open, children }) => {
-  
   const AnimatedTitle: React.FC<{ text: string }> = ({ text }) => (
     <motion.b
       exit={{ opacity: 0 }}
@@ -194,11 +203,11 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
 
   return (
     // <AnimatePresence initial={false} mode='wait'>
-      <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
-        {open && title && <AnimatedTitle text={title} />}
-        {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />}
-        {children}
-      </div>
+    <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
+      {open && title && <AnimatedTitle text={title} />}
+      {/* {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />} */}
+      {children}
+    </div>
     // </AnimatePresence>
   );
 };
