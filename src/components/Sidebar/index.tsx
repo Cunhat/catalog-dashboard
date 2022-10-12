@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { formatTitle } from '@/utils/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from '@/components/Tooltip';
+import { PopoverMenu } from '@/components/PopoverMenu';
 
 export const Sidebar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true);
@@ -72,8 +73,8 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
       <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
       <Link href={'/'}>
         <div
-        onMouseEnter={() => setOpenTooltip(true)}
-        onMouseLeave={() => setOpenTooltip(false)}
+          onMouseEnter={() => setOpenTooltip(true)}
+          onMouseLeave={() => setOpenTooltip(false)}
           className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 hover:text-[#613aeb] hover:bg-[#efebfe] hover:cursor-pointer rounded-md ${
             open ? '' : 'justify-center w-10'
           }`}
@@ -91,8 +92,37 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
   );
 };
 
+const PopHover: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void; text: string; icon: IconProp }> = ({
+  open,
+  onOpenChange,
+  text,
+  icon,
+}) => {
+  return (
+    <PopoverMenu open={open} onOpenChange={onOpenChange}>
+      <div
+        className='flex h-10  items-center gap-3 p-2.5 
+          bg-[#613aeb] text-white rounded-t-md
+        hover:cursor-pointer'
+      >
+        <FontAwesomeIcon icon={icon} className='text-base' />
+        <span className={`text-sm`}>{text}</span>
+      </div>
+      <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
+        <ExpandableItem text='List Products' />
+        <ExpandableItem text='Create New Product' />
+        <ExpandableItem text='Edit Product' />
+        <ExpandableItem text='Configuration Allowed Combos' />
+        <ExpandableItem text='Pricing' />
+      </div>
+    </PopoverMenu>
+  );
+};
+
 const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = ({ icon, text, open }) => {
   const [showItems, setShowItems] = useState<boolean>(false);
+  const [openTooltip, setOpenTooltip] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const expandItem = () => {
     if (open) setShowItems(!showItems);
@@ -102,8 +132,12 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
     if (!open) setShowItems(false);
   }, [open]);
 
+  //onMouseEnter={() => setOpenMenu(true)} onMouseLeave={() => setOpenMenu(false)}
+
   return (
-    <div>
+    <div onClick={() => setOpenMenu(!openMenu)} onMouseEnter={() => setOpenTooltip(true)} onMouseLeave={() => setOpenTooltip(false)}>
+      <PopHover open={openMenu && !open} onOpenChange={setOpenMenu} text={text} icon={icon} />
+      <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
       <div
         onClick={expandItem}
         className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
