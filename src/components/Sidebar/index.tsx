@@ -15,10 +15,10 @@ export const Sidebar: React.FC = () => {
       <motion.div
         initial='collapsed'
         animate={{
-          width: open ? '240px' : '80px',
+          width: open ? '240px' : '85px',
           transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
-        className={`h-full bg-white rounded-xl flex flex-col gap-2 py-5 overflow-auto`}
+        className={`h-full bg-white rounded-xl flex flex-col py-5 overflow-auto shadow-2xl`}
       >
         <div className=' flex justify-center'>
           <motion.div
@@ -92,7 +92,7 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
   );
 };
 
-const PopHover: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void; text: string; icon: IconProp }> = ({
+const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void; text: string; icon: IconProp }> = ({
   open,
   onOpenChange,
   text,
@@ -132,76 +132,81 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
     if (!open) setShowItems(false);
   }, [open]);
 
-  //onMouseEnter={() => setOpenMenu(true)} onMouseLeave={() => setOpenMenu(false)}
+  console.log(openMenu)
 
   return (
-    <div onClick={() => setOpenMenu(!openMenu)} onMouseEnter={() => setOpenTooltip(true)} onMouseLeave={() => setOpenTooltip(false)}>
-      <PopHover open={openMenu && !open} onOpenChange={setOpenMenu} text={text} icon={icon} />
+    <>
       <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
-      <div
-        onClick={expandItem}
-        className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
-          showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe] rounded-md'
-        } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
-      >
-        <FontAwesomeIcon icon={icon} className='text-base' />
-        <motion.span animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }} className={`${open ? 'block' : 'hidden'} text-sm`}>
-          {text}
-        </motion.span>
-        {!open ? (
-          <></>
-        ) : showItems ? (
-          <FontAwesomeIcon icon={faMinus} className='text-[10px] ml-auto'></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
-        )}
-      </div>
-      {/* <AnimatePresence initial={false} mode='wait'> */}
-      {showItems && open && (
-        <motion.div
-          className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
-          key='expandItem'
-          initial='initial'
-          animate='open'
-          exit='collapsed'
-          variants={{
-            open: {
-              height: 'auto',
-              opacity: 1,
-              transition: {
-                height: {
-                  duration: 0.4,
-                },
-                opacity: {
-                  duration: 0.25,
-                  delay: 0.05,
-                },
-              },
-            },
-            collapsed: {
-              height: 0,
-              opacity: 0,
-              transition: {
-                height: {
-                  duration: 0.4,
-                },
-                opacity: {
-                  duration: 0.25,
-                },
-              },
-            },
-            initial: { height: 0, opacity: 0 },
-          }}
+      <PopoverComp open={openMenu && !open} onOpenChange={setOpenMenu} text={text} icon={icon} />
+      <div onClick={() => setOpenMenu(!openMenu && !open)} onMouseEnter={() => setOpenTooltip(true)} onMouseLeave={() => setOpenTooltip(false)}>
+        <div
+          onClick={expandItem}
+          className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
+            showItems ? 'bg-[#613aeb] text-white rounded-t-md' : ' hover:text-[#613aeb] hover:bg-[#efebfe] rounded-md'
+          } hover:cursor-pointer  ${open ? '' : 'justify-center w-10'} `}
         >
-          <ExpandableItem text='List Products' />
-          <ExpandableItem text='Create New Product' />
-          <ExpandableItem text='Edit Product' />
-          <ExpandableItem text='Configuration Allowed Combos' />
-          <ExpandableItem text='Pricing' />
-        </motion.div>
-      )}
-      {/* </AnimatePresence> */}
-    </div>
+          <FontAwesomeIcon icon={icon} className='text-base' />
+          <motion.span
+            animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }}
+            className={`${open ? 'block' : 'hidden'} text-sm`}
+          >
+            {text}
+          </motion.span>
+          {!open ? (
+            <></>
+          ) : showItems ? (
+            <FontAwesomeIcon icon={faMinus} className='text-[10px] ml-auto'></FontAwesomeIcon>
+          ) : (
+            <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
+          )}
+        </div>
+        {/* <AnimatePresence initial={false} mode='wait'> */}
+        {showItems && open && (
+          <motion.div
+            className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
+            key='expandItem'
+            initial='initial'
+            animate='open'
+            exit='collapsed'
+            variants={{
+              open: {
+                height: 'auto',
+                opacity: 1,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                    delay: 0.05,
+                  },
+                },
+              },
+              collapsed: {
+                height: 0,
+                opacity: 0,
+                transition: {
+                  height: {
+                    duration: 0.4,
+                  },
+                  opacity: {
+                    duration: 0.25,
+                  },
+                },
+              },
+              initial: { height: 0, opacity: 0 },
+            }}
+          >
+            <ExpandableItem text='List Products' />
+            <ExpandableItem text='Create New Product' />
+            <ExpandableItem text='Edit Product' />
+            <ExpandableItem text='Configuration Allowed Combos' />
+            <ExpandableItem text='Pricing' />
+          </motion.div>
+        )}
+        {/* </AnimatePresence> */}
+      </div>
+    </>
   );
 };
 
@@ -236,12 +241,10 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
   );
 
   return (
-    // <AnimatePresence initial={false} mode='wait'>
     <div className={`p-3 flex flex-col ${open ? '' : 'items-center'}`}>
       {open && title && <AnimatedTitle text={title} />}
-      {/* {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />} */}
+      {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />}
       {children}
     </div>
-    // </AnimatePresence>
   );
 };

@@ -7,8 +7,8 @@ import { DashboardLayout } from '@/components/Layouts';
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
-      <div className='h-[200px] w-[400px] bg-cyan-500'></div>
+      <div className='h-[200px] w-[400px] bg-indigo-500'></div>
+      <div className='h-[200px] w-[400px] bg-indigo-500'></div>
      
     </>
   );
