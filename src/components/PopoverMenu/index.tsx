@@ -11,7 +11,7 @@ export const PopoverMenu: React.FC<PropsWithChildren<PropPopoverMenuProps>> = ({
     <PopoverComp.Trigger />
     <PopoverComp.Anchor />
     <PopoverComp.Portal>
-      <PopoverComp.Content sideOffset={20} side="right" className='focus-visible:outline-0 shadow-xl'>{children}</PopoverComp.Content>
+      <PopoverComp.Content sideOffset={20} side="right" className='focus-visible:outline-0'>{children}</PopoverComp.Content>
     </PopoverComp.Portal>
   </PopoverComp.Root>
 );

@@ -100,21 +100,23 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
 }) => {
   return (
     <PopoverMenu open={open} onOpenChange={onOpenChange}>
-      <div
-        className='flex h-10  items-center gap-3 p-2.5 
+      <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, ease: 'easeInOut' }}>
+        <div
+          className='flex h-10  items-center gap-3 p-2.5 
           bg-[#613aeb] text-white rounded-t-md
-        hover:cursor-pointer'
-      >
-        <FontAwesomeIcon icon={icon} className='text-base' />
-        <span className={`text-sm`}>{text}</span>
-      </div>
-      <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
-        <ExpandableItem text='List Products' />
-        <ExpandableItem text='Create New Product' />
-        <ExpandableItem text='Edit Product' />
-        <ExpandableItem text='Configuration Allowed Combos' />
-        <ExpandableItem text='Pricing' />
-      </div>
+        hover:cursor-pointer shadow-xl'
+        >
+          <FontAwesomeIcon icon={icon} className='text-base' />
+          <span className={`text-sm`}>{text}</span>
+        </div>
+        <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
+          <ExpandableItem delayAnimation={false} text='List Products' />
+          <ExpandableItem delayAnimation={false} text='Create New Product' />
+          <ExpandableItem delayAnimation={false} text='Edit Product' />
+          <ExpandableItem delayAnimation={false} text='Configuration Allowed Combos' />
+          <ExpandableItem delayAnimation={false} text='Pricing' />
+        </div>
+      </motion.div>
     </PopoverMenu>
   );
 };
@@ -216,7 +218,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
   );
 };
 
-const ExpandableItem: React.FC<{ text: string }> = ({ text }) => {
+const ExpandableItem: React.FC<{ text: string, delayAnimation?: boolean }> = ({ text, delayAnimation = true }) => {
   return (
     <Link href={'/'}>
       <AnimatePresence>
@@ -224,7 +226,7 @@ const ExpandableItem: React.FC<{ text: string }> = ({ text }) => {
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: 0.35 }}
+          transition={{ duration: 0.1, delay: delayAnimation ? 0.35 : 0 }}
           className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}
         >
           {text}
