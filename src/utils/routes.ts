@@ -1,5 +1,20 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faMinus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHouse,
+  faAddressCard,
+  faPlus,
+  faSearch,
+  faPencil,
+  faBookmark,
+  faTag,
+  faCircleInfo,
+  faSliders,
+  faPaperPlane,
+  faPaperclip,
+  faEye,
+  faMagnifyingGlass,
+  faClone,
+} from '@fortawesome/free-solid-svg-icons';
 
 type SidebarItemLink = 'link';
 type SidebarItemDropdown = 'dropdown';
@@ -57,6 +72,82 @@ export const SideBarRoutes: Array<SideBarSection> = [
         path: '/',
         label: 'Edit Existing Catalogues',
         icon: faPencil,
+        type: 'link',
+      },
+    ],
+  },
+  {
+    sectionName: 'Catalog Components',
+    items: [
+      {
+        label: 'Product Management',
+        icon: faAddressCard,
+        type: 'dropdown',
+        subPaths: [
+          { path: '/', label: 'List Products' },
+          { path: '/', label: 'Create New Product' },
+          { path: '/', label: 'Edit Product' },
+          { path: '/', label: 'Configuration Allowed Combis' },
+          { path: '/', label: 'Pricing' },
+        ],
+      },
+      {
+        path: '/',
+        label: 'Bundle Management',
+        icon: faBookmark,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Discounts Management',
+        icon: faTag,
+        type: 'link',
+      },
+    ],
+  },
+  {
+    sectionName: 'Product Dimensions',
+    items: [
+      {
+        path: '/',
+        label: 'Specification',
+        icon: faCircleInfo,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Configurations Options',
+        icon: faSliders,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Placement',
+        icon: faPaperPlane,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Attachments',
+        icon: faPaperclip,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Visibility',
+        icon: faEye,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Eligibility',
+        icon: faMagnifyingGlass,
+        type: 'link',
+      },
+      {
+        path: '/',
+        label: 'Templates Management',
+        icon: faClone,
         type: 'link',
       },
     ],
