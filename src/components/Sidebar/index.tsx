@@ -132,13 +132,17 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
     if (!open) setShowItems(false);
   }, [open]);
 
-  console.log(openMenu)
+  console.log(openMenu);
 
   return (
     <>
       <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
       <PopoverComp open={openMenu && !open} onOpenChange={setOpenMenu} text={text} icon={icon} />
-      <div onClick={() => setOpenMenu(!openMenu && !open)} onMouseEnter={() => setOpenTooltip(true)} onMouseLeave={() => setOpenTooltip(false)}>
+      <div
+        onClick={() => setOpenMenu(!openMenu && !open)}
+        onMouseEnter={() => setOpenTooltip(true)}
+        onMouseLeave={() => setOpenTooltip(false)}
+      >
         <div
           onClick={expandItem}
           className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
@@ -160,51 +164,53 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
             <FontAwesomeIcon icon={faPlus} className='text-[10px] ml-auto' />
           )}
         </div>
-        {/* <AnimatePresence initial={false} mode='wait'> */}
-        {showItems && open && (
-          <motion.div
-            className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
-            key='expandItem'
-            initial='initial'
-            animate='open'
-            exit='collapsed'
-            variants={{
-              open: {
-                height: 'auto',
-                opacity: 1,
-                transition: {
-                  height: {
-                    duration: 0.4,
-                  },
-                  opacity: {
-                    duration: 0.25,
-                    delay: 0.05,
-                  },
-                },
-              },
-              collapsed: {
-                height: 0,
-                opacity: 0,
-                transition: {
-                  height: {
-                    duration: 0.4,
-                  },
-                  opacity: {
-                    duration: 0.25,
+        <AnimatePresence initial={false} mode='wait'>
+          {showItems && open && (
+            <motion.div
+              className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
+              key='expandItem'
+              initial='initial'
+              animate='open'
+              exit='collapsed'
+              layout
+              variants={{
+                open: {
+                  height: 'auto',
+                  opacity: 1,
+                  transition: {
+                    height: {
+                      duration: 0.4,
+                    },
+                    opacity: {
+                      duration: 0.25,
+                      delay: 0.05,
+                    },
+                    //when: 'beforeChildren',
                   },
                 },
-              },
-              initial: { height: 0, opacity: 0 },
-            }}
-          >
-            <ExpandableItem text='List Products' />
-            <ExpandableItem text='Create New Product' />
-            <ExpandableItem text='Edit Product' />
-            <ExpandableItem text='Configuration Allowed Combos' />
-            <ExpandableItem text='Pricing' />
-          </motion.div>
-        )}
-        {/* </AnimatePresence> */}
+                collapsed: {
+                  height: 0,
+                  opacity: 0,
+                  transition: {
+                    height: {
+                      duration: 0.4,
+                    },
+                    opacity: {
+                      duration: 0.25,
+                    },
+                  },
+                },
+                initial: { height: 0, opacity: 0 },
+              }}
+            >
+              <ExpandableItem text='List Products' />
+              <ExpandableItem text='Create New Product' />
+              <ExpandableItem text='Edit Product' />
+              <ExpandableItem text='Configuration Allowed Combos' />
+              <ExpandableItem text='Pricing' />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
@@ -213,7 +219,17 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
 const ExpandableItem: React.FC<{ text: string }> = ({ text }) => {
   return (
     <Link href={'/'}>
-      <span className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}>{text}</span>
+      <AnimatePresence>
+        <motion.span
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.1, delay: 0.35 }}
+          className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}
+        >
+          {text}
+        </motion.span>
+      </AnimatePresence>
     </Link>
   );
 };
