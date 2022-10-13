@@ -1,12 +1,13 @@
 import React, { useState, PropsWithChildren, createRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faAnglesLeft, faPlus, faSearch, faPencil, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faAnglesLeft, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { formatTitle } from '@/utils/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tooltip } from '@/components/Tooltip';
 import { PopoverMenu } from '@/components/PopoverMenu';
+import { SideBarRoutes, SidebarDropdownItem } from '@/utils/routes';
 
 export const Sidebar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true);
@@ -38,29 +39,19 @@ export const Sidebar: React.FC = () => {
             ></FontAwesomeIcon>
           </motion.div>
         </div>
-
-        <SidebarSection open={open}>
-          <SidebarItem text='Dashboard' icon={faHouse} open={open} />
-        </SidebarSection>
-        <SidebarSeparator />
-        <SidebarSection title='CATALOG MANAGEMENT' open={open}>
-          {/* <SidebarItem text='Create New Catalog' icon={faPlus} open={open} /> */}
-          <SidebarExpandableItem text='Create New Catalog' icon={faPlus} open={open} />
-          <SidebarItem text='List Categories' icon={faSearch} open={open} />
-          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-        </SidebarSection>
-        <SidebarSeparator />
-        <SidebarSection title='CATALOG COMPONENTS' open={open}>
-          <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-          <SidebarItem text='List Categories' icon={faSearch} open={open} />
-          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-        </SidebarSection>
-        <SidebarSeparator />
-        <SidebarSection title='PRODUCT DIMENSIONS' open={open}>
-          <SidebarItem text='Create New Catalog' icon={faPlus} open={open} />
-          <SidebarItem text='List Categories' icon={faSearch} open={open} />
-          <SidebarItem text='Edit Existing Catalog' icon={faPencil} open={open} />
-        </SidebarSection>
+        {SideBarRoutes.map((route, index) => {
+          return (
+            <>
+              <SidebarSection open={open} title={route?.sectionName} key={(route?.sectionName || 'noname') + index}>
+                {route.items.map((item) => {
+                  if (item.type === 'link') return <SidebarItem key={item.label} text={item.label} icon={item.icon} open={open} />;
+                  return <SidebarExpandableItem label={item.label} icon={item.icon} open={open} subPaths={item.subPaths} />;
+                })}
+              </SidebarSection>
+              <SidebarSeparator />
+            </>
+          );
+        })}
       </motion.div>
     </AnimatePresence>
   );
@@ -92,11 +83,12 @@ const SidebarItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = (
   );
 };
 
-const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void; text: string; icon: IconProp }> = ({
+const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void } & Omit<SidebarDropdownItem, 'type'>> = ({
   open,
   onOpenChange,
-  text,
+  label,
   icon,
+  subPaths,
 }) => {
   return (
     <PopoverMenu open={open} onOpenChange={onOpenChange}>
@@ -107,21 +99,21 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
         hover:cursor-pointer shadow-xl'
         >
           <FontAwesomeIcon icon={icon} className='text-base' />
-          <span className={`text-sm`}>{text}</span>
+          <span className={`text-sm`}>{label}</span>
         </div>
         <div className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'>
-          <ExpandableItem delayAnimation={false} text='List Products' />
-          <ExpandableItem delayAnimation={false} text='Create New Product' />
-          <ExpandableItem delayAnimation={false} text='Edit Product' />
-          <ExpandableItem delayAnimation={false} text='Configuration Allowed Combos' />
-          <ExpandableItem delayAnimation={false} text='Pricing' />
+          {subPaths.map((subPath, index) => (
+            <ExpandableItem delayAnimation={false} key={subPath.label + index} text={subPath.label} />
+          ))}
         </div>
       </motion.div>
     </PopoverMenu>
   );
 };
 
-const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: boolean }> = ({ icon, text, open }) => {
+type SidebarExpandableItemProps = Omit<SidebarDropdownItem, 'type'> & { open: boolean };
+
+const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ icon, label, open, subPaths }) => {
   const [showItems, setShowItems] = useState<boolean>(false);
   const [openTooltip, setOpenTooltip] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -138,8 +130,8 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
 
   return (
     <>
-      <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
-      <PopoverComp open={openMenu && !open} onOpenChange={setOpenMenu} text={text} icon={icon} />
+      <Tooltip text={label} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
+      <PopoverComp open={openMenu && !open} onOpenChange={setOpenMenu} label={label} icon={icon} subPaths={subPaths} />
       <div
         onClick={() => setOpenMenu(!openMenu && !open)}
         onMouseEnter={() => setOpenTooltip(true)}
@@ -156,7 +148,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
             animate={{ opacity: open ? 1 : 0, transition: { duration: 0.5 } }}
             className={`${open ? 'block' : 'hidden'} text-sm`}
           >
-            {text}
+            {label}
           </motion.span>
           {!open ? (
             <></>
@@ -169,7 +161,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
         <AnimatePresence initial={false} mode='wait'>
           {showItems && open && (
             <motion.div
-              className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3'
+              className='px-2.5 py-3 bg-[#efebfe] flex flex-col rounded-b-md gap-3 h-auto'
               key='expandItem'
               initial='initial'
               animate='open'
@@ -181,13 +173,12 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
                   opacity: 1,
                   transition: {
                     height: {
-                      duration: 0.4,
+                      duration: 0.3,
                     },
                     opacity: {
                       duration: 0.25,
                       delay: 0.05,
                     },
-                    //when: 'beforeChildren',
                   },
                 },
                 collapsed: {
@@ -195,7 +186,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
                   opacity: 0,
                   transition: {
                     height: {
-                      duration: 0.4,
+                      duration: 0.3,
                     },
                     opacity: {
                       duration: 0.25,
@@ -205,11 +196,9 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
                 initial: { height: 0, opacity: 0 },
               }}
             >
-              <ExpandableItem text='List Products' />
-              <ExpandableItem text='Create New Product' />
-              <ExpandableItem text='Edit Product' />
-              <ExpandableItem text='Configuration Allowed Combos' />
-              <ExpandableItem text='Pricing' />
+              {subPaths.map((subPath, index) => (
+                <ExpandableItem text={subPath.label} key={subPath.label + index} />
+              ))}
             </motion.div>
           )}
         </AnimatePresence>
@@ -218,7 +207,7 @@ const SidebarExpandableItem: React.FC<{ icon: IconProp; text: string; open: bool
   );
 };
 
-const ExpandableItem: React.FC<{ text: string, delayAnimation?: boolean }> = ({ text, delayAnimation = true }) => {
+const ExpandableItem: React.FC<{ text: string; delayAnimation?: boolean }> = ({ text, delayAnimation = true }) => {
   return (
     <Link href={'/'}>
       <AnimatePresence>
@@ -226,7 +215,7 @@ const ExpandableItem: React.FC<{ text: string, delayAnimation?: boolean }> = ({ 
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: delayAnimation ? 0.35 : 0 }}
+          transition={{ duration: 0.1, delay: delayAnimation ? 0.25 : 0 }}
           className={`text-sm text-neutral-500 hover:text-[#613aeb] hover:cursor-pointer`}
         >
           {text}
