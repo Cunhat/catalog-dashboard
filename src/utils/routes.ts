@@ -20,6 +20,7 @@ type SidebarItemLink = 'link';
 type SidebarItemDropdown = 'dropdown';
 
 type SidebarItem = {
+  id: number;
   path: string;
   label: string;
   icon: IconProp;
@@ -27,6 +28,7 @@ type SidebarItem = {
 };
 
 export type SidebarDropdownItem = {
+  id: number;
   label: string;
   icon: IconProp;
   type: SidebarItemDropdown;
@@ -34,14 +36,17 @@ export type SidebarDropdownItem = {
 };
 
 type SideBarSection = {
+  id: number;
   sectionName?: string;
   items: Array<SidebarItem | SidebarDropdownItem>;
 };
 
 export const SideBarRoutes: Array<SideBarSection> = [
   {
+    id: 1,
     items: [
       {
+        id: 1,
         path: '/',
         label: 'Dashboard',
         icon: faHouse,
@@ -50,15 +55,18 @@ export const SideBarRoutes: Array<SideBarSection> = [
     ],
   },
   {
+    id: 2,
     sectionName: 'Catalog Management',
     items: [
       {
+        id: 1,
         path: '/',
         label: 'Create New Catalog',
         icon: faPlus,
         type: 'link',
       },
       {
+        id: 2,
         label: 'List Catalogues',
         icon: faSearch,
         type: 'dropdown',
@@ -69,6 +77,7 @@ export const SideBarRoutes: Array<SideBarSection> = [
         ],
       },
       {
+        id: 3,
         path: '/',
         label: 'Edit Existing Catalogues',
         icon: faPencil,
@@ -77,9 +86,11 @@ export const SideBarRoutes: Array<SideBarSection> = [
     ],
   },
   {
+    id: 3,
     sectionName: 'Catalog Components',
     items: [
       {
+        id: 1,
         label: 'Product Management',
         icon: faAddressCard,
         type: 'dropdown',
@@ -92,12 +103,14 @@ export const SideBarRoutes: Array<SideBarSection> = [
         ],
       },
       {
+        id: 2,
         path: '/',
         label: 'Bundle Management',
         icon: faBookmark,
         type: 'link',
       },
       {
+        id: 3,
         path: '/',
         label: 'Discounts Management',
         icon: faTag,
@@ -106,45 +119,53 @@ export const SideBarRoutes: Array<SideBarSection> = [
     ],
   },
   {
+    id: 4,
     sectionName: 'Product Dimensions',
     items: [
       {
+        id: 1,
         path: '/',
         label: 'Specification',
         icon: faCircleInfo,
         type: 'link',
       },
       {
+        id: 2,
         path: '/',
         label: 'Configurations Options',
         icon: faSliders,
         type: 'link',
       },
       {
+        id: 3,
         path: '/',
         label: 'Placement',
         icon: faPaperPlane,
         type: 'link',
       },
       {
+        id: 4,
         path: '/',
         label: 'Attachments',
         icon: faPaperclip,
         type: 'link',
       },
       {
+        id: 5,
         path: '/',
         label: 'Visibility',
         icon: faEye,
         type: 'link',
       },
       {
+        id: 6,
         path: '/',
         label: 'Eligibility',
         icon: faMagnifyingGlass,
         type: 'link',
       },
       {
+        id: 7,
         path: '/',
         label: 'Templates Management',
         icon: faClone,

@@ -8,5 +8,6 @@
   "useTabs": false,
   "arrowParents": "avoid",
   "jsxSingleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "tailwindCSS.emmetCompletions": true
 }

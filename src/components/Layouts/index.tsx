@@ -1,15 +1,17 @@
 import { FC, PropsWithChildren } from 'react';
 import React from 'react';
 import { Sidebar } from '@/components/Sidebar';
+import { ActionBar } from '@/components/ActionBar';
 
 export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
-  <div className='flex flex-col h-screen bg-slate-100'>
-    <nav className='bg-indigo-500 h-[50px] flex justify-center items-center'>TOP BAR SECTION</nav>
-    <div className='flex flex-1'>
-      <div className=' h-full p-3'>
-        <Sidebar />
-      </div>
-      <main className='flex flex-1 flex-wrap gap-3 p-10'>{children}</main>
+  <div className='box-border flex h-screen flex-col bg-slate-100'>
+    <nav className='flex h-[50px] w-full items-center justify-center '>TOP BAR SECTION</nav>
+    <div className='flex flex-1 gap-3 overflow-hidden p-3'>
+      <Sidebar />
+      <main className='flex flex-1 flex-col'>
+        <ActionBar />
+        <div className='flex flex-1 flex-wrap gap-3 p-10'>{children}</div>
+      </main>
     </div>
   </div>
 );
