@@ -6,11 +6,11 @@ import { ActionBar } from '@/components/ActionBar';
 export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
   <div className='box-border flex h-screen flex-col bg-slate-100'>
     <nav className='flex h-[50px] w-full items-center justify-center '>TOP BAR SECTION</nav>
-    <div className='flex flex-1 gap-3 overflow-hidden p-3'>
+    <div className='flex flex-1 gap-3 p-3'>
       <Sidebar />
-      <main className='flex flex-1 flex-col'>
+      <main className='flex flex-1 flex-col gap-3'>
         <ActionBar />
-        <div className='flex flex-1 flex-wrap gap-3 p-10'>{children}</div>
+        <div className='flex flex-1 flex-wrap gap-3 justify-center'>{children}</div>
       </main>
     </div>
   </div>
