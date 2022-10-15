@@ -17,7 +17,7 @@ export const Sidebar: React.FC = () => {
           width: open ? '250px' : '95px',
           transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
-        className={`flex h-full flex-col overflow-y-auto rounded-xl bg-white py-5 shadow-lg`}
+        className={`flex h-full flex-col overflow-y-auto rounded-xl bg-white py-5 shadow-sm`}
       >
         <div className='sticky flex justify-center'>
           <motion.div

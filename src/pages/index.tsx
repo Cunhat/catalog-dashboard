@@ -27,7 +27,7 @@ const Home: NextPageWithLayout = () => {
                 <TextInput label='Model Code' />
               </div>
               <div className='col-span-2'>
-                <TextInput label='Model Desciption' />
+                <TextInput label='Model Description' />
               </div>
             </div>
             <TextArea label='Product Description' />
