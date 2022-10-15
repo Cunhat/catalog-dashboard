@@ -4,6 +4,7 @@ import { ReactElement } from 'react';
 import { WidgetContainer } from '@/components/WidgetContainer';
 import { Title } from '@/components/Typography/Title';
 import { TextInput } from '@/components/Inputs/TextInput';
+import { TextArea } from '@/components/Inputs/TextArea';
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -15,14 +16,20 @@ const Home: NextPageWithLayout = () => {
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>
               <div className='col-span-1'>
-                <TextInput label='Product Name' />
+                <TextInput label='Product Code' />
               </div>
               <div className='col-span-1'>
-                <TextInput label='Product Name' />
+                <TextInput label='Model Code' />
               </div>
               <div className='col-span-2'>
-                <TextInput label='Product Name' />
+                <TextInput label='Model Desciption' />
               </div>
+            </div>
+            <TextArea label='Product Description' />
+            <TextArea label='Comments' />
+            <div className='grid grid-cols-2 gap-3'>
+              <TextInput label='Commercial Launch Date' />
+              <TextInput label='Supplier' />
             </div>
           </div>
         </WidgetContainer>
