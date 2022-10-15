@@ -1,0 +1,15 @@
+import { Text } from '@/components/Typography/Text';
+
+export const TextInput: React.FC<{ label: string }> = ({ label }) => {
+  return (
+    <div className='flex flex-col gap-1'>
+      <Text text={label} />
+      <input
+        type='text'
+        maxLength={50}
+        className='border-neutral-500 border border-solid rounded-md text-sm text-neutral-500 py-1 px-2 m-0 focus:text-gray-700 hover:border-primary focus:border-primary invalid:border-red-500 focus:outline-none transition
+        ease-in-out'
+      ></input>
+    </div>
+  );
+};

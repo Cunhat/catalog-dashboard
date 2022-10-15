@@ -4,7 +4,7 @@ import { formatTitle } from '@/utils/utils';
 import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SidebarExpandableItem } from './SidebarExpandavleItem';
+import { SidebarExpandableItem } from './SidebarExpandableItem';
 import { SidebarItem } from './SidebarItem';
 
 export const Sidebar: React.FC = () => {
