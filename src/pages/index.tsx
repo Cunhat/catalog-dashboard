@@ -5,6 +5,7 @@ import { WidgetContainer } from '@/components/WidgetContainer';
 import { Title } from '@/components/Typography/Title';
 import { TextInput } from '@/components/Inputs/TextInput';
 import { TextArea } from '@/components/Inputs/TextArea';
+import { Button } from '@/components/Button';
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -12,7 +13,11 @@ const Home: NextPageWithLayout = () => {
       <div className='col-span-2'>
         <WidgetContainer>
           <div className='flex flex-col gap-3'>
-            <Title text='Product Definition' />
+            <div className='flex justify-between items-center'>
+              <Title text='Product Definition' />
+              <Button text='Save' />
+            </div>
+
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>
               <div className='col-span-1'>
