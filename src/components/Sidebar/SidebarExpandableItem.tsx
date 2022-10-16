@@ -35,8 +35,8 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
       >
         <div
           onClick={expandItem}
-          className={`flex h-10  items-center gap-3 p-2.5 text-neutral-500 ${
-            showItems ? 'rounded-t-md bg-primary text-white' : ' rounded-md hover:bg-hover_light hover:text-primary'
+          className={`flex h-10  items-center gap-3 p-2.5  ${
+            showItems ? 'rounded-t-md bg-primary text-white' : 'text-neutral-500 rounded-md hover:bg-hover_light hover:text-primary'
           } hover:cursor-pointer  ${open ? '' : 'w-10 justify-center'} `}
         >
           <FontAwesomeIcon icon={icon} className='text-base' />
