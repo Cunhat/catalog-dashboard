@@ -1,72 +1,41 @@
-import { PropsWithChildren } from 'react';
-import * as RadioGroup from '@radix-ui/react-radio-group';
+type RadioData = Array<{
+  id: string;
+  label: string;
+  value: string;
+}>;
 
-const teste = [
-  {
-    id: '1',
-    label: 'teste',
-    value: 'teste',
-  },
-  {
-    id: '2',
-    label: 'teste2',
-    value: 'teste2',
-  },
-];
-
-export const RadioButtons: React.FC<PropsWithChildren> = ({ children }) => {
+export const RadioButtons: React.FC<{
+  name: string;
+  onChange: (e: any, setSelected: (value: string) => void) => void;
+  selected: string;
+  data: RadioData;
+  setSelected: (value: string) => void;
+}> = ({ name, onChange, selected, data, setSelected }) => {
   return (
-    <div></div>
-    // <div className='flex w-full relative'>
-    //   <input type='radio' id='option0' name='tabs' className='appearance-none' />
-    //   <label
-    //     for='option0'
-    //     className='cursor-pointer w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2'
-    //   >
-    //     OPTION 0
-    //   </label>
-
-    //   <input type='radio' id='option1' name='tabs' className='appearance-none' />
-    //   <label
-    //     for='option1'
-    //     className='cursor-pointer w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2'
-    //   >
-    //     OPTION 1
-    //   </label>
-
-    //   <input type='radio' id='option2' name='tabs' className='appearance-none' />
-    //   <label
-    //     for='option2'
-    //     className='cursor-pointer w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2'
-    //   >
-    //     OPTION 2
-    //   </label>
-
-    //   <input type='radio' id='option3' name='tabs' className='appearance-none' />
-    //   <label
-    //     for='option3'
-    //     className='cursor-pointer w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2'
-    //   >
-    //     OPTION 3
-    //   </label>
-
-    //   <input type='radio' id='option4' name='tabs' className='appearance-none' />
-    //   <label
-    //     for='option4'
-    //     className='cursor-pointer w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full py-2'
-    //   >
-    //     OPTION 4
-    //   </label>
-
-    //   <div className='w-1/6 flex items-center justify-center truncate uppercase select-none font-semibold text-lg rounded-full p-0 h-full bg-indigo-600 absolute transform transition-transform tabAnim'></div>
-    // </div>
+    <ul className='flex flex-wrap w-full'>
+      {data.map((radio, index) => {
+        return (
+          <li className='relative flex flex-1 justify-center' key={radio.id}>
+            <input
+              onChange={(e) => onChange(e, setSelected)}
+              checked={selected === radio.value}
+              className='sr-only peer'
+              type='radio'
+              value={radio.value}
+              name={name}
+              id={radio.id}
+            />
+            <label
+              className={`flex flex-1 justify-center py-2 px-3 bg-white border border-neutral-300 cursor-pointer focus:outline-none hover:bg-hover_light peer-checked:bg-primary text-neutral-500 peer-checked:text-white peer-checked:border-transparent ${
+                index === 0 ? 'rounded-l-lg' : index === data.length - 1 ? 'rounded-r-lg' : ''
+              }`}
+              htmlFor={radio.id}
+            >
+              <p className='text-sm'>{radio.label}</p>
+            </label>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
-
-// {teste.map((item) => (
-//   <RadioGroup.Item value={item.value} id={item.id} className='w-10 h-10 bg-white border border-neutral-500'>
-//     <RadioGroup.Indicator className='w-full h-full justify-center items-center after:bg-violet-500 bg-pink-300'>
-//       {item.label}
-//     </RadioGroup.Indicator>
-//   </RadioGroup.Item>
-// ))}
