@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { DashboardLayout } from '@/components/Layouts';
 import { NextPageWithLayout } from '@/types';
 import { ReactElement } from 'react';
-import { WidgetContainer } from '@/components/WidgetContainer';
+import { WidgetContainer, InnerContainer } from '@/components/WidgetContainer';
 import { Title } from '@/components/Typography/Title';
 import { Text } from '@/components/Typography/Text';
 import { TextInput } from '@/components/Inputs/TextInput';
@@ -11,6 +11,7 @@ import { Button } from '@/components/Button';
 import { VersionIcon } from '@/components/VersionIcon';
 import { RadioButtons } from '@/components/RadioButtons';
 import { SmallWidget } from '@/components/WidgetContainer/SmallWidget';
+import { Tag } from '@/components/Tag';
 
 const data = [
   {
@@ -75,12 +76,11 @@ const Home: NextPageWithLayout = () => {
     <div className='grid grid-cols-3 gap-4 h-full w-full max-w-screen-2xl'>
       <div className='col-span-2'>
         <WidgetContainer>
-          <div className='flex flex-col gap-3'>
+          <InnerContainer>
             <div className='flex justify-between items-center'>
               <Title text='Product Definition' />
               <Button text='Save' />
             </div>
-
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>
               <div className='col-span-1'>
@@ -125,12 +125,12 @@ const Home: NextPageWithLayout = () => {
                 </div>
               </SmallWidget>
             </div>
-          </div>
+          </InnerContainer>
         </WidgetContainer>
       </div>
       <div className='col-span-1 flex flex-col gap-3'>
         <WidgetContainer height='h-fit'>
-          <div className='flex flex-col gap-3'>
+          <InnerContainer>
             <Title text='Product Information' />
             <div className='flex items-center gap-2'>
               <VersionIcon color='primary' />
@@ -149,9 +149,18 @@ const Home: NextPageWithLayout = () => {
                 <TextInput label='Start Date:' />
               </div>
             </div>
-          </div>
+          </InnerContainer>
         </WidgetContainer>
-        <WidgetContainer></WidgetContainer>
+        <WidgetContainer height='h-fit'>
+          <InnerContainer>
+            <Title text='Labels' />
+            <div className='flex gap-2 flex-wrap border border-neutral-300 rounded-2xl px-2 py-1'>
+              <Tag text='New offer' />
+              <Tag text='Retention' />
+              <Tag text='Test Big text' />
+            </div>
+          </InnerContainer>
+        </WidgetContainer>
         <WidgetContainer></WidgetContainer>
         <WidgetContainer></WidgetContainer>
       </div>
