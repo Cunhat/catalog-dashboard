@@ -133,10 +133,10 @@ const Home: NextPageWithLayout = () => {
           <InnerContainer>
             <Title text='Product Information' />
             <div className='flex items-center gap-2'>
-              <VersionIcon color='primary' />
+              <VersionIcon type='primary' />
               <Text text='Product based on template XPTO' />
             </div>
-            <div className='bg-neutral-500 h-[1px] opacity-30'></div>
+            <Separator />
             <div className='grid lg:grid-cols-2 md:grid-cols-2 gap-3 sm:grid-cols-1'>
               <div className=' flex flex-col gap-3'>
                 <Text text='Version Number: 5' />
@@ -161,7 +161,35 @@ const Home: NextPageWithLayout = () => {
             </div>
           </InnerContainer>
         </WidgetContainer>
-        <WidgetContainer></WidgetContainer>
+        <WidgetContainer height='h-fit'>
+          <InnerContainer>
+            <Title text='Version History' />
+            <div className='flex gap-2 items-center'>
+              <VersionIcon type='primary' />
+              <Text text='Version 1 - Archived' />
+            </div>
+            <Separator></Separator>
+            <div className='flex gap-2 items-center'>
+              <VersionIcon type='primary' />
+              <Text text='Version 2 - Published - Retired' />
+            </div>
+            <Separator></Separator>
+            <div className='flex gap-2 items-center'>
+              <VersionIcon type='primary' />
+              <Text text='Version 3 - Published - Active' />
+            </div>
+            <Separator></Separator>
+            <div className='flex gap-2 items-center'>
+              <VersionIcon type='primary' />
+              <Text text='Version 4 - Published - Scheduled' />
+            </div>
+            <Separator></Separator>
+            <div className='flex gap-2 items-center mb-2'>
+              <VersionIcon type='green' />
+              <Text text='Version 5 - Designed' color='text-green-500' />
+            </div>
+          </InnerContainer>
+        </WidgetContainer>
         <WidgetContainer></WidgetContainer>
       </div>
     </div>
@@ -173,3 +201,5 @@ Home.getLayout = function getLayout(page: ReactElement) {
 };
 
 export default Home;
+
+const Separator: React.FC = () => <div className='bg-neutral-500 h-[1px] opacity-30'></div>;

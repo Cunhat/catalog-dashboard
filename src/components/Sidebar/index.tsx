@@ -57,7 +57,7 @@ export const Sidebar: React.FC = () => {
                   );
                 })}
               </SidebarSection>
-              <SidebarSeparator key={(route?.sectionName ?? 'noname') + index + 'separator'} />
+              <Separator key={(route?.sectionName ?? 'noname') + index + 'separator'} />
             </div>
           );
         })}
@@ -66,7 +66,7 @@ export const Sidebar: React.FC = () => {
   );
 };
 
-const SidebarSeparator: React.FC = () => {
+export const Separator: React.FC = () => {
   return <div className='h-[2px] bg-neutral-100'></div>;
 };
 
