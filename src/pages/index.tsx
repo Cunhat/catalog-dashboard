@@ -80,7 +80,7 @@ const Home: NextPageWithLayout = () => {
           <InnerContainer>
             <div className='flex justify-between items-center'>
               <Title text='Product Definition' />
-              <Button fullWidth={false} text='Save' />
+              <Button text='Save' />
             </div>
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>
