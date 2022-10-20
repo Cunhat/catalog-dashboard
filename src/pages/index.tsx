@@ -12,6 +12,7 @@ import { VersionIcon } from '@/components/VersionIcon';
 import { RadioButtons } from '@/components/RadioButtons';
 import { SmallWidget } from '@/components/WidgetContainer/SmallWidget';
 import { Tag } from '@/components/Tag';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const data = [
   {
@@ -79,7 +80,7 @@ const Home: NextPageWithLayout = () => {
           <InnerContainer>
             <div className='flex justify-between items-center'>
               <Title text='Product Definition' />
-              <Button text='Save' />
+              <Button fullWidth={false} text='Save' />
             </div>
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>
@@ -190,7 +191,20 @@ const Home: NextPageWithLayout = () => {
             </div>
           </InnerContainer>
         </WidgetContainer>
-        <WidgetContainer></WidgetContainer>
+        <WidgetContainer height='h-fit'>
+          <InnerContainer>
+            <Title text='Comments' />
+            <Button leftIcon={faCheck} text='New Comment' type='small' />
+            <Separator />
+            <div className='flex flex-col gap-2'>
+              <div className='flex justify-between'>
+                <Text text='User: Francisco Guilherme' />
+                <Text text='Date: 2021-12-23 10:00:002' />
+              </div>
+              <Text text='Will show two window one is query other is graphical window so you can add the table' />
+            </div>
+          </InnerContainer>
+        </WidgetContainer>
       </div>
     </div>
   );
