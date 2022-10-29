@@ -13,6 +13,8 @@ import { RadioButtons } from '@/components/RadioButtons';
 import { SmallWidget } from '@/components/WidgetContainer/SmallWidget';
 import { Tag } from '@/components/Tag';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import Tab from '@/components/Tab';
+import { Details } from '@/components/Pages/Tabs/details';
 
 const data = [
   {
@@ -126,6 +128,31 @@ const Home: NextPageWithLayout = () => {
                 </div>
               </SmallWidget>
             </div>
+            <WidgetContainer>
+              <InnerContainer>
+                <Title text='Product Characterization' />
+                <Tab>
+                  <Tab.TabElement tabTitle='Details'>
+                    <Details />
+                  </Tab.TabElement>
+                  <Tab.TabElement tabTitle='Pricing'>
+                    <span>Pricing</span>
+                  </Tab.TabElement>
+                  <Tab.TabElement tabTitle='Configuration Options'>
+                    <span>Configuration Options</span>
+                  </Tab.TabElement>
+                  <Tab.TabElement tabTitle='Product Specifications'>
+                    <span>Product Specifications</span>
+                  </Tab.TabElement>
+                  <Tab.TabElement tabTitle='Telco Ext.'>
+                    <span>Telco Ext.</span>
+                  </Tab.TabElement>
+                  <Tab.TabElement tabTitle='Finance Ext.'>
+                    <span>Finance Ext.</span>
+                  </Tab.TabElement>
+                </Tab>
+              </InnerContainer>
+            </WidgetContainer>
           </InnerContainer>
         </WidgetContainer>
       </div>
