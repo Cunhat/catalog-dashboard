@@ -25,7 +25,7 @@ const Tab: React.FC<PropsWithChildren> & TabComponent = ({ children }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    let data: Array<TabElementValue> = [];
+    const data: Array<TabElementValue> = [];
 
     React.Children.forEach(children, (element) => {
       if (!React.isValidElement(element)) return;
