@@ -1,7 +1,6 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { ReactElement, ReactNode } from 'react';
 import { Text } from '@/components/Typography/Text';
 import { cva } from 'class-variance-authority';
+import React, { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 
 const tabElementStyle = cva('flex flex-1 justify-center items-center py-1 px-[5px] rounded-lg hover:cursor-pointer text-center', {
   variants: {
