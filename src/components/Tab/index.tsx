@@ -6,7 +6,8 @@ import { cva } from 'class-variance-authority';
 const tabElementStyle = cva('flex flex-1 justify-center items-center py-1 px-[5px] rounded-lg hover:cursor-pointer text-center', {
   variants: {
     activeTab: {
-      true: 'bg-primary text-white ',
+      true: 'bg-primary text-white',
+      false: 'hover:bg-hover_light',
     },
   },
 });
