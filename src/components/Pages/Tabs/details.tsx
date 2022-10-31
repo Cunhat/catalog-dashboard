@@ -1,5 +1,6 @@
 import { Title } from '@/components/Typography/Title';
 import { TextInput } from '@/components/Inputs/TextInput';
+import { Select } from '@/components/Select';
 
 export const Details: React.FC<{}> = () => {
   return (
@@ -7,7 +8,7 @@ export const Details: React.FC<{}> = () => {
       <Title text='Object Dimensions' />
       <div className='grid grid-cols-4 grid-rows-2 gap-3'>
         <div className='col-start-1 col-span-1'>
-          <TextInput label='Unit Systems' />
+          <Select label='Unit Systems' />
         </div>
         <div className='row-start-2 col-span-1'>
           <TextInput label='Item Height' />
