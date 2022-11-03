@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import React from 'react';
-import { Sidebar } from '@/components/Sidebar';
-import { ActionBar } from '@/components/ActionBar';
+import { Sidebar } from '@ui/Sidebar';
+import { ActionBar } from '@ui/ActionBar';
 
 export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => (
   <div className='box-border flex h-screen flex-col bg-slate-100'>

@@ -1,4 +1,4 @@
-import { Text } from '@/components/Typography/Text';
+import { Text } from '@ui/Typography/Text';
 import { cva } from 'class-variance-authority';
 import React, { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 

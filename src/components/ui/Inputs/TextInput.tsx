@@ -1,4 +1,4 @@
-import { Text } from '@/components/Typography/Text';
+import { Text } from '@ui/Typography/Text';
 
 export const TextInput: React.FC<{ label: string }> = ({ label }) => {
   return (

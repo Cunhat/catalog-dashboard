@@ -1,4 +1,4 @@
-import { Text } from '../Typography/Text';
+import { Text } from '@ui/Typography/Text';
 
 export const TextArea: React.FC<{ label: string }> = ({ label }) => {
   return (

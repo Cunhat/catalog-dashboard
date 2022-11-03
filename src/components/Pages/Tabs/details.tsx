@@ -1,6 +1,6 @@
-import { Title } from '@/components/Typography/Title';
-import { TextInput } from '@/components/Inputs/TextInput';
-import { Select } from '@/components/Select';
+import { Title } from '@ui/Typography/Title';
+import { TextInput } from '@ui/Inputs/TextInput';
+import { Select } from '@ui/Select';
 
 export const Details: React.FC<{}> = () => {
   return (

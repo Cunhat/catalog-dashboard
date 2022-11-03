@@ -1,5 +1,5 @@
-import { PopoverMenu } from '@/components/PopoverMenu';
-import { Tooltip } from '@/components/Tooltip';
+import { PopoverMenu } from '@ui/PopoverMenu';
+import { Tooltip } from '@ui/Tooltip';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';

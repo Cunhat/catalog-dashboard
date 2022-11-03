@@ -1,19 +1,19 @@
 import React, { PropsWithChildren, useState } from 'react';
-import { DashboardLayout } from '@/components/Layouts';
+import { DashboardLayout } from '@ui/Layouts';
 import { NextPageWithLayout } from '@/types';
 import { ReactElement } from 'react';
-import { WidgetContainer, InnerContainer } from '@/components/WidgetContainer';
-import { Title } from '@/components/Typography/Title';
-import { Text } from '@/components/Typography/Text';
-import { TextInput } from '@/components/Inputs/TextInput';
-import { TextArea } from '@/components/Inputs/TextArea';
-import { Button } from '@/components/Button';
-import { VersionIcon } from '@/components/VersionIcon';
-import { RadioButtons } from '@/components/RadioButtons';
-import { SmallWidget } from '@/components/WidgetContainer/SmallWidget';
-import { Tag } from '@/components/Tag';
+import { WidgetContainer, InnerContainer } from '@ui/WidgetContainer';
+import { Title } from '@ui/Typography/Title';
+import { Text } from '@ui/Typography/Text';
+import { TextInput } from '@ui/Inputs/TextInput';
+import { TextArea } from '@ui/Inputs/TextArea';
+import { Button } from '@ui/Button';
+import { VersionIcon } from '@ui/VersionIcon';
+import { RadioButtons } from '@ui/RadioButtons';
+import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
+import { Tag } from '@ui/Tag';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import Tab from '@/components/Tab';
+import Tab from '@ui/Tab';
 import { Details } from '@/components/Pages/Tabs/details';
 
 const data = [
