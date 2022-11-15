@@ -15,6 +15,7 @@ import { Tag } from '@ui/Tag';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Tab from '@ui/Tab';
 import { Details } from '@/components/Pages/Tabs/details';
+import { DatePicker } from '@ui/DatePicker';
 
 const data = [
   {
@@ -169,12 +170,12 @@ const Home: NextPageWithLayout = () => {
               <div className=' flex flex-col gap-3'>
                 <Text text='Version Number: 5' />
                 <Text text='Creation Date: 2021-12-19' />
-                <TextInput label='Start Date:' />
+                <DatePicker label='Start Date:' />
               </div>
               <div className=' flex flex-col gap-3'>
                 <Text text='Version Number: 5' />
                 <Text text='Creation Date: 2021-12-19' />
-                <TextInput label='Start Date:' />
+                <DatePicker label='End Date:' />
               </div>
             </div>
           </InnerContainer>

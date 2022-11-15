@@ -129,7 +129,7 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
   subPaths,
 }) => {
   return (
-    <PopoverMenu open={open} onOpenChange={onOpenChange}>
+    <PopoverMenu open={open} side='right' onOpenChange={onOpenChange} sideOffset={20}>
       <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, ease: 'easeInOut' }}>
         <div
           className='flex h-10  items-center gap-3 rounded-t-md 
