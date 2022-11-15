@@ -14,7 +14,11 @@ import {
   faEye,
   faMagnifyingGlass,
   faClone,
+  faEuroSign,
+  faList,
+  faUserCheck,
 } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 type SidebarItemLink = 'link';
 type SidebarItemDropdown = 'dropdown';
@@ -169,6 +173,67 @@ export const SideBarRoutes: Array<SideBarSection> = [
         path: '/',
         label: 'Templates Management',
         icon: faClone,
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 5,
+    sectionName: 'Data References',
+    items: [
+      {
+        id: 1,
+        path: '/',
+        label: 'Channels',
+        icon: faYoutube,
+        type: 'link',
+      },
+      {
+        id: 2,
+        path: '/',
+        label: 'Product Families',
+        icon: faList,
+        type: 'link',
+      },
+      {
+        id: 3,
+        path: '/',
+        label: 'Product Classes',
+        icon: faList,
+        type: 'link',
+      },
+      {
+        id: 4,
+        path: '/',
+        label: 'Product Types',
+        icon: faList,
+        type: 'link',
+      },
+      {
+        id: 5,
+        path: '/',
+        label: 'Product Categories',
+        icon: faList,
+        type: 'link',
+      },
+      {
+        id: 6,
+        path: '/',
+        label: 'Currencies',
+        icon: faEuroSign,
+        type: 'link',
+      },
+    ],
+  },
+  {
+    id: 6,
+    sectionName: 'Administration',
+    items: [
+      {
+        id: 1,
+        path: '/',
+        label: 'User and Permissions Management',
+        icon: faUserCheck,
         type: 'link',
       },
     ],

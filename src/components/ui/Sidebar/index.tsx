@@ -14,7 +14,7 @@ export const Sidebar: React.FC = () => {
       <motion.div
         initial='collapsed'
         animate={{
-          width: open ? '250px' : '95px',
+          width: open ? '250px' : '102px',
           transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
         className={`flex h-full flex-col overflow-y-auto rounded-xl bg-white py-5 shadow-sm`}
@@ -57,7 +57,7 @@ export const Sidebar: React.FC = () => {
                   );
                 })}
               </SidebarSection>
-              <Separator key={(route?.sectionName ?? 'noname') + index + 'separator'} />
+              {index !== SideBarRoutes.length - 1 && <Separator key={(route?.sectionName ?? 'noname') + index + 'separator'} />}
             </div>
           );
         })}
