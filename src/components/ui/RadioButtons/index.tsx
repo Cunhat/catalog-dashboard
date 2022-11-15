@@ -26,7 +26,7 @@ export const RadioButtons: React.FC<{
               id={radio.id}
             />
             <label
-              className={`flex flex-1 justify-center py-2 px-3 bg-white border border-neutral-300 cursor-pointer focus:outline-none hover:bg-hover_light peer-checked:bg-primary text-neutral-500 peer-checked:text-white peer-checked:border-transparent ${
+              className={`flex flex-1 justify-center py-2 px-3 bg-white border border-neutral-300 cursor-pointer focus:outline-none hover:bg-hover peer-checked:bg-primary text-neutral-500 peer-checked:text-white peer-checked:border-transparent ${
                 index === 0 ? 'rounded-l-lg' : index === data.length - 1 ? 'rounded-r-lg' : ''
               }`}
               htmlFor={radio.id}

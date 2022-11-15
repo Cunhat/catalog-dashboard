@@ -36,7 +36,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
         <div
           onClick={expandItem}
           className={`flex h-10  items-center gap-3 p-2.5  ${
-            showItems ? 'rounded-t-md bg-primary text-white' : 'text-neutral-500 rounded-md hover:bg-hover_light hover:text-primary'
+            showItems ? 'rounded-t-md bg-primary text-white' : 'text-neutral-500 rounded-md hover:bg-hover hover:text-primary'
           } hover:cursor-pointer  ${open ? '' : 'w-10 justify-center'} `}
         >
           <FontAwesomeIcon icon={icon} className='text-base' />
@@ -57,7 +57,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
         <AnimatePresence initial={false} mode='wait'>
           {showItems && open && (
             <motion.div
-              className='flex h-auto flex-col gap-3 rounded-b-md bg-hover_light px-2.5 py-3'
+              className='flex h-auto flex-col gap-3 rounded-b-md bg-hover px-2.5 py-3'
               key='expandItem'
               initial='initial'
               animate='open'
@@ -139,7 +139,7 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
           <FontAwesomeIcon icon={icon} className='text-base' />
           <span className={`text-sm`}>{label}</span>
         </div>
-        <div className='flex flex-col gap-3 rounded-b-md bg-hover_light px-2.5 py-3'>
+        <div className='flex flex-col gap-3 rounded-b-md bg-hover px-2.5 py-3'>
           {subPaths.map((subPath, index) => (
             <ExpandableItem delayAnimation={false} key={subPath.label + index} text={subPath.label} />
           ))}

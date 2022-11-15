@@ -18,7 +18,7 @@ export const SidebarItem: React.FC<{
         <div
           onMouseEnter={() => setOpenTooltip(true)}
           onMouseLeave={() => setOpenTooltip(false)}
-          className={`flex h-10  items-center gap-3 rounded-md p-2.5 text-neutral-500 hover:cursor-pointer hover:bg-hover_light hover:text-primary ${
+          className={`flex h-10  items-center gap-3 rounded-md p-2.5 text-neutral-500 dark:text-white dark:hover:bg-primary hover:cursor-pointer hover:bg-hover hover:text-primary ${
             open ? '' : 'w-10 justify-center'
           }`}
         >

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ActionBar: React.FC = () => {
   return (
-    <div className='flex h-10 items-center rounded-xl bg-white p-4 shadow-sm gap-5'>
+    <div className='flex h-10 items-center rounded-xl bg-white p-4 shadow-sm gap-5 dark:bg-dark-widget'>
       <ActionBarItem icon={faFile} text='Versioning' />
     </div>
   );

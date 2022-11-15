@@ -6,7 +6,7 @@ const tabElementStyle = cva('flex flex-1 justify-center items-center py-1 px-[5p
   variants: {
     activeTab: {
       true: 'bg-primary text-white',
-      false: 'hover:bg-hover_light',
+      false: 'hover:bg-hover',
     },
   },
 });

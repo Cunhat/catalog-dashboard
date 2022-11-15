@@ -17,9 +17,9 @@ export const Sidebar: React.FC = () => {
           width: open ? '250px' : '102px',
           transition: { duration: 0.5, type: 'spring', when: 'afterChildren' },
         }}
-        className={`flex h-full flex-col overflow-y-auto rounded-xl bg-white py-5 shadow-sm`}
+        className={`flex h-full flex-col overflow-y-auto rounded-xl bg-white py-5 shadow-sm dark:bg-dark-widget`}
       >
-        <div className='sticky flex justify-center'>
+        <div className='flex justify-center'>
           <motion.div
             className={`${open ? 'ml-auto mr-3' : ''}`}
             animate={{
@@ -32,7 +32,7 @@ export const Sidebar: React.FC = () => {
           >
             <FontAwesomeIcon
               icon={faAnglesLeft}
-              className={`flex h-3 w-3 rounded-full bg-neutral-100 p-3 text-neutral-500  hover:cursor-pointer hover:bg-hover_light hover:text-primary`}
+              className={`flex text-xs rounded-full bg-neutral-100 p-3 text-neutral-500  hover:cursor-pointer hover:bg-hover hover:text-primary dark:bg-neutral-500 dark:text-white`}
               onClick={() => setOpen(!open)}
             ></FontAwesomeIcon>
           </motion.div>
@@ -67,7 +67,7 @@ export const Sidebar: React.FC = () => {
 };
 
 export const Separator: React.FC = () => {
-  return <div className='h-[2px] bg-neutral-100'></div>;
+  return <div className='h-[2px] bg-neutral-100 dark:bg-neutral-500'></div>;
 };
 
 type SidebarSectionProps = {
@@ -82,7 +82,7 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`p-2.5 text-[8px] text-primary`}
+      className={`p-2.5 text-[8px] text-primary dark:text-[#8f90a6]`}
     >
       {text}
     </motion.b>

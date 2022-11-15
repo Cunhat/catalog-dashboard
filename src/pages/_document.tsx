@@ -5,7 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head />
-        <body>
+        <body className='dark'>
           <Main />
           <div id='portal' />
           <NextScript />
