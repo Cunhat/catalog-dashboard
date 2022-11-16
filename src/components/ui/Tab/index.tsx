@@ -6,7 +6,7 @@ const tabElementStyle = cva('flex flex-1 justify-center items-center py-1 px-[5p
   variants: {
     activeTab: {
       true: 'bg-primary text-white',
-      false: 'hover:bg-hover',
+      false: 'hover:bg-hover dark:hover:bg-primary',
     },
   },
 });
@@ -40,7 +40,7 @@ const Tab: React.FC<PropsWithChildren> & TabComponent = ({ children }) => {
 
   return (
     <div>
-      <ul className='flex rounded-t-lg bg-slate-100'>
+      <ul className='flex rounded-t-lg bg-slate-100 dark:bg-dark-background shadow-lg'>
         {tabsData?.map((tab, index) => {
           return (
             <li key={index} className={tabElementStyle({ activeTab: activeTab === index })} onClick={() => setActiveTab(index)}>

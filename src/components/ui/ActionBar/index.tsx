@@ -14,7 +14,7 @@ const ActionBarItem: React.FC<{ icon: IconProp; text: string }> = ({ icon, text 
   return (
     <div className='flex gap-1 items-center hover:cursor-pointer'>
       <FontAwesomeIcon icon={icon} className='text-sm text-neutral-400' />
-      <text className='text-sm text-primary '>{text}</text>
+      <p className='text-sm text-primary '>{text}</p>
     </div>
   );
 };

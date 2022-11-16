@@ -13,6 +13,7 @@ module.exports = {
         dark: {
           background: '#292b2f',
           widget: '#36393f',
+          drops: '#32353a',
         },
       },
     },

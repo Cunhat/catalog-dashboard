@@ -94,21 +94,26 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
             type='text'
             readOnly
             className='border-neutral-300 hover:cursor-pointer border border-solid rounded-md text-sm text-neutral-500 py-1 px-2 m-0 focus:text-neutral-600 hover:border-primary focus:border-primary invalid:border-red-500 focus:outline-none transition
-        ease-in-out'
+        ease-in-out dark:bg-dark-widget dark:text-white'
             placeholder='Select date'
             value={format(selectedDate, 'dd-MM-yyyy')}
             onClick={toggleDatepicker}
           />
           <PopoverMenu side='bottom' open={showDatepicker} onOpenChange={toggleDatepicker}>
-            <div className='bg-white rounded-lg p-4 shadow-lg' style={{ width: '17rem' }}>
+            <div className='bg-white dark:bg-dark-drops rounded-lg p-4 shadow-lg' style={{ width: '17rem' }}>
               <div className='flex justify-between items-center mb-2'>
                 <div>
                   <button
                     type='button'
-                    className='transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full'
+                    className='transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 dark:hover:bg-primary p-1 rounded-full'
                     onClick={decrement}
                   >
-                    <svg className='h-6 w-6 text-gray-500 inline-flex' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <svg
+                      className='h-6 w-6 text-gray-500 inline-flex dark:text-white'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 19l-7-7 7-7' />
                     </svg>
                   </button>
@@ -116,24 +121,29 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
                 {type === 'date' && (
                   <div
                     onClick={showMonthPicker}
-                    className='flex-grow p-1 text-lg font-bold text-neutral-500 cursor-pointer hover:bg-gray-200 rounded-lg'
+                    className='flex-grow p-1 text-lg font-bold text-neutral-500 cursor-pointer hover:bg-gray-200 rounded-lg dark:text-white dark:hover:bg-primary'
                   >
                     <p className='text-center'>{format(datepickerHeaderDate, 'MMMM')}</p>
                   </div>
                 )}
                 <div
                   onClick={showYearPicker}
-                  className='flex-grow p-1 text-lg font-bold text-neutral-500  cursor-pointer hover:bg-gray-200 rounded-lg'
+                  className='flex-grow p-1 text-lg font-bold text-neutral-500 cursor-pointer hover:bg-gray-200 rounded-lg dark:text-white dark:hover:bg-primary'
                 >
                   <p className='text-center'>{format(datepickerHeaderDate, 'yyyy')}</p>
                 </div>
                 <div>
                   <button
                     type='button'
-                    className='transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full'
+                    className='transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 dark:hover:bg-primary p-1 rounded-full'
                     onClick={increment}
                   >
-                    <svg className='h-6 w-6 text-gray-500 inline-flex' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                    <svg
+                      className='h-6 w-6 text-gray-500 dark:text-white inline-flex'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
                       <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
                     </svg>
                   </button>
@@ -144,7 +154,7 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
                   <div className='flex flex-wrap mb-3 -mx-1'>
                     {DAYS.map((day, i) => (
                       <div key={i} style={{ width: '14.26%' }} className='px-1'>
-                        <div className='text-neutral-500 font-medium text-center text-xs'>{day}</div>
+                        <div className='text-neutral-500 dark:text-white font-medium text-center text-xs'>{day}</div>
                       </div>
                     ))}
                   </div>
@@ -157,7 +167,7 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
                         <div
                           onClick={setDateValue(d)}
                           className={`cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
-                            isToday(d) ? 'bg-primary text-white' : 'text-neutral-500  hover:bg-primary hover:text-white'
+                            isToday(d) ? 'bg-primary text-white' : 'text-neutral-500  hover:bg-primary hover:text-white dark:text-white'
                           }`}
                         >
                           {d}

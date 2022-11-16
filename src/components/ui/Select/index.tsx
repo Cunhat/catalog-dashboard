@@ -12,10 +12,10 @@ export const Select: React.FC<{ label: string }> = ({ label }) => {
     <Listbox as='div' className='' value={selectedData} onChange={setSelectedData}>
       {({ open }) => (
         <>
-          <Listbox.Label className='text-sm text-neutral-500'>{label}</Listbox.Label>
+          <Listbox.Label className='text-sm text-neutral-500 dark:text-white'>{label}</Listbox.Label>
           <div className='relative'>
             <span className='inline-block w-full rounded-md'>
-              <Listbox.Button className='cursor-default relative w-full text-sm text-neutral-500 rounded-md border border-neutral-300 bg-white py-1 px-2 pr-6 text-left focus:outline-none focus:shadow-outline-blue focus:border-primary transition ease-in-out duration-150'>
+              <Listbox.Button className='cursor-default relative w-full text-sm text-neutral-500 rounded-md border border-neutral-300 bg-white dark:bg-dark-widget dark:text-white py-1 px-2 pr-6 text-left focus:outline-none focus:shadow-outline-blue focus:border-primary transition ease-in-out duration-150'>
                 <span className='block truncate'>{selectedData}</span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
@@ -29,7 +29,7 @@ export const Select: React.FC<{ label: string }> = ({ label }) => {
               leave='transition ease-in duration-100'
               leaveFrom='opacity-100'
               leaveTo='opacity-0'
-              className='absolute mt-1 w-full rounded-md bg-white shadow-lg'
+              className='absolute mt-1 w-full rounded-md bg-white shadow-lg dark:bg-dark-drops'
             >
               <Listbox.Options static className='max-h-60 rounded-md py-1 leading-6 shadow-xs overflow-auto focus:outline-none text-sm'>
                 {data.map((elem) => (
@@ -37,7 +37,7 @@ export const Select: React.FC<{ label: string }> = ({ label }) => {
                     {({ selected, active }) => (
                       <div
                         className={`${
-                          active ? 'text-white bg-primary' : 'text-neutral-500'
+                          active ? 'text-white bg-primary' : 'text-neutral-500 dark:text-white'
                         } cursor-default select-none relative py-1 pl-3 pr-4`}
                       >
                         <span className={`${selected ? (active ? 'text-white' : 'text-primary') : ''} block truncate`}>{elem}</span>
