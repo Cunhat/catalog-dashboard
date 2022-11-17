@@ -12,10 +12,10 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     jwt: ({ token, user, profile, account }) => {
-      // console.log('account ---->', account);
-      // console.log('profile ---->', profile);
-      // console.log('user ---->', user);
-      // console.log('token ---->', token);
+      console.log('account ---->', account);
+      console.log('profile ---->', profile);
+      console.log('user ---->', user);
+      console.log('token ---->', token);
       if (user) {
         token.id = user.id;
       }
@@ -27,8 +27,8 @@ export const authOptions: NextAuthOptions = {
       }
       // console.log('NextAuth.js session and token', session, token);
 
-      console.log('session', session);
-      console.log('token', token);
+      // console.log('session', session);
+      // console.log('token', token);
       return session;
     },
     async signIn(sign) {
@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
   },
-
+  secret: process.env.AUTH_SECRET,
   providers: [
     Auth0Provider({
       clientId: process.env.AUTH0_CLIENT_ID!,
@@ -44,16 +44,16 @@ export const authOptions: NextAuthOptions = {
       issuer: process.env.AUTH0_ISSUER,
       idToken: true,
 
-      // token: {
-      //   params: {
-      //     audience: process.env.AUTH0_AUDIENCE,
-      //   },
-      // },
-      // authorization: {
-      //   params: {
-      //     audience: process.env.AUTH0_AUDIENCE,
-      //   },
-      // },
+      token: {
+        params: {
+          audience: process.env.AUTH0_AUDIENCE,
+        },
+      },
+      authorization: {
+        params: {
+          audience: process.env.AUTH0_AUDIENCE,
+        },
+      },
     }),
 
     // ...add more providers here
