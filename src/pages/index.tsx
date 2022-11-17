@@ -16,6 +16,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Tab from '@ui/Tab';
 import { Details } from '@/components/Pages/Tabs/details';
 import { DatePicker } from '@ui/DatePicker';
+import { Modal } from '@ui/Modal';
 
 const data = [
   {
@@ -71,6 +72,7 @@ const Home: NextPageWithLayout = () => {
   const [value1, setValue1] = useState('yes');
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
+  const [open, setOpen] = useState(false);
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
@@ -78,12 +80,22 @@ const Home: NextPageWithLayout = () => {
 
   return (
     <div className='grid grid-cols-3 gap-4 h-full w-full max-w-screen-2xl'>
+      <Modal open={open}>
+        <div className='flex flex-col gap-3'>
+          <Title text='Confirmation' />
+          <Text text='Are you sure do you want to save the changes?' />
+          <div className='flex gap-2 ml-auto'>
+            <Button text='Yes' type='small' onClick={() => setOpen(false)} />
+            <Button text='No' type='small' onClick={() => setOpen(false)} />
+          </div>
+        </div>
+      </Modal>
       <div className='col-span-2'>
         <WidgetContainer>
           <InnerContainer>
             <div className='flex justify-between items-center'>
               <Title text='Product Definition' />
-              <Button text='Save' />
+              <Button onClick={() => setOpen(!open)} text='Save' />
             </div>
             <TextInput label='Product Name' />
             <div className='grid grid-cols-4 gap-3'>

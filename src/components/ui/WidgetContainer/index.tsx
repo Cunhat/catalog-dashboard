@@ -1,7 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 
-export const WidgetContainer: React.FC<PropsWithChildren<{ height?: string }>> = ({ children, height = 'h-full' }) => {
-  return <div className={`w-full ${height} rounded-xl bg-white shadow-sm p-3 dark:bg-dark-widget`}>{children}</div>;
+export const WidgetContainer: React.FC<PropsWithChildren<{ height?: string; width?: string }>> = ({
+  children,
+  height = 'h-full',
+  width = 'w-full',
+}) => {
+  return <div className={`${width} ${height} rounded-xl bg-white shadow-sm p-3 dark:bg-dark-widget`}>{children}</div>;
 };
 
 export const InnerContainer: React.FC<PropsWithChildren> = ({ children }) => {
