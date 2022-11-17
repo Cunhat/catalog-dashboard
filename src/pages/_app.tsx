@@ -18,7 +18,7 @@ import { Session } from 'next-auth';
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page) => page);
   return getLayout(
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={(pageProps as any).session}>
       <Component {...pageProps} />
     </SessionProvider>,
   );

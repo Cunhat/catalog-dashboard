@@ -14,27 +14,26 @@ export const authOptions: NextAuthOptions = {
     jwt: ({ token, user, profile, account }) => {
       console.log('account ---->', account);
       console.log('profile ---->', profile);
-      console.log('user ---->', user);
-      console.log('token ---->', token);
+
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     session: ({ session, token, user }) => {
-      if (token) {
-        session.id = token.id;
-      }
+      // if (token) {
+      //   session.id = token.id;
+      // }
       // console.log('NextAuth.js session and token', session, token);
 
       // console.log('session', session);
       // console.log('token', token);
       return session;
     },
-    async signIn(sign) {
-      //console.log('sign', sign);
-      return true;
-    },
+    // async signIn(sign) {
+    //   console.log('sign', sign);
+    //   return true;
+    // },
   },
   secret: process.env.AUTH_SECRET,
   providers: [
