@@ -73,6 +73,7 @@ const Home: NextPageWithLayout = () => {
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const [open, setOpen] = useState(false);
+  const [openComments, setOpenComments] = useState(false);
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
@@ -87,6 +88,16 @@ const Home: NextPageWithLayout = () => {
           <div className='flex gap-2 ml-auto'>
             <Button text='Yes' type='small' onClick={() => setOpen(false)} />
             <Button text='No' type='small' onClick={() => setOpen(false)} />
+          </div>
+        </div>
+      </Modal>
+      <Modal open={openComments}>
+        <div className='flex flex-col gap-5 w-[300px]'>
+          <Title text='Add comments' />
+          <TextArea />
+          <div className='flex gap-2 ml-auto'>
+            <Button text='Add' type='small' onClick={() => setOpenComments(false)} />
+            <Button text='Cancel' type='small' onClick={() => setOpenComments(false)} />
           </div>
         </div>
       </Modal>
@@ -234,7 +245,7 @@ const Home: NextPageWithLayout = () => {
         <WidgetContainer height='h-fit'>
           <InnerContainer>
             <Title text='Comments' />
-            <Button leftIcon={faCheck} text='New Comment' type='small' />
+            <Button leftIcon={faCheck} onClick={() => setOpenComments(!openComments)} text='New Comment' type='small' />
             <Separator />
             <div className='flex flex-col gap-2'>
               <div className='flex justify-between'>
