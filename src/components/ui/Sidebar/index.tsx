@@ -82,7 +82,7 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`p-2.5 text-[8px] text-primary dark:text-[#8f90a6]`}
+      className={`p-2.5 text-[8px] text-primary `}
     >
       {text}
     </motion.b>

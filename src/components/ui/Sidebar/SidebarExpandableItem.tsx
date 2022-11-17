@@ -36,7 +36,9 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
         <div
           onClick={expandItem}
           className={`flex h-10  items-center gap-3 p-2.5  ${
-            showItems ? 'rounded-t-md bg-primary text-white' : 'text-neutral-500 rounded-md hover:bg-hover hover:text-primary'
+            showItems
+              ? 'rounded-t-md bg-primary text-white'
+              : 'text-neutral-500 dark:text-white rounded-md hover:bg-hover hover:text-primary dark:hover:bg-primary'
           } hover:cursor-pointer  ${open ? '' : 'w-10 justify-center'} `}
         >
           <FontAwesomeIcon icon={icon} className='text-base' />
@@ -57,7 +59,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
         <AnimatePresence initial={false} mode='wait'>
           {showItems && open && (
             <motion.div
-              className='flex h-auto flex-col gap-3 rounded-b-md bg-hover px-2.5 py-3'
+              className='flex h-auto flex-col gap-3 rounded-b-md bg-hover  px-2.5 py-3'
               key='expandItem'
               initial='initial'
               animate='open'
@@ -112,7 +114,7 @@ const ExpandableItem: React.FC<{ text: string; delayAnimation?: boolean }> = ({ 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.1, delay: delayAnimation ? 0.25 : 0 }}
-          className={`text-sm text-neutral-500 hover:cursor-pointer hover:text-primary`}
+          className={`text-sm text-neutral-500 hover:cursor-pointer hover:text-primary `}
         >
           {text}
         </motion.span>
