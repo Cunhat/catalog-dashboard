@@ -20,14 +20,15 @@ const ButtonStyles = cva(
   },
 );
 
-export const Button: React.FC<{ text: string; disabled?: boolean; leftIcon?: IconProp; type?: 'small' | 'normal' }> = ({
-  text,
-  disabled,
-  leftIcon,
-  type,
-}) => {
+export const Button: React.FC<{
+  text: string;
+  disabled?: boolean;
+  leftIcon?: IconProp;
+  type?: 'small' | 'normal';
+  onClick?: () => void;
+}> = ({ text, disabled, leftIcon, type, onClick }) => {
   return (
-    <button className={ButtonStyles({ type, disabled })} type='button' disabled={disabled}>
+    <button onClick={onClick} className={ButtonStyles({ type, disabled })} type='button' disabled={disabled}>
       {leftIcon && <FontAwesomeIcon icon={leftIcon} className='mr-2' />}
       {text}
     </button>
