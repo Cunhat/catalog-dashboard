@@ -14,9 +14,13 @@ import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { Tag } from '@ui/Tag';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Tab from '@ui/Tab';
-import { Details } from '@/components/Pages/Tabs/details';
+import { Details } from '@/components/Pages/ProductManagement/Tabs/details';
 import { DatePicker } from '@ui/DatePicker';
 import { Modal } from '@ui/Modal';
+import { ProductInformation } from '@/components/Pages/ProductManagement/Widgets/ProductInformation';
+import { Labels } from '@/components/Pages/ProductManagement/Widgets/Labels';
+import { VersionHistory } from '@/components/Pages/ProductManagement/Widgets/VersionHistory';
+import { Comments } from '@/components/Pages/ProductManagement/Widgets/Comments';
 
 const data = [
   {
@@ -73,7 +77,6 @@ const Home: NextPageWithLayout = () => {
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const [open, setOpen] = useState(false);
-  const [openComments, setOpenComments] = useState(false);
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
@@ -91,16 +94,7 @@ const Home: NextPageWithLayout = () => {
           </div>
         </div>
       </Modal>
-      <Modal open={openComments}>
-        <div className='flex flex-col gap-5 w-[300px]'>
-          <Title text='Add comments' />
-          <TextArea />
-          <div className='flex gap-2 ml-auto'>
-            <Button text='Add' type='small' onClick={() => setOpenComments(false)} />
-            <Button text='Cancel' type='small' onClick={() => setOpenComments(false)} />
-          </div>
-        </div>
-      </Modal>
+
       <div className='col-span-2'>
         <WidgetContainer>
           <InnerContainer>
@@ -181,81 +175,10 @@ const Home: NextPageWithLayout = () => {
         </WidgetContainer>
       </div>
       <div className='col-span-1 flex flex-col gap-3'>
-        <WidgetContainer height='h-fit'>
-          <InnerContainer>
-            <Title text='Product Information' />
-            <div className='flex items-center gap-2'>
-              <VersionIcon type='primary' />
-              <Text text='Product based on template XPTO' />
-            </div>
-            <Separator />
-            <div className='grid lg:grid-cols-2 md:grid-cols-2 gap-3 sm:grid-cols-1'>
-              <div className=' flex flex-col gap-3'>
-                <Text text='Version Number: 5' />
-                <Text text='Creation Date: 2021-12-19' />
-                <DatePicker label='Start Date:' />
-              </div>
-              <div className=' flex flex-col gap-3'>
-                <Text text='Version Number: 5' />
-                <Text text='Creation Date: 2021-12-19' />
-                <DatePicker label='End Date:' />
-              </div>
-            </div>
-          </InnerContainer>
-        </WidgetContainer>
-        <WidgetContainer height='h-fit'>
-          <InnerContainer>
-            <Title text='Labels' />
-            <div className='flex gap-2 flex-wrap border border-neutral-300 rounded-2xl px-2 py-1'>
-              <Tag text='New offer' />
-              <Tag text='Retention' />
-              <Tag text='Test Big text' />
-            </div>
-          </InnerContainer>
-        </WidgetContainer>
-        <WidgetContainer height='h-fit'>
-          <InnerContainer>
-            <Title text='Version History' />
-            <div className='flex gap-2 items-center'>
-              <VersionIcon type='primary' />
-              <Text text='Version 1 - Archived' />
-            </div>
-            <Separator></Separator>
-            <div className='flex gap-2 items-center'>
-              <VersionIcon type='primary' />
-              <Text text='Version 2 - Published - Retired' />
-            </div>
-            <Separator></Separator>
-            <div className='flex gap-2 items-center'>
-              <VersionIcon type='primary' />
-              <Text text='Version 3 - Published - Active' />
-            </div>
-            <Separator></Separator>
-            <div className='flex gap-2 items-center'>
-              <VersionIcon type='primary' />
-              <Text text='Version 4 - Published - Scheduled' />
-            </div>
-            <Separator></Separator>
-            <div className='flex gap-2 items-center mb-2'>
-              <VersionIcon type='green' />
-              <Text text='Version 5 - Designed' color='text-green-500' />
-            </div>
-          </InnerContainer>
-        </WidgetContainer>
-        <WidgetContainer height='h-fit'>
-          <InnerContainer>
-            <Title text='Comments' />
-            <Button leftIcon={faCheck} onClick={() => setOpenComments(!openComments)} text='New Comment' type='small' />
-            <Separator />
-            <div className='flex flex-col gap-2'>
-              <div className='flex justify-between'>
-                <Text text='User: Francisco Guilherme' />
-                <Text text='Date: 2021-12-23 10:00:002' />
-              </div>
-              <Text text='Will show two window one is query other is graphical window so you can add the table' />
-            </div>
-          </InnerContainer>
-        </WidgetContainer>
+        <ProductInformation />
+        <Labels />
+        <VersionHistory />
+        <Comments />
       </div>
     </div>
   );
