@@ -21,6 +21,9 @@ import { ProductInformation } from '@/components/Pages/ProductManagement/Widgets
 import { Labels } from '@/components/Pages/ProductManagement/Widgets/Labels';
 import { VersionHistory } from '@/components/Pages/ProductManagement/Widgets/VersionHistory';
 import { Comments } from '@/components/Pages/ProductManagement/Widgets/Comments';
+import { Pricing } from '@/components/Pages/ProductManagement/Tabs/pricing';
+import { ConfigurationOptions } from '@/components/Pages/ProductManagement/Tabs/ConfigurationOptions';
+import { ProductSpecifications } from '@/components/Pages/ProductManagement/Tabs/ProductSpecifications';
 
 const data = [
   {
@@ -154,13 +157,13 @@ const Home: NextPageWithLayout = () => {
                     <Details />
                   </Tab.TabElement>
                   <Tab.TabElement tabTitle='Pricing'>
-                    <span>Pricing</span>
+                    <Pricing></Pricing>
                   </Tab.TabElement>
                   <Tab.TabElement tabTitle='Configuration Options'>
-                    <span>Configuration Options</span>
+                    <ConfigurationOptions></ConfigurationOptions>
                   </Tab.TabElement>
                   <Tab.TabElement tabTitle='Product Specifications'>
-                    <span>Product Specifications</span>
+                    <ProductSpecifications></ProductSpecifications>
                   </Tab.TabElement>
                   <Tab.TabElement tabTitle='Telco Ext.'>
                     <span>Telco Ext.</span>
