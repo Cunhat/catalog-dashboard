@@ -24,6 +24,8 @@ import { Comments } from '@/components/Pages/ProductManagement/Widgets/Comments'
 import { Pricing } from '@/components/Pages/ProductManagement/Tabs/pricing';
 import { ConfigurationOptions } from '@/components/Pages/ProductManagement/Tabs/ConfigurationOptions';
 import { ProductSpecifications } from '@/components/Pages/ProductManagement/Tabs/ProductSpecifications';
+import { getSession, GetSessionParams } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
 
 const data = [
   {
@@ -193,4 +195,22 @@ Home.getLayout = function getLayout(page: ReactElement) {
 
 export default Home;
 
-const Separator: React.FC = () => <div className='bg-neutral-500 h-[1px] opacity-30'></div>;
+export const getServerSideProps: GetServerSideProps = async (context: GetSessionParams) => {
+  const session = await getSession(context);
+  console.log(session);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/api/auth/signin/auth0',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
