@@ -44,7 +44,13 @@ export const Sidebar: React.FC = () => {
                 {route.items.map((item) => {
                   if (item.type === 'link')
                     return (
-                      <SidebarItem key={'section' + route?.id + 'sidebarItem' + item.id} text={item.label} icon={item.icon} open={open} />
+                      <SidebarItem
+                        path={item.path}
+                        key={'section' + route?.id + 'sidebarItem' + item.id}
+                        text={item.label}
+                        icon={item.icon}
+                        open={open}
+                      />
                     );
                   return (
                     <SidebarExpandableItem

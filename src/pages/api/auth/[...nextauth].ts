@@ -12,9 +12,6 @@ export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
     jwt: ({ token, user, profile, account }) => {
-      console.log('account ---->', account);
-      console.log('profile ---->', profile);
-
       if (user) {
         token.id = user.id;
       }
@@ -34,7 +31,17 @@ export const authOptions: NextAuthOptions = {
     //   console.log('sign', sign);
     //   return true;
     // },
+    async redirect({ url, baseUrl }) {
+      // console.log('url', url);
+      // console.log('baseUrl', baseUrl);
+      // // Allows relative callback URLs
+      // if (url.startsWith('/')) return `${baseUrl}${url}`;
+      // // Allows callback URLs on the same origin
+      // else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
+
   secret: process.env.AUTH_SECRET,
   providers: [
     Auth0Provider({
@@ -57,14 +64,6 @@ export const authOptions: NextAuthOptions = {
 
     // ...add more providers here
   ],
-
-  //adapter: PrismaAdapter(prisma), adapter will not work with credentials provider
-  // pages: {
-  //   signIn: '/login',
-  // },
-  // jwt: {
-  //   secret: process.env.JWT_SECRET,
-  // },
 };
 
 export default NextAuth(authOptions);

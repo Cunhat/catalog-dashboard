@@ -9,12 +9,13 @@ export const SidebarItem: React.FC<{
   icon: IconProp;
   text: string;
   open: boolean;
-}> = ({ icon, text, open }) => {
+  path: string;
+}> = ({ icon, text, open, path }) => {
   const [openTooltip, setOpenTooltip] = useState<boolean>(false);
   return (
     <>
       <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
-      <Link href={'/'}>
+      <Link href={path}>
         <div
           onMouseEnter={() => setOpenTooltip(true)}
           onMouseLeave={() => setOpenTooltip(false)}

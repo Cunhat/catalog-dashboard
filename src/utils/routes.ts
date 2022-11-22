@@ -51,7 +51,7 @@ export const SideBarRoutes: Array<SideBarSection> = [
     items: [
       {
         id: 1,
-        path: '/',
+        path: '/dashboard',
         label: 'Dashboard',
         icon: faHouse,
         type: 'link',
