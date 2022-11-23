@@ -31,15 +31,6 @@ export const authOptions: NextAuthOptions = {
     //   console.log('sign', sign);
     //   return true;
     // },
-    async redirect({ url, baseUrl }) {
-      // console.log('url', url);
-      // console.log('baseUrl', baseUrl);
-      // // Allows relative callback URLs
-      // if (url.startsWith('/')) return `${baseUrl}${url}`;
-      // // Allows callback URLs on the same origin
-      // else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
-    },
   },
 
   secret: process.env.AUTH_SECRET,
@@ -61,9 +52,11 @@ export const authOptions: NextAuthOptions = {
         },
       },
     }),
-
     // ...add more providers here
   ],
+  pages: {
+    signIn: '/login',
+  },
 };
 
 export default NextAuth(authOptions);

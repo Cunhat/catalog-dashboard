@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { getSession, GetSessionParams } from 'next-auth/react';
+import Cookies from 'cookies';
 
 const Dashboard: NextPage = () => {
   return (
@@ -11,14 +12,14 @@ const Dashboard: NextPage = () => {
 
 export default Dashboard;
 
-export const getServerSideProps: GetServerSideProps = async (context: GetSessionParams) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
   console.log(session);
 
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth',
+        destination: '/login',
         permanent: false,
       },
     };

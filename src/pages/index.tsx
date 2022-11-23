@@ -197,12 +197,11 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context: GetSessionParams) => {
   const session = await getSession(context);
-  console.log(session);
 
   if (!session) {
     return {
       redirect: {
-        destination: '/api/auth/signin/auth0',
+        destination: '/login',
         permanent: false,
       },
     };
