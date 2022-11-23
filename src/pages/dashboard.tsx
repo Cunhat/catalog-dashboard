@@ -1,6 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { getSession, GetSessionParams } from 'next-auth/react';
-import Cookies from 'cookies';
 
 const Dashboard: NextPage = () => {
   return (
