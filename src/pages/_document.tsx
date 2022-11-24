@@ -6,6 +6,7 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <title>Catalog App</title>
+          <meta name='description' content='Your Catalog App' />
         </Head>
         <body className=''>
           <Main />
