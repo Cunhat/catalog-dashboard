@@ -4,7 +4,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>Catalog App</title>
+        </Head>
         <body className=''>
           <Main />
           <div id='modalPortal' />
