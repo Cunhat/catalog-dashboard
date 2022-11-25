@@ -49,7 +49,6 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <nav className='flex h-[50px] w-full bg-white shadow-lg items-center justify-end pr-5 gap-3 dark:bg-dark-widget'>
         <DarkThemeSwitcher />
         <FontAwesomeIcon icon={faBell} className='text-lg text-neutral-500 hover:cursor-pointer hover:text-primary' />
-        {/* <UserCard></UserCard> */}
         <Menu data={data}></Menu>
       </nav>
       <div className='flex flex-1 gap-3 overflow-auto p-3'>
@@ -60,26 +59,6 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
         </main>
       </div>
     </div>
-  );
-};
-
-const UserCard = () => {
-  const [open, setOpen] = React.useState<boolean>(false);
-
-  return (
-    <>
-      <div className='flex gap-3 hover:cursor-pointer hover:bg-hover py-1 px-3 rounded-md' onClick={() => setOpen(!open)}>
-        <div className='rounded-full bg-hover p-[6px] flex justify-center items-center border border-primary'>
-          <span className='text-sm text-primary font-bold m-0 p-0'>US</span>
-        </div>
-        <div className='flex flex-col items-center justify-center'>
-          <p className='text-xs text-neutral-500 dark:text-white'>User Name</p>
-        </div>
-        {/* <div className='flex justify-center items-center'>
-        <FontAwesomeIcon icon={faChevronDown} className='text-sm text-neutral-500 hover:cursor-pointer hover:text-primary' />
-      </div> */}
-      </div>
-    </>
   );
 };
 

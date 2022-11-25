@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, forwardRef } from 'react';
 import { Menu as MenuComponent, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { cva } from 'class-variance-authority';
@@ -6,7 +6,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const MenuStyles = cva(
-  'hover:bg-primary flex gap-3 items-center text-left hover:text-white text-neutral-500 dark:text-white p-2 rounded-md hover:cursor-pointer',
+  'hover:bg-primary text-sm flex gap-3 items-center text-left hover:text-white text-neutral-500 dark:text-white p-2 rounded-md hover:cursor-pointer',
 );
 
 export type MenuElement = {
@@ -37,14 +37,14 @@ export const Menu: React.FC<MenuProps> = ({ data }) => {
         <MenuComponent.Items className='absolute p-2 right-0 mt-2 flex flex-col min-w-[200px] w-auto origin-top-right rounded-md bg-white dark:bg-dark-background shadow-xl  focus:outline-none'>
           {data.map((elem) => {
             return elem.type === 'link' ? (
-              <MenuComponent.Item as={Link} href={elem.href} key={'href'}>
+              <MenuComponent.Item as={Link} href={elem.href} key={elem.href}>
                 <div className={MenuStyles()}>
                   {elem.icon && <FontAwesomeIcon icon={elem.icon} />}
                   <span>{elem.label}</span>
                 </div>
               </MenuComponent.Item>
             ) : (
-              <MenuComponent.Item as='button' className={MenuStyles()} onClick={elem.onClick}>
+              <MenuComponent.Item as='button' className={MenuStyles()} key={elem.href} onClick={elem.onClick}>
                 {elem.icon && <FontAwesomeIcon icon={elem.icon} />}
                 <span>{elem.label}</span>
               </MenuComponent.Item>
@@ -56,7 +56,7 @@ export const Menu: React.FC<MenuProps> = ({ data }) => {
   );
 };
 
-const UserMenu = () => {
+const UserMenu = forwardRef((props, ref) => {
   return (
     <MenuComponent.Button className='flex gap-3 hover:cursor-pointer hover:bg-hover py-1 px-3 rounded-md items-center justify-center'>
       <div className='rounded-full bg-hover p-[6px] flex justify-center items-center border border-primary'>
@@ -67,4 +67,4 @@ const UserMenu = () => {
       </div>
     </MenuComponent.Button>
   );
-};
+});

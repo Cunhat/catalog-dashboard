@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import { Title } from '@ui/Typography/Title';
-// import LoginImg from '@/assets/img/login.svg';
 
 const Login: NextPage = () => {
   useEffect(() => {
