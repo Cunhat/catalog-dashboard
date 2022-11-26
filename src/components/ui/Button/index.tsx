@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { cva } from 'class-variance-authority';
 
 const ButtonStyles = cva(
-  'bg-primary shadow-lg text-white py-2 px-3 rounded-lg text-sm focus:outline-none focus:shadow-outline hover:bg-violet-500 hover:cursor-pointer',
+  'bg-primary shadow-lg text-white py-2 px-3 rounded-lg text-sm focus:outline-none focus:shadow-outline hover:bg-primary_hover hover:cursor-pointer',
   {
     variants: {
       type: {

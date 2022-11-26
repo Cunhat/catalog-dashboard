@@ -11,6 +11,7 @@ import { useAtom, atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Menu, type MenuElement } from '@ui/Menu';
 import { signOut } from 'next-auth/react';
+import { Toaster, ToastBar } from 'react-hot-toast';
 
 export const darkModeAtom = atom(false);
 
@@ -46,6 +47,7 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className='box-border flex h-screen flex-col bg-slate-100 dark:bg-dark-background'>
+      <Toaster position='top-right' reverseOrder={false}></Toaster>
       <nav className='flex h-[50px] w-full bg-white shadow-lg items-center justify-end pr-5 gap-3 dark:bg-dark-widget'>
         <DarkThemeSwitcher />
         <FontAwesomeIcon icon={faBell} className='text-lg text-neutral-500 hover:cursor-pointer hover:text-primary' />

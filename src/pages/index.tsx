@@ -26,7 +26,8 @@ import { ConfigurationOptions } from '@/components/Pages/ProductManagement/Tabs/
 import { ProductSpecifications } from '@/components/Pages/ProductManagement/Tabs/ProductSpecifications';
 import { getSession, GetSessionParams } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
-
+import toast from 'react-hot-toast';
+import { notification } from '@ui/Toaster';
 const data = [
   {
     id: 'data1',
@@ -94,7 +95,16 @@ const Home: NextPageWithLayout = () => {
           <Title text='Confirmation' />
           <Text text='Are you sure do you want to save the changes?' />
           <div className='flex gap-2 ml-auto'>
-            <Button text='Yes' type='small' onClick={() => setOpen(false)} />
+            <Button
+              text='Yes'
+              type='small'
+              onClick={() => {
+                notification('success', 'Saved', 'Product saved successfully');
+                notification('error', 'Error', 'Error occured while saving the product');
+                notification('warning', 'Warning', 'Warning occured while saving the product');
+                setOpen(false);
+              }}
+            />
             <Button text='No' type='small' onClick={() => setOpen(false)} />
           </div>
         </div>
