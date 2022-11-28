@@ -2,13 +2,18 @@ import { cva } from 'class-variance-authority';
 import { faCircleExclamation, faCircleInfo, faCircleCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
-const ToasterStyles = cva('flex gap-4 p-3 items-center w-[300px] bg-opacity-75 border-l-4 min-h-[65px] rounded-lg', {
+const ToasterStyles = cva('flex gap-4 p-3 items-center w-[300px] pointer-events-auto bg-opacity-85 border-l-4 min-h-[65px] rounded-lg', {
   variants: {
     type: {
       warning: 'bg-yellow-100 border-yellow-500 text-yellow-500',
       success: 'bg-green-100 border-green-500 text-green-500',
       error: 'bg-red-100 border-red-500 text-red-500',
+    },
+    visible: {
+      true: 'animate-enter',
+      false: 'animate-leave',
     },
   },
   defaultVariants: {
@@ -21,9 +26,10 @@ type ToasterProps = {
   title: string;
   message: string;
   clickHandler: () => void;
+  visible: boolean;
 };
 
-export const Toaster: React.FC<ToasterProps> = ({ type, title, message, clickHandler }) => {
+export const Toaster: React.FC<ToasterProps> = ({ type, title, message, clickHandler, visible }) => {
   const getIcon = () => {
     switch (type) {
       case 'warning':
@@ -36,7 +42,7 @@ export const Toaster: React.FC<ToasterProps> = ({ type, title, message, clickHan
   };
 
   return (
-    <div className={ToasterStyles({ type })}>
+    <div className={ToasterStyles({ type, visible })}>
       <FontAwesomeIcon icon={getIcon()} className='text-2xl ' />
       <div>
         <p className='text-base'>{title}</p>
@@ -48,4 +54,4 @@ export const Toaster: React.FC<ToasterProps> = ({ type, title, message, clickHan
 };
 
 export const notification = (type: ToasterProps['type'], title: string, message: string) =>
-  toast.custom((t) => <Toaster type={type} title={title} message={message} clickHandler={() => toast.remove(t.id)} />);
+  toast.custom((t) => <Toaster visible={t.visible} type={type} title={title} message={message} clickHandler={() => toast.dismiss(t.id)} />);

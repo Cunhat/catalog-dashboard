@@ -100,8 +100,12 @@ const Home: NextPageWithLayout = () => {
               type='small'
               onClick={() => {
                 notification('success', 'Saved', 'Product saved successfully');
-                notification('error', 'Error', 'Error occured while saving the product');
-                notification('warning', 'Warning', 'Warning occured while saving the product');
+                setTimeout(() => {
+                  notification('error', 'Error', 'Error occured while saving the product');
+                }, 500);
+                setTimeout(() => {
+                  notification('warning', 'Warning', 'Warning occured while saving the product');
+                }, 650);
                 setOpen(false);
               }}
             />

@@ -47,7 +47,7 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className='box-border flex h-screen flex-col bg-slate-100 dark:bg-dark-background'>
-      <Toaster position='top-right' reverseOrder={false}></Toaster>
+      <Toaster position='top-right' reverseOrder></Toaster>
       <nav className='flex h-[50px] w-full bg-white shadow-lg items-center justify-end pr-5 gap-3 dark:bg-dark-widget'>
         <DarkThemeSwitcher />
         <FontAwesomeIcon icon={faBell} className='text-lg text-neutral-500 hover:cursor-pointer hover:text-primary' />
