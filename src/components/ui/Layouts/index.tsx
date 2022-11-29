@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import React from 'react';
 import { Sidebar } from '@ui/Sidebar';
 import { ActionBar } from '@ui/ActionBar';
@@ -13,22 +13,11 @@ import { Menu, type MenuElement } from '@ui/Menu';
 import { signOut } from 'next-auth/react';
 import { Toaster, ToastBar } from 'react-hot-toast';
 
-export const darkModeAtom = atom(false);
+//export const darkModeAtom = atom(false);
 
-//export const darkModeAtom = atomWithStorage('darkMode', false);
+export const darkModeAtom = atomWithStorage('darkMode', false);
 
 export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    // console.log(darkMode);
-  }, [darkMode]);
-
   const data: Array<MenuElement> = [
     {
       label: 'Log out',
@@ -64,8 +53,20 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-const DarkThemeSwitcher = () => {
+const DarkThemeSwitcher: React.FC<{}> = ({}) => {
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const [canRender, setCanRender] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    setCanRender(true);
+  }, [darkMode]);
+
+  if (!canRender) return null;
 
   return <Toggle enabled={darkMode} setEnabled={() => setDarkMode(!darkMode)} />;
 };
