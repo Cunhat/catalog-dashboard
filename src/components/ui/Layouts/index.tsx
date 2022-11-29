@@ -32,9 +32,9 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const data: Array<MenuElement> = [
     {
       label: 'Log out',
-      href: '/logout',
-      type: 'button',
-      onClick: () => signOut(),
+      href: process.env.LOGOUT_URL!,
+      type: 'link',
+      //onClick: () => signOut(),
       icon: faRightFromBracket,
     },
     {

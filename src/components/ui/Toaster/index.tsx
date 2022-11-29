@@ -2,7 +2,6 @@ import { cva } from 'class-variance-authority';
 import { faCircleExclamation, faCircleInfo, faCircleCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import toast from 'react-hot-toast';
-import { useEffect } from 'react';
 
 const ToasterStyles = cva('flex gap-4 p-3 items-center w-[300px] pointer-events-auto bg-opacity-85 border-l-4 min-h-[65px] rounded-lg', {
   variants: {
