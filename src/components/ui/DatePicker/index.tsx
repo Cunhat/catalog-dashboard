@@ -85,6 +85,17 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
     getDayCount(datepickerHeaderDate);
   }, [datepickerHeaderDate]);
 
+  const teste = (i: any) => {
+    // console.log(i);
+    // console.log(datepickerHeaderDate.getFullYear());
+    console.log(datepickerHeaderDate.getDate());
+
+    //console.log(format(new Date(datepickerHeaderDate.getFullYear(), i, datepickerHeaderDate.getDate()), 'MMM'));
+    console.log(format(new Date(datepickerHeaderDate.getFullYear(), 1, datepickerHeaderDate.getDate()), 'MMM'));
+
+    return format(new Date(datepickerHeaderDate.getFullYear(), i, datepickerHeaderDate.getDate()), 'MMM');
+  };
+
   return (
     <div>
       <div className='flex flex-col gap-1'>
@@ -166,7 +177,7 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
                       <div key={i} style={{ width: '14.26%' }} className='px-1 mb-1'>
                         <div
                           onClick={setDateValue(d)}
-                          className={`cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
+                          className={`cursor-pointer text-center text-sm rounded-full leading-loose transition ease-in-out duration-100 ${
                             isToday(d) ? 'bg-primary text-white' : 'text-neutral-500  hover:bg-primary hover:text-white dark:text-white'
                           }`}
                         >
@@ -184,11 +195,11 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
                     .map((_, i) => (
                       <div key={i} onClick={setMonthValue(i)} style={{ width: '25%' }}>
                         <div
-                          className={`cursor-pointer p-5 font-semibold text-center text-sm rounded-lg hover:bg-primary ${
+                          className={`cursor-pointer flex justify-center items-center  p-5 font-semibold text-center text-sm rounded-lg hover:bg-primary ${
                             isSelectedMonth(i) ? 'bg-primary text-white' : 'text-neutral-500  hover:bg-primary hover:text-white'
                           }`}
                         >
-                          {format(new Date(datepickerHeaderDate.getFullYear(), i, datepickerHeaderDate.getDate()), 'MMM')}
+                          {teste(i)}
                         </div>
                       </div>
                     ))}

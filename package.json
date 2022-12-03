@@ -20,6 +20,7 @@
     "@radix-ui/react-toast": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.0.0",
     "@tabler/icons": "^1.102.0",
+    "@tanstack/react-query": "^4.19.0",
     "@tanstack/react-table": "^8.5.30",
     "class-variance-authority": "^0.2.4",
     "csstype": "^3.0.10",

@@ -12,6 +12,7 @@ specifiers:
   '@radix-ui/react-toast': ^1.1.2
   '@radix-ui/react-tooltip': ^1.0.0
   '@tabler/icons': ^1.102.0
+  '@tanstack/react-query': ^4.19.0
   '@tanstack/react-table': ^8.5.30
   '@types/node': 18.0.0
   '@types/react': 18.0.14
@@ -50,6 +51,7 @@ dependencies:
   '@radix-ui/react-toast': 1.1.2_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tooltip': 1.0.0_twyhzqqpkwvvgrmyeapdo6i4my
   '@tabler/icons': 1.102.0_biqbaboplfbrettd7655fr4n2y
+  '@tanstack/react-query': 4.19.0_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-table': 8.5.30_biqbaboplfbrettd7655fr4n2y
   class-variance-authority: 0.2.4_typescript@4.8.4
   csstype: 3.1.1
@@ -932,6 +934,28 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/query-core/4.19.0:
+    resolution: {integrity: sha512-q+4GvS05nG2UXDE4ng0NU5SQNhT+VqhRTLNVtgVw1tIKJfG3CyYQpP/JwAdzMB7NEqC8L5oo9NAaORxEQN53dg==}
+    dev: false
+
+  /@tanstack/react-query/4.19.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gP4kmfQ3BvCYxTxA/3Xf0P24iNgW539Thk89KzP7X+i+EvFiWhEUMl1NtuI87bFrVEBHs+1ColFNimDidBh/Ww==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.19.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@tanstack/react-table/8.5.30_biqbaboplfbrettd7655fr4n2y:

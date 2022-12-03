@@ -28,6 +28,9 @@ import { getSession, GetSessionParams } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
 import toast from 'react-hot-toast';
 import { notification } from '@ui/Toaster';
+import { useQuery } from '@tanstack/react-query';
+import { productOffering } from '@/server/api';
+
 const data = [
   {
     id: 'data1',
@@ -83,6 +86,8 @@ const Home: NextPageWithLayout = () => {
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const [open, setOpen] = useState(false);
+
+  const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering() });
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
