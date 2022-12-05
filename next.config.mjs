@@ -24,5 +24,6 @@ export default defineNextConfig({
   env: {
     LOGOUT_URL: process.env.LOGOUT_URL ?? '/',
     API_URL: process.env.API_URL ?? 'http://localhost:3000',
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET ?? 'secret',
   },
 });

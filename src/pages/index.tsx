@@ -30,6 +30,8 @@ import toast from 'react-hot-toast';
 import { notification } from '@ui/Toaster';
 import { useQuery } from '@tanstack/react-query';
 import { productOffering } from '@/server/api';
+import { Session } from 'next-auth';
+import { getToken, JWT } from 'next-auth/jwt';
 
 const data = [
   {
@@ -80,14 +82,22 @@ const data3 = [
   },
 ];
 
-const Home: NextPageWithLayout = () => {
+interface CustomJWT extends JWT {
+  accessToken: string;
+}
+interface HomeProps {
+  session: Session;
+  token: CustomJWT;
+}
+
+const Home: NextPageWithLayout<HomeProps> = (props) => {
   const [value, setValue] = useState('yes');
   const [value1, setValue1] = useState('yes');
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const [open, setOpen] = useState(false);
 
-  const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering() });
+  const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering(props?.token?.accessToken) });
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
@@ -214,10 +224,18 @@ Home.getLayout = function getLayout(page: ReactElement) {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context: GetSessionParams) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
+  const secret = process.env.NEXTAUTH_SECRET;
 
-  if (!session) {
+  const token = await getToken({
+    req: context.req,
+    secret: secret,
+  });
+
+  console.log('TOKEN: ', token);
+
+  if (!session && !token) {
     return {
       redirect: {
         destination: '/login',
@@ -229,6 +247,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetSession
   return {
     props: {
       session,
+      token,
     },
   };
 };

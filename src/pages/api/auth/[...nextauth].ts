@@ -11,26 +11,15 @@ import Auth0Provider from 'next-auth/providers/auth0';
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    jwt: ({ token, user, profile, account }) => {
-      if (user) {
-        token.id = user.id;
+    jwt: async ({ token, user, profile, account }) => {
+      if (account) {
+        token.accessToken = account.access_token;
       }
       return token;
     },
-    session: ({ session, token, user }) => {
-      // if (token) {
-      //   session.id = token.id;
-      // }
-      // console.log('NextAuth.js session and token', session, token);
-
-      // console.log('session', session);
-      // console.log('token', token);
+    session: async ({ session, token, user }) => {
       return session;
     },
-    // async signIn(sign) {
-    //   console.log('sign', sign);
-    //   return true;
-    // },
   },
 
   secret: process.env.AUTH_SECRET,
