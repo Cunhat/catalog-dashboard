@@ -233,8 +233,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     secret: secret,
   });
 
-  console.log('TOKEN: ', token);
-
   if (!session && !token) {
     return {
       redirect: {

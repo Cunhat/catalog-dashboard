@@ -1,19 +1,13 @@
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import React from 'react';
-import { Sidebar } from '@ui/Sidebar';
-import { ActionBar } from '@ui/ActionBar';
-import { Text } from '@ui/Typography/Text';
-import { faBell, faChevronDown, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PopoverMenu } from '@ui/PopoverMenu';
-import { Toggle } from '@ui/Toggle';
-import { useAtom, atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { ActionBar } from '@ui/ActionBar';
 import { Menu, type MenuElement } from '@ui/Menu';
-import { signOut } from 'next-auth/react';
-import { Toaster, ToastBar } from 'react-hot-toast';
-
-//export const darkModeAtom = atom(false);
+import { Sidebar } from '@ui/Sidebar';
+import { Toggle } from '@ui/Toggle';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 export const darkModeAtom = atomWithStorage('darkMode', false);
 
@@ -23,7 +17,6 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       label: 'Log out',
       href: process.env.LOGOUT_URL!,
       type: 'link',
-      //onClick: () => signOut(),
       icon: faRightFromBracket,
     },
     {
