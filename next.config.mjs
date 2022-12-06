@@ -18,8 +18,9 @@ export default defineNextConfig({
   swcMinify: true,
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
-    locales: ['en'],
+    locales: ['en', 'fr', 'pt'],
     defaultLocale: 'en',
+    localeDetection: false,
   },
   env: {
     LOGOUT_URL: process.env.LOGOUT_URL ?? '/',

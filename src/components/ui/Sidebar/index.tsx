@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SidebarExpandableItem } from './SidebarExpandableItem';
 import { SidebarItem } from './SidebarItem';
+import { useTranslation } from 'next-i18next';
 
 export const Sidebar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(true);
+  const { t } = useTranslation();
   return (
     <AnimatePresence initial={false} mode='wait'>
       <motion.div
@@ -47,14 +49,14 @@ export const Sidebar: React.FC = () => {
                       <SidebarItem
                         path={item.path}
                         key={'section' + route?.id + 'sidebarItem' + item.id}
-                        text={item.label}
+                        text={t(item.label)}
                         icon={item.icon}
                         open={open}
                       />
                     );
                   return (
                     <SidebarExpandableItem
-                      label={item.label}
+                      label={t(item.label)}
                       icon={item.icon}
                       open={open}
                       subPaths={item.subPaths}
@@ -82,6 +84,7 @@ type SidebarSectionProps = {
 };
 
 const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ title, open, children }) => {
+  const { t } = useTranslation();
   const AnimatedTitle: React.FC<{ text: string }> = ({ text }) => (
     <motion.b
       exit={{ opacity: 0 }}
@@ -96,8 +99,8 @@ const SidebarSection: React.FC<PropsWithChildren<SidebarSectionProps>> = ({ titl
 
   return (
     <div className={`flex flex-col p-3 ${open ? '' : 'items-center'}`}>
-      {open && title && <AnimatedTitle text={title} />}
-      {!open && title !== undefined && <AnimatedTitle text={formatTitle(title, open)!} />}
+      {open && title && <AnimatedTitle text={t(title)} />}
+      {!open && title !== undefined && <AnimatedTitle text={formatTitle(t(title), open)!} />}
       {children}
     </div>
   );

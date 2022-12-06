@@ -1,0 +1,24 @@
+{
+  "productDefinition": "Product Definition",
+  "productName": "Product Name",
+  "productCode": "Product Code",
+  "modelCode": "Model Code",
+  "modelDescription": "Model Description",
+  "productDescription": "Product Description",
+  "comments": "Comments",
+  "commercialLaunchDate": "Commercial Launch Date",
+  "supplier": "Supplier",
+  "serializable": "Serializable?",
+  "orderable": "Orderable?",
+  "objectType": "Object Type",
+  "restrictOptionCombis": "Restrict option combis?",
+  "productCharacterization": "Product Characterization",
+  "productCharacterizationTabs": {
+    "details": "Details",
+    "pricing": "Pricing",
+    "configurationOptions": "Configuration Options",
+    "productSpecifications": "Product Specifications",
+    "telcoExt": "Telco Ext.",
+    "financeExt": "Finance Ext."
+  }
+}

@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { SidebarDropdownItem } from '@/utils/routes';
+import { useTranslation } from 'next-i18next';
 
 type SidebarExpandableItemProps = Omit<SidebarDropdownItem, 'type' | 'id'> & {
   open: boolean;
@@ -15,6 +16,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
   const [showItems, setShowItems] = useState<boolean>(false);
   const [openTooltip, setOpenTooltip] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const expandItem = () => {
     if (open) setShowItems(!showItems);
@@ -95,7 +97,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
               }}
             >
               {subPaths.map((subPath, index) => (
-                <ExpandableItem text={subPath.label} key={subPath.label + index} />
+                <ExpandableItem text={t(subPath.label)} key={subPath.label + index} />
               ))}
             </motion.div>
           )}

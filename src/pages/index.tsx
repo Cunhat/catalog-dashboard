@@ -32,6 +32,8 @@ import { useQuery } from '@tanstack/react-query';
 import { productOffering } from '@/server/api';
 import { Session } from 'next-auth';
 import { getToken, JWT } from 'next-auth/jwt';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 const data = [
   {
@@ -88,6 +90,7 @@ interface CustomJWT extends JWT {
 interface HomeProps {
   session: Session;
   token: CustomJWT;
+  locales: string;
 }
 
 const Home: NextPageWithLayout<HomeProps> = (props) => {
@@ -98,6 +101,8 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
   const [open, setOpen] = useState(false);
 
   const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering(props?.token?.accessToken) });
+
+  const { t } = useTranslation('productDefinition');
 
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
@@ -133,73 +138,73 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
         <WidgetContainer>
           <InnerContainer>
             <div className='flex justify-between items-center'>
-              <Title text='Product Definition' />
+              <Title text={t('productDefinition')} />
               <Button onClick={() => setOpen(!open)} text='Save' />
             </div>
-            <TextInput label='Product Name' />
+            <TextInput label={t('productName')} />
             <div className='grid grid-cols-4 gap-3'>
               <div className='col-span-1'>
-                <TextInput label='Product Code' />
+                <TextInput label={t('productCode')} />
               </div>
               <div className='col-span-1'>
-                <TextInput label='Model Code' />
+                <TextInput label={t('modelCode')} />
               </div>
               <div className='col-span-2'>
-                <TextInput label='Model Description' />
+                <TextInput label={t('modelDescription')} />
               </div>
             </div>
-            <TextArea label='Product Description' />
-            <TextArea label='Comments' />
+            <TextArea label={t('productDescription')} />
+            <TextArea label={t('comments')} />
             <div className='grid grid-cols-2 gap-3'>
-              <TextInput label='Commercial Launch Date' />
-              <TextInput label='Supplier' />
+              <TextInput label={t('commercialLaunchDate')} />
+              <TextInput label={t('supplier')} />
             </div>
             <div className='flex justify-between flex-wrap gap-2'>
               <SmallWidget>
                 <div className='flex flex-col gap-2'>
-                  <Title text='Serializable?' />
+                  <Title text={t('serializable')} />
                   <RadioButtons setSelected={setValue} selected={value} data={data} onChange={onChange} name='radio_yes' />
                 </div>
               </SmallWidget>
               <SmallWidget>
                 <div className='flex flex-col gap-2'>
-                  <Title text='Orderable?' />
+                  <Title text={t('orderable')} />
                   <RadioButtons setSelected={setValue1} selected={value1} data={data1} onChange={onChange} name='radio_orderable' />
                 </div>
               </SmallWidget>
               <SmallWidget>
                 <div className='flex flex-col gap-2'>
-                  <Title text='Object Type' />
+                  <Title text={t('objectType')} />
                   <RadioButtons setSelected={setValue2} selected={value2} data={data2} onChange={onChange} name='radio_objType' />
                 </div>
               </SmallWidget>
               <SmallWidget>
                 <div className='flex flex-col gap-2 items-center'>
-                  <Title text='Restrict option combis?' />
+                  <Title text={t('restrictOptionCombis')} />
                   <RadioButtons setSelected={setValue3} selected={value3} data={data3} onChange={onChange} name='radio_combis' />
                 </div>
               </SmallWidget>
             </div>
             <WidgetContainer>
               <InnerContainer>
-                <Title text='Product Characterization' />
+                <Title text={t('productCharacterization')} />
                 <Tab>
-                  <Tab.TabElement tabTitle='Details'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.details')}>
                     <Details />
                   </Tab.TabElement>
-                  <Tab.TabElement tabTitle='Pricing'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.pricing')}>
                     <Pricing></Pricing>
                   </Tab.TabElement>
-                  <Tab.TabElement tabTitle='Configuration Options'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.configurationOptions')}>
                     <ConfigurationOptions></ConfigurationOptions>
                   </Tab.TabElement>
-                  <Tab.TabElement tabTitle='Product Specifications'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.productSpecifications')}>
                     <ProductSpecifications></ProductSpecifications>
                   </Tab.TabElement>
-                  <Tab.TabElement tabTitle='Telco Ext.'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.telcoExt')}>
                     <span>Telco Ext.</span>
                   </Tab.TabElement>
-                  <Tab.TabElement tabTitle='Finance Ext.'>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.financeExt')}>
                     <span>Finance Ext.</span>
                   </Tab.TabElement>
                 </Tab>
@@ -242,10 +247,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const locale = await serverSideTranslations(context.locale!, ['common', 'productDefinition']);
+
   return {
     props: {
       session,
       token,
+      ...locale,
     },
   };
 };

@@ -1,6 +1,6 @@
 import { Text } from '@ui/Typography/Text';
 
-export const TextArea: React.FC<{ label?: string }> = ({ label }) => {
+export const TextArea: React.FC<{ label: string }> = ({ label }) => {
   return (
     <div className='flex flex-col gap-1'>
       {label !== undefined && label?.length > 0 && <Text text={label} />}
