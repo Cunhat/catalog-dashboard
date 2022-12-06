@@ -189,7 +189,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
               <InnerContainer>
                 <Title text={t('productCharacterization')} />
                 <Tab>
-                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.details')}>
+                  <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
                     <Details />
                   </Tab.TabElement>
                   <Tab.TabElement tabTitle={t('productCharacterizationTabs.pricing')}>

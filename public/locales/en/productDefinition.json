@@ -14,7 +14,18 @@
   "restrictOptionCombis": "Restrict option combis?",
   "productCharacterization": "Product Characterization",
   "productCharacterizationTabs": {
-    "details": "Details",
+    "details": {
+      "title": "Details",
+      "objectDimensions": "Object Dimensions",
+      "unitSystems": "Unit Systems",
+      "itemHeight": "Item Height",
+      "itemLength": "Item Length",
+      "itemWeight": "Item Weight",
+      "itemWidth": "Item Width",
+      "productLifecycle": "Product Lifecycle",
+      "durationAfterActivation": "Duration after activation",
+      "units": "Units"
+    },
     "pricing": "Pricing",
     "configurationOptions": "Configuration Options",
     "productSpecifications": "Product Specifications",
