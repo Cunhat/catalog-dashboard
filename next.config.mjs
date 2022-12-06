@@ -1,5 +1,6 @@
 // @ts-check
 import { env } from './src/env/server.mjs';
+import path from 'path';
 
 /**
  * Don't be scared of the generics here.
@@ -13,6 +14,8 @@ function defineNextConfig(config) {
   return config;
 }
 
+//const path = require('path');
+
 export default defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
@@ -22,6 +25,7 @@ export default defineNextConfig({
     defaultLocale: 'en',
     localeDetection: false,
   },
+  ...(typeof window === undefined ? { localePath: path.resolve('./public/locales') } : {}),
   env: {
     LOGOUT_URL: process.env.LOGOUT_URL ?? '/',
     API_URL: process.env.API_URL ?? 'http://localhost:3000',
