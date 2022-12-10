@@ -88,10 +88,10 @@ export const DatePicker: React.FC<{ label: string }> = ({ label }) => {
   const teste = (i: any) => {
     // console.log(i);
     // console.log(datepickerHeaderDate.getFullYear());
-    console.log(datepickerHeaderDate.getDate());
+    //console.log(datepickerHeaderDate.getDate());
 
     //console.log(format(new Date(datepickerHeaderDate.getFullYear(), i, datepickerHeaderDate.getDate()), 'MMM'));
-    console.log(format(new Date(datepickerHeaderDate.getFullYear(), 1, datepickerHeaderDate.getDate()), 'MMM'));
+    // console.log(format(new Date(datepickerHeaderDate.getFullYear(), 1, datepickerHeaderDate.getDate()), 'MMM'));
 
     return format(new Date(datepickerHeaderDate.getFullYear(), i, datepickerHeaderDate.getDate()), 'MMM');
   };
