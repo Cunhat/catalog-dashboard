@@ -10,7 +10,7 @@ export const Tooltip: React.FC<PropsWithChildren<{ text: string; open: boolean; 
   return (
     <TooltipComponent.Provider>
       <TooltipComponent.Root delayDuration={100} open={open} onOpenChange={setOpen}>
-        <TooltipComponent.Trigger></TooltipComponent.Trigger>
+        <TooltipComponent.Trigger aria-label={text} name={text}></TooltipComponent.Trigger>
         <TooltipComponent.Portal>
           <TooltipComponent.Content side='right' sideOffset={25} align='center' avoidCollisions>
             <div className='p-2.5 bg-zinc-700  rounded-md'>
