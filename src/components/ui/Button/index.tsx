@@ -28,7 +28,7 @@ export const Button: React.FC<{
   onClick?: () => void;
 }> = ({ text, disabled, leftIcon, type, onClick }) => {
   return (
-    <button onClick={onClick} className={ButtonStyles({ type, disabled })} type='button' disabled={disabled}>
+    <button onClick={onClick} className={ButtonStyles({ type, disabled })} type='button' disabled={disabled} aria-label={text}>
       {leftIcon && <FontAwesomeIcon icon={leftIcon} className='mr-2' />}
       {text}
     </button>

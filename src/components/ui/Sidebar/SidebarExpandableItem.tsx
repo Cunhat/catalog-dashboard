@@ -109,7 +109,7 @@ export const SidebarExpandableItem: React.FC<SidebarExpandableItemProps> = ({ ic
 
 const ExpandableItem: React.FC<{ text: string; delayAnimation?: boolean }> = ({ text, delayAnimation = true }) => {
   return (
-    <Link href={'/'}>
+    <Link href={'/'} aria-label={text}>
       <AnimatePresence>
         <motion.span
           exit={{ opacity: 0 }}
@@ -132,6 +132,7 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
   icon,
   subPaths,
 }) => {
+  const { t } = useTranslation();
   return (
     <PopoverMenu open={open} side='right' onOpenChange={onOpenChange} sideOffset={20}>
       <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2, ease: 'easeInOut' }}>
@@ -145,7 +146,7 @@ const PopoverComp: React.FC<{ open: boolean; onOpenChange: (open: boolean) => vo
         </div>
         <div className='flex flex-col gap-3 rounded-b-md bg-hover px-2.5 py-3'>
           {subPaths.map((subPath, index) => (
-            <ExpandableItem delayAnimation={false} key={subPath.label + index} text={subPath.label} />
+            <ExpandableItem delayAnimation={false} key={subPath.label + index} text={t(subPath.label)} />
           ))}
         </div>
       </motion.div>

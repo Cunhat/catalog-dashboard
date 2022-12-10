@@ -15,7 +15,7 @@ export const SidebarItem: React.FC<{
   return (
     <>
       <Tooltip text={text} open={openTooltip && !open} setOpen={setOpenTooltip}></Tooltip>
-      <Link href={path}>
+      <Link href={path} aria-label={text}>
         <div
           onMouseEnter={() => setOpenTooltip(true)}
           onMouseLeave={() => setOpenTooltip(false)}
