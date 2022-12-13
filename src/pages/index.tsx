@@ -1,4 +1,4 @@
-import { ProductDefinition } from '@/components/Pages/ProductDefinition';
+import { ProductDefinition } from '@/components/Pages/ProductManagement/ProductDefinition';
 import { Comments } from '@/components/Pages/ProductManagement/Widgets/Comments';
 import { Labels } from '@/components/Pages/ProductManagement/Widgets/Labels';
 import { ProductInformation } from '@/components/Pages/ProductManagement/Widgets/ProductInformation';
@@ -42,7 +42,6 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
     }),
   };
 
-  //grid grid-cols-3
   return (
     <div className='flex flex-row gap-4 h-full w-full max-w-screen-2xl'>
       <div className='flex-1'>
