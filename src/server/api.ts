@@ -1,5 +1,5 @@
 export const productOffering = async (accessToken: string) => {
-  const response = await fetch(process.env.API_URL + 'tmf-api/productCatalogManagement/v4/productOffering/1', {
+  const response = await fetch('http://85.242.112.72:5681/tmf-api/productCatalogManagement/v4/productOffering/1', {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -14,3 +14,5 @@ export const productOffering = async (accessToken: string) => {
   }
   return response.json();
 };
+
+//process.env.API_URL + 'tmf-api/productCatalogManagement/v4/productOffering/1'

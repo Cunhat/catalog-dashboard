@@ -28,7 +28,7 @@ interface HomeProps {
 }
 
 const Home: NextPageWithLayout<HomeProps> = (props) => {
-  //const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering(props?.token?.accessToken) });
+  const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering(props?.token?.accessToken) });
   const [open, setOpen] = useState<boolean>(false);
 
   const variants = {
