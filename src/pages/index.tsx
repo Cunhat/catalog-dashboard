@@ -101,7 +101,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
 };
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout>{page}</DashboardLayout>;
+  return <DashboardLayout userInfo={page.props.session.user}>{page}</DashboardLayout>;
 };
 
 export default Home;

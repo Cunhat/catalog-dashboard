@@ -11,7 +11,8 @@ import { Toaster } from 'react-hot-toast';
 
 export const darkModeAtom = atomWithStorage('darkMode', false);
 
-export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
+export const DashboardLayout: FC<PropsWithChildren<{ userInfo: any }>> = ({ children, userInfo }) => {
+  console.log(userInfo);
   const data: Array<MenuElement> = [
     {
       label: 'Log out',
@@ -33,7 +34,7 @@ export const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <nav className='flex h-[50px] w-full bg-white shadow-lg items-center justify-end pr-5 gap-3 dark:bg-dark-widget'>
         <DarkThemeSwitcher />
         <FontAwesomeIcon icon={faBell} className='text-lg text-neutral-500 hover:cursor-pointer hover:text-primary' />
-        <Menu data={data}></Menu>
+        <Menu userInfo={userInfo} data={data}></Menu>
       </nav>
       <div className='flex flex-1 gap-3 overflow-auto p-3'>
         <Sidebar />

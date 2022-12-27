@@ -19,12 +19,17 @@ export type MenuElement = {
 
 type MenuProps = {
   data: Array<MenuElement>;
+  userInfo: {
+    name: string;
+    email: string;
+    image: string;
+  };
 };
 
-export const Menu: React.FC<MenuProps> = ({ data }) => {
+export const Menu: React.FC<MenuProps> = ({ data, userInfo }) => {
   return (
     <MenuComponent as='div' className='relative inline-block text-left'>
-      <MenuComponent.Button as={UserMenu} />
+      <MenuComponent.Button as={UserMenu} userInfo={userInfo} />
       <Transition
         as={Fragment}
         enter='transition ease-out duration-100'
@@ -56,14 +61,20 @@ export const Menu: React.FC<MenuProps> = ({ data }) => {
   );
 };
 
-const UserMenu = forwardRef((props, ref) => {
+const UserMenu: React.FC<{
+  userInfo: {
+    name: string;
+    email: string;
+    image: string;
+  };
+}> = forwardRef((props, ref) => {
   return (
     <MenuComponent.Button className='flex gap-3 hover:cursor-pointer hover:bg-hover py-1 px-3 rounded-md items-center justify-center'>
-      <div className='rounded-full bg-hover p-[6px] flex justify-center items-center border border-primary'>
-        <span className='text-sm text-primary font-bold m-0 p-0'>US</span>
+      <div className='rounded-full bg-hover p-[6px] w-8 flex justify-center items-center border border-primary'>
+        <span className='text-sm text-primary font-bold m-0 p-0'>{props.userInfo.name[0]?.toLocaleUpperCase()}</span>
       </div>
       <div className='flex flex-col '>
-        <p className='text-xs text-neutral-500 dark:text-primary'>User Name</p>
+        <p className='text-xs text-neutral-500 dark:text-primary'>{props.userInfo.name}</p>
       </div>
     </MenuComponent.Button>
   );
