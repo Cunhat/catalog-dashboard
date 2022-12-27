@@ -1,13 +1,13 @@
 type RadioData = Array<{
   id: string;
   label: string;
-  value: string;
+  value: string | number;
 }>;
 
 export const RadioButtons: React.FC<{
   name: string;
   onChange: (e: any, setSelected: (value: string) => void) => void;
-  selected: string;
+  selected: string | number;
   data: RadioData;
   setSelected: (value: string) => void;
 }> = ({ name, onChange, selected, data, setSelected }) => {

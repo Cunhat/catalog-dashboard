@@ -12,7 +12,7 @@ import { Session } from 'next-auth';
 import { getToken, JWT } from 'next-auth/jwt';
 import { getSession } from 'next-auth/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
@@ -28,7 +28,10 @@ interface HomeProps {
 }
 
 const Home: NextPageWithLayout<HomeProps> = (props) => {
-  const query = useQuery({ queryKey: ['productOffering'], queryFn: () => productOffering(props?.token?.accessToken) });
+  const { data, isFetching, error } = useQuery({
+    queryKey: ['productOffering'],
+    queryFn: () => productOffering(props?.token?.accessToken),
+  });
   const [open, setOpen] = useState<boolean>(false);
 
   const variants = {
@@ -45,7 +48,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
   return (
     <div className='flex flex-row gap-4 h-full w-full max-w-screen-2xl'>
       <div className='flex-1'>
-        <ProductDefinition />
+        <ProductDefinition productOfferInfo={data} />
       </div>
       <div id='expand' className='flex m-auto w-fit items-center'>
         <motion.div

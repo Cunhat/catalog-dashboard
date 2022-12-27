@@ -15,19 +15,21 @@ import { InnerContainer, WidgetContainer } from '@ui/WidgetContainer';
 import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
+import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
 
 const data = [
   {
     id: 'data1',
     label: 'No',
-    value: 'no',
+    value: 0,
   },
   {
     id: 'data2',
     label: 'Yes',
-    value: 'yes',
+    value: 1,
   },
 ];
+
 const data1 = [
   {
     id: 'data11',
@@ -65,7 +67,7 @@ const data3 = [
   },
 ];
 
-export const ProductDefinition = () => {
+export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResponse | undefined }> = ({ productOfferInfo }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('productDefinition');
   const [value, setValue] = useState('yes');
@@ -73,8 +75,18 @@ export const ProductDefinition = () => {
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
 
+  const [edit, setEdit] = useState(false);
+
   const onChange = (value: any, setSelected: (value: string) => void) => {
     setSelected(value.target.value);
+  };
+
+  const primaryActionButton = () => {
+    if (edit) {
+      setOpen(!open);
+    } else {
+      setEdit(!edit);
+    }
   };
 
   return (
@@ -96,6 +108,7 @@ export const ProductDefinition = () => {
                   notification('warning', 'Warning', 'Warning occured while saving the product');
                 }, 650);
                 setOpen(false);
+                setEdit(false);
               }}
             />
             <Button text='No' type='small' onClick={() => setOpen(false)} />
@@ -105,31 +118,40 @@ export const ProductDefinition = () => {
       <InnerContainer>
         <div className='flex justify-between items-center'>
           <Title text={t('productDefinition')} />
-          <Button onClick={() => setOpen(!open)} text='Save' />
+          <div className='flex gap-3'>
+            {edit && <Button onClick={() => setEdit(false)} text='Cancel' />}
+            <Button onClick={() => primaryActionButton()} text={edit ? 'Save' : 'Edit'} />
+          </div>
         </div>
-        <TextInput label={t('productName')} />
+        <TextInput label={t('productName')} value={productOfferInfo?.name ?? ''} editMode={edit} />
         <div className='grid grid-cols-4 gap-3'>
           <div className='col-span-1'>
-            <TextInput label={t('productCode')} />
+            <TextInput label={t('productCode')} value={productOfferInfo?.charetristics.prodCode} editMode={edit} />
           </div>
           <div className='col-span-1'>
-            <TextInput label={t('modelCode')} />
+            <TextInput label={t('modelCode')} value={productOfferInfo?.charetristics.modelCode} editMode={edit} />
           </div>
           <div className='col-span-2'>
-            <TextInput label={t('modelDescription')} />
+            <TextInput label={t('modelDescription')} value={productOfferInfo?.charetristics.modelDescription} editMode={edit} />
           </div>
         </div>
-        <TextArea label={t('productDescription')} />
-        <TextArea label={t('comments')} />
+        <TextArea label={t('productDescription')} value={productOfferInfo?.comments ?? ''} editMode={edit} />
+        <TextArea label={t('comments')} value={productOfferInfo?.description ?? ''} editMode={edit} />
         <div className='grid grid-cols-2 gap-3'>
-          <TextInput label={t('commercialLaunchDate')} />
-          <TextInput label={t('supplier')} />
+          <TextInput label={t('commercialLaunchDate')} value={productOfferInfo?.commercialLaunchDate ?? ''} editMode={edit} />
+          <TextInput label={t('supplier')} value={productOfferInfo?.charetristics.supplier ?? ''} editMode={edit} />
         </div>
         <div className='flex justify-between flex-wrap gap-2'>
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('serializable')} />
-              <RadioButtons setSelected={setValue} selected={value} data={data} onChange={onChange} name='radio_yes' />
+              <RadioButtons
+                setSelected={setValue}
+                selected={productOfferInfo?.serializedFlg ? 1 : 0}
+                data={data}
+                onChange={onChange}
+                name='radio_yes'
+              />
             </div>
           </SmallWidget>
           <SmallWidget>
