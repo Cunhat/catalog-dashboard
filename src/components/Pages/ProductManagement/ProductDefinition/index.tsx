@@ -16,8 +16,6 @@ import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 const data = [
   {
