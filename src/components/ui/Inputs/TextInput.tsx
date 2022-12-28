@@ -17,7 +17,7 @@ export const TextInput: React.FC<{ label: string; value?: string; editMode?: boo
         ></input>
       ) : (
         <div className='py-1 px-2'>
-          <Text text={value ?? '- -'} />
+          <Text text={value || '- -'} />
         </div>
       )}
     </div>

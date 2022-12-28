@@ -17,6 +17,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { notification } from '@ui/Toaster';
 
 interface CustomJWT extends JWT {
   accessToken: string;
@@ -31,6 +32,9 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
   const { data, isFetching, error } = useQuery({
     queryKey: ['productOffering'],
     queryFn: () => productOffering(props?.token?.accessToken),
+    onError: () => {
+      notification('error', 'Error', 'Error fetching data from server');
+    },
   });
   const [open, setOpen] = useState<boolean>(false);
 

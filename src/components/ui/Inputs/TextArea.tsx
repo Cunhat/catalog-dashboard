@@ -18,7 +18,7 @@ export const TextArea: React.FC<{ label: string; value: string; editMode?: boole
         ></textarea>
       ) : (
         <div className='py-1 px-2'>
-          <Text text={value ?? '- -'} />
+          <Text text={value || '- -'} />
         </div>
       )}
     </div>

@@ -16,6 +16,8 @@ import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const data = [
   {
@@ -178,10 +180,10 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
             <Title text={t('productCharacterization')} />
             <Tab>
               <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
-                <Details />
+                <Details editMode={edit} />
               </Tab.TabElement>
               <Tab.TabElement tabTitle={t('productCharacterizationTabs.pricing')}>
-                <Pricing></Pricing>
+                <Pricing editMode={edit}></Pricing>
               </Tab.TabElement>
               <Tab.TabElement tabTitle={t('productCharacterizationTabs.configurationOptions')}>
                 <ConfigurationOptions></ConfigurationOptions>
