@@ -9,20 +9,11 @@ export const TextInput: React.FC<{ label: string; value?: string; editMode?: boo
 }) => {
   return (
     <div className='flex flex-col gap-1'>
-      {isLoading ? (
-        <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='5' ry='5' width='80' height='10' />
-        </ContentLoader>
-      ) : (
-        <label htmlFor={label} className={'text-neutral-500 dark:text-white text-sm font-bold'}>
-          {label}
-        </label>
-      )}
-      {isLoading ? (
-        <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='5' ry='5' width='150' height='10' />
-        </ContentLoader>
-      ) : editMode ? (
+      <label htmlFor={label} className={'text-neutral-500 dark:text-white text-sm font-bold'}>
+        {label}
+      </label>
+
+      {editMode ? (
         <input
           type='text'
           id={label}

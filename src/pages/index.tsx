@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notification } from '@ui/Toaster';
+import { PageSkeletonLoader } from '@/components/Pages/ProductManagement/ProductDefinition/PageSkeletonLoader';
 
 interface CustomJWT extends JWT {
   accessToken: string;
@@ -35,6 +36,8 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
     onError: () => {
       notification('error', 'Error', 'Error fetching data from server');
     },
+    retry: false,
+    refetchOnWindowFocus: false,
   });
   const [open, setOpen] = useState<boolean>(false);
 
@@ -51,9 +54,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
 
   return (
     <div className='flex flex-row gap-4 h-full w-full max-w-screen-2xl'>
-      <div className='flex-1'>
-        <ProductDefinition productOfferInfo={data} />
-      </div>
+      <div className='flex-1'>{isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} />}</div>
       <div id='expand' className='flex m-auto w-fit items-center'>
         <motion.div
           animate={{

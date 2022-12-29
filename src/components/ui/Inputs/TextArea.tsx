@@ -1,31 +1,15 @@
 import { Text } from '@ui/Typography/Text';
 import ContentLoader from 'react-content-loader';
 
-export const TextArea: React.FC<{ label: string; value: string; editMode?: boolean; isLoading?: boolean }> = ({
-  label,
-  value,
-  editMode = false,
-  isLoading = true,
-}) => {
+export const TextArea: React.FC<{ label: string; value: string; editMode?: boolean }> = ({ label, value, editMode = false }) => {
   return (
     <div className='flex flex-col gap-1'>
-      {isLoading ? (
-        <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='5' ry='5' width='80' height='10' />
-        </ContentLoader>
-      ) : (
-        label !== undefined &&
-        label?.length > 0 && (
-          <label htmlFor={label} className={'text-neutral-500 dark:text-white text-sm font-bold'}>
-            {label}
-          </label>
-        )
+      {label !== undefined && label?.length > 0 && (
+        <label htmlFor={label} className={'text-neutral-500 dark:text-white text-sm font-bold'}>
+          {label}
+        </label>
       )}
-      {isLoading ? (
-        <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='5' ry='5' width='90%' height='10' />
-        </ContentLoader>
-      ) : editMode ? (
+      {editMode ? (
         <textarea
           rows={4}
           id={label}

@@ -28,7 +28,7 @@ export const Button: React.FC<{
   type?: 'small' | 'normal';
   onClick?: () => void;
   isLoading?: boolean;
-}> = ({ text, disabled, leftIcon, type, onClick, isLoading = true }) => {
+}> = ({ text, disabled, leftIcon, type, onClick, isLoading = false }) => {
   if (isLoading) {
     return (
       <ContentLoader speed={2} width={150} height={36} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
