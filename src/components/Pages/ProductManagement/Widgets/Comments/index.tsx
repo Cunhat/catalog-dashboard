@@ -15,7 +15,7 @@ export const Comments: React.FC = ({}) => {
       <Modal open={openComments}>
         <div className='flex flex-col gap-5 w-[300px]'>
           <Title text='Add comments' />
-          <TextArea label='' />
+          <TextArea label='' value='' />
           <div className='flex gap-2 ml-auto'>
             <Button text='Add' type='small' onClick={() => setOpenComments(false)} />
             <Button text='Cancel' type='small' onClick={() => setOpenComments(false)} />
