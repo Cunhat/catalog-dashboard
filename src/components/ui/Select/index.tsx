@@ -3,18 +3,33 @@ import { Listbox, Transition } from '@headlessui/react';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Text } from '@ui/Typography/Text';
+import ContentLoader from 'react-content-loader';
 
 const data = ['Metric', 'Imperial'];
 
-export const Select: React.FC<{ label: string; editMode: boolean }> = ({ label, editMode = false }) => {
+export const Select: React.FC<{ label: string; editMode: boolean; isLoading?: boolean }> = ({
+  label,
+  editMode = false,
+  isLoading = true,
+}) => {
   const [selectedData, setSelectedData] = useState(data[0]);
 
   return (
     <Listbox as='div' className='' value={selectedData} onChange={setSelectedData}>
       {({ open }) => (
         <>
-          <Listbox.Label className='text-sm text-neutral-500 dark:text-white'>{label}</Listbox.Label>
-          {editMode ? (
+          {isLoading ? (
+            <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
+              <rect x='0' y='0' rx='5' ry='5' width='80' height='10' />
+            </ContentLoader>
+          ) : (
+            <Listbox.Label className='text-sm text-neutral-500 dark:text-white'>{label}</Listbox.Label>
+          )}
+          {isLoading ? (
+            <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
+              <rect x='0' y='0' rx='5' ry='5' width='150' height='10' />
+            </ContentLoader>
+          ) : editMode ? (
             <div className='relative'>
               <span className='inline-block w-full rounded-md'>
                 <Listbox.Button className='cursor-default relative w-full text-sm text-neutral-500 rounded-md border border-neutral-300 bg-white dark:bg-dark-widget dark:text-white py-1 px-2 pr-6 text-left focus:outline-none focus:shadow-outline-blue focus:border-primary transition ease-in-out duration-150'>

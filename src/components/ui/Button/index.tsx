@@ -1,6 +1,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { cva } from 'class-variance-authority';
+import ContentLoader from 'react-content-loader';
 
 const ButtonStyles = cva(
   'bg-primary shadow-lg text-white py-2 px-3 rounded-lg text-sm focus:outline-none focus:shadow-outline hover:bg-primary_hover hover:cursor-pointer',
@@ -26,7 +27,16 @@ export const Button: React.FC<{
   leftIcon?: IconProp;
   type?: 'small' | 'normal';
   onClick?: () => void;
-}> = ({ text, disabled, leftIcon, type, onClick }) => {
+  isLoading?: boolean;
+}> = ({ text, disabled, leftIcon, type, onClick, isLoading = true }) => {
+  if (isLoading) {
+    return (
+      <ContentLoader speed={2} width={150} height={36} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
+        <rect x='0' y='0' rx='5' ry='5' width='150' height='36' />
+      </ContentLoader>
+    );
+  }
+
   return (
     <button onClick={onClick} className={ButtonStyles({ type, disabled })} type='button' disabled={disabled} aria-label={text}>
       {leftIcon && <FontAwesomeIcon icon={leftIcon} className='mr-2' />}

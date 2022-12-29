@@ -23,7 +23,7 @@ export const TextArea: React.FC<{ label: string; value: string; editMode?: boole
       )}
       {isLoading ? (
         <ContentLoader speed={2} width={'100%'} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-          <rect x='0' y='0' rx='5' ry='5' width='100%' height='10' />
+          <rect x='0' y='0' rx='5' ry='5' width='90%' height='10' />
         </ContentLoader>
       ) : editMode ? (
         <textarea
