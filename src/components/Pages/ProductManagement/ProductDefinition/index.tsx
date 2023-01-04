@@ -16,6 +16,8 @@ import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { ControlledTextInput } from '@ui/Inputs/ControlledTextInput';
 
 const data = [
   {
@@ -74,6 +76,13 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
   const [value1, setValue1] = useState('yes');
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    control,
+  } = useForm<any>();
 
   const [edit, setEdit] = useState(false);
 
@@ -88,6 +97,8 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
       setEdit(!edit);
     }
   };
+
+  console.log(watch(t('productName')));
 
   return (
     <WidgetContainer height=''>
@@ -116,31 +127,95 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
         </div>
       </Modal>
       <InnerContainer>
-        <div className='flex justify-between items-center'>
-          <Title text={t('productDefinition')} />
-          <div className='flex gap-3'>
-            {edit && <Button onClick={() => setEdit(false)} text='Cancel' />}
-            <Button onClick={() => primaryActionButton()} text={edit ? 'Save' : 'Edit'} />
+        <form onSubmit={handleSubmit((data) => console.log(data))}>
+          <div className='flex justify-between items-center'>
+            <Title text={t('productDefinition')} />
+            <div className='flex gap-3'>
+              {edit && <Button onClick={() => setEdit(false)} text='Cancel' />}
+              {edit ? <Button text={'Save'} type={'submit'} /> : <Button onClick={() => primaryActionButton()} text={'Edit'} />}
+            </div>
           </div>
-        </div>
-        <TextInput label={t('productName')} value={productOfferInfo?.name ?? ''} editMode={edit} />
-        <div className='grid grid-cols-4 gap-3'>
-          <div className='col-span-1'>
-            <TextInput label={t('productCode')} value={productOfferInfo?.charetristics.prodCode} editMode={edit} />
+          <Controller
+            name='name'
+            control={control}
+            render={({ field }) => (
+              <ControlledTextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} editMode={edit} />
+            )}
+          />
+
+          <div className='grid grid-cols-4 gap-3'>
+            <div className='col-span-1'>
+              <Controller
+                name='charetristics.prodCode'
+                control={control}
+                render={({ field }) => (
+                  <ControlledTextInput
+                    {...field}
+                    label={t('productCode')}
+                    value={field.value ?? productOfferInfo?.charetristics.prodCode}
+                    editMode={edit}
+                  />
+                )}
+              />
+            </div>
+            <div className='col-span-1'>
+              <Controller
+                name='charetristics.modelCode'
+                control={control}
+                render={({ field }) => (
+                  <ControlledTextInput
+                    {...field}
+                    label={t('modelCode')}
+                    value={field.value ?? productOfferInfo?.charetristics.modelCode}
+                    editMode={edit}
+                  />
+                )}
+              />
+            </div>
+            <div className='col-span-2'>
+              <Controller
+                name='charetristics.modelDescription'
+                control={control}
+                render={({ field }) => (
+                  <ControlledTextInput
+                    {...field}
+                    label={t('modelDescription')}
+                    value={field.value ?? productOfferInfo?.charetristics.modelDescription}
+                    editMode={edit}
+                  />
+                )}
+              />
+            </div>
           </div>
-          <div className='col-span-1'>
-            <TextInput label={t('modelCode')} value={productOfferInfo?.charetristics.modelCode} editMode={edit} />
+          {/* <TextArea label={t('productDescription')} value={productOfferInfo?.comments ?? ''} editMode={edit} /> */}
+          {/* <TextArea label={t('comments')} value={productOfferInfo?.description ?? ''} editMode={edit} /> */}
+          <div className='grid grid-cols-2 gap-3'>
+            <Controller
+              name='commercialLaunchDate'
+              control={control}
+              render={({ field }) => (
+                <ControlledTextInput
+                  {...field}
+                  label={t('commercialLaunchDate')}
+                  value={field.value ?? productOfferInfo?.commercialLaunchDate}
+                  editMode={edit}
+                />
+              )}
+            />
+            <Controller
+              name='charetristics.supplier'
+              control={control}
+              render={({ field }) => (
+                <ControlledTextInput
+                  {...field}
+                  label={t('supplier')}
+                  value={field.value ?? productOfferInfo?.charetristics.supplier}
+                  editMode={edit}
+                />
+              )}
+            />
           </div>
-          <div className='col-span-2'>
-            <TextInput label={t('modelDescription')} value={productOfferInfo?.charetristics.modelDescription} editMode={edit} />
-          </div>
-        </div>
-        <TextArea label={t('productDescription')} value={productOfferInfo?.comments ?? ''} editMode={edit} />
-        <TextArea label={t('comments')} value={productOfferInfo?.description ?? ''} editMode={edit} />
-        <div className='grid grid-cols-2 gap-3'>
-          <TextInput label={t('commercialLaunchDate')} value={productOfferInfo?.commercialLaunchDate ?? ''} editMode={edit} />
-          <TextInput label={t('supplier')} value={productOfferInfo?.charetristics.supplier ?? ''} editMode={edit} />
-        </div>
+        </form>
         <div className='flex justify-between flex-wrap gap-2'>
           <SmallWidget>
             <div className='flex flex-col gap-2'>

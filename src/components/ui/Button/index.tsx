@@ -7,7 +7,7 @@ const ButtonStyles = cva(
   'bg-primary shadow-lg text-white py-2 px-3 rounded-lg text-sm focus:outline-none focus:shadow-outline hover:bg-primary_hover hover:cursor-pointer',
   {
     variants: {
-      type: {
+      size: {
         normal: 'min-w-[150px]',
         small: 'w-fit',
       },
@@ -16,7 +16,7 @@ const ButtonStyles = cva(
       },
     },
     defaultVariants: {
-      type: 'normal',
+      size: 'normal',
     },
   },
 );
@@ -25,10 +25,11 @@ export const Button: React.FC<{
   text: string;
   disabled?: boolean;
   leftIcon?: IconProp;
-  type?: 'small' | 'normal';
+  size?: 'small' | 'normal';
   onClick?: () => void;
   isLoading?: boolean;
-}> = ({ text, disabled, leftIcon, type, onClick, isLoading = false }) => {
+  type?: 'button' | 'submit' | 'reset';
+}> = ({ text, disabled, leftIcon, size, onClick, isLoading = false, type = 'button' }) => {
   if (isLoading) {
     return (
       <ContentLoader speed={2} width={150} height={36} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
@@ -38,7 +39,7 @@ export const Button: React.FC<{
   }
 
   return (
-    <button onClick={onClick} className={ButtonStyles({ type, disabled })} type='button' disabled={disabled} aria-label={text}>
+    <button onClick={onClick} className={ButtonStyles({ size, disabled })} type={type} disabled={disabled} aria-label={text}>
       {leftIcon && <FontAwesomeIcon icon={leftIcon} className='mr-2' />}
       {text}
     </button>
