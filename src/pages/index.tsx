@@ -19,7 +19,14 @@ import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notification } from '@ui/Toaster';
 import { PageSkeletonLoader } from '@/components/Pages/ProductManagement/ProductDefinition/PageSkeletonLoader';
-
+import { ConfigurationOptions } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/ConfigurationOptions';
+import { Details } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/Details';
+import { Pricing } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/Pricing';
+import { ProductSpecifications } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/ProductSpecifications';
+import { InnerContainer, WidgetContainer } from '@ui/WidgetContainer';
+import Tab from '@ui/Tab';
+import { Title } from '@ui/Typography/Title';
+import { useTranslation } from 'next-i18next';
 interface CustomJWT extends JWT {
   accessToken: string;
 }
@@ -52,9 +59,40 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
     }),
   };
 
+  const [edit, setEdit] = useState(false);
+  const { t } = useTranslation('productDefinition');
+
   return (
     <div className='flex flex-row gap-4 h-full w-full max-w-screen-2xl'>
-      <div className='flex-1'>{isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} />}</div>
+      <div className='flex-1 flex flex-col gap-3'>
+        {isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} />}
+        <WidgetContainer height='auto'>
+          <InnerContainer>
+            <Title text={t('productCharacterization')} />
+            <Tab>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
+                <Details editMode={edit} />
+              </Tab.TabElement>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.pricing')}>
+                <Pricing editMode={edit}></Pricing>
+              </Tab.TabElement>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.configurationOptions')}>
+                <ConfigurationOptions></ConfigurationOptions>
+              </Tab.TabElement>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.productSpecifications')}>
+                <ProductSpecifications></ProductSpecifications>
+              </Tab.TabElement>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.telcoExt')}>
+                <span>Telco Ext.</span>
+              </Tab.TabElement>
+              <Tab.TabElement tabTitle={t('productCharacterizationTabs.financeExt')}>
+                <span>Finance Ext.</span>
+              </Tab.TabElement>
+            </Tab>
+          </InnerContainer>
+        </WidgetContainer>
+      </div>
+
       <div id='expand' className='flex m-auto w-fit items-center'>
         <motion.div
           animate={{

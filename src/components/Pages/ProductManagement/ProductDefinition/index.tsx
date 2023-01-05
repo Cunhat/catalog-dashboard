@@ -98,8 +98,6 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
     }
   };
 
-  console.log(watch(t('productName')));
-
   return (
     <WidgetContainer height=''>
       <Modal open={open}>
@@ -248,7 +246,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
             </div>
           </SmallWidget>
         </div>
-        <WidgetContainer>
+        {/* <WidgetContainer>
           <InnerContainer>
             <Title text={t('productCharacterization')} />
             <Tab>
@@ -272,7 +270,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
               </Tab.TabElement>
             </Tab>
           </InnerContainer>
-        </WidgetContainer>
+        </WidgetContainer> */}
       </InnerContainer>
     </WidgetContainer>
   );

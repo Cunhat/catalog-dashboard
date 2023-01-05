@@ -5,7 +5,7 @@ export const WidgetContainer: React.FC<PropsWithChildren<{ height?: string; widt
   height = 'h-full',
   width = 'w-full',
 }) => {
-  return <div className={`${width} ${height} rounded-xl bg-white shadow-sm p-3 dark:bg-dark-widget`}>{children}</div>;
+  return <div className={`${width} ${height} rounded-xl bg-white shadow-md p-3 dark:bg-dark-widget`}>{children}</div>;
 };
 
 export const InnerContainer: React.FC<PropsWithChildren> = ({ children }) => {
