@@ -66,45 +66,6 @@ export const PageSkeletonLoader = () => {
             </div>
           </SmallWidget>
         </div>
-        <WidgetContainer>
-          <InnerContainer>
-            <ContentLoader speed={2} width={130} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-              <rect x='0' y='0' rx='5' ry='5' width='110' height='10' />
-            </ContentLoader>
-            <ContentLoader speed={2} width={'100%'} height={40} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-              <rect x='0' y='0' rx='5' ry='5' width='95%' height='40' />
-            </ContentLoader>
-            <div className='flex flex-col gap-4'>
-              <ContentLoader speed={2} width={130} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-                <rect x='0' y='0' rx='5' ry='5' width='110' height='10' />
-              </ContentLoader>
-              <div className='grid grid-cols-4 grid-rows-2 gap-3'>
-                <div className='col-start-1 col-span-1'>
-                  <InputSkeletonLoader />
-                </div>
-                <div className='row-start-2 col-span-1'>
-                  <InputSkeletonLoader />
-                </div>
-                <div className='row-start-2 col-span-1'>
-                  <InputSkeletonLoader />
-                </div>
-                <div className='row-start-2 col-span-1'>
-                  <InputSkeletonLoader />
-                </div>
-                <div className='row-start-2 col-span-1'>
-                  <InputSkeletonLoader />
-                </div>
-              </div>
-              <ContentLoader speed={2} width={130} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>
-                <rect x='0' y='0' rx='5' ry='5' width='110' height='10' />
-              </ContentLoader>
-              <div className='grid grid-cols-4 gap-3'>
-                <InputSkeletonLoader />
-                <InputSkeletonLoader />
-              </div>
-            </div>
-          </InnerContainer>
-        </WidgetContainer>
       </InnerContainer>
     </WidgetContainer>
   );

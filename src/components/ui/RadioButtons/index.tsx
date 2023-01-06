@@ -1,23 +1,25 @@
 type RadioData = Array<{
   id: string;
   label: string;
-  value: string | number;
+  value: string;
 }>;
 
 export const RadioButtons: React.FC<{
   name: string;
-  onChange: (e: any, setSelected: (value: string) => void) => void;
-  selected: string | number;
+  // onChange: (e: any, setSelected: (value: string | number) => void) => void;
+  selected: string;
   data: RadioData;
   setSelected: (value: string) => void;
-}> = ({ name, onChange, selected, data, setSelected }) => {
+}> = ({ name, selected, data, setSelected }) => {
   return (
     <ul className='flex flex-wrap w-full'>
       {data.map((radio, index) => {
         return (
           <li className='relative flex flex-1 justify-center' key={radio.id}>
             <input
-              onChange={(e) => onChange(e, setSelected)}
+              onChange={(e) => {
+                setSelected(e.target.value);
+              }}
               checked={selected === radio.value}
               className='sr-only peer'
               type='radio'

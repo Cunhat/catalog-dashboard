@@ -1,13 +1,7 @@
-import { ConfigurationOptions } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/ConfigurationOptions';
-import { Details } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/Details';
-import { Pricing } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/Pricing';
-import { ProductSpecifications } from '@/components/Pages/ProductManagement/ProductDefinition/Tabs/ProductSpecifications';
 import { Button } from '@ui/Button';
 import { TextArea } from '@ui/Inputs/TextArea';
-import { TextInput } from '@ui/Inputs/TextInput';
 import { Modal } from '@ui/Modal';
 import { RadioButtons } from '@ui/RadioButtons';
-import Tab from '@ui/Tab';
 import { notification } from '@ui/Toaster';
 import { Text } from '@ui/Typography/Text';
 import { Title } from '@ui/Typography/Title';
@@ -16,32 +10,32 @@ import { SmallWidget } from '@ui/WidgetContainer/SmallWidget';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { ControlledTextInput } from '@ui/Inputs/ControlledTextInput';
 
 const data = [
   {
     id: 'data1',
     label: 'No',
-    value: 0,
+    value: 'false',
   },
   {
     id: 'data2',
     label: 'Yes',
-    value: 1,
+    value: 'true',
   },
 ];
 
-const data1 = [
+const isSellable = [
   {
     id: 'data11',
     label: 'No',
-    value: 'no',
+    value: 'false',
   },
   {
     id: 'data12',
     label: 'Yes',
-    value: 'yes',
+    value: 'true',
   },
 ];
 const data2 = [
@@ -72,8 +66,8 @@ const data3 = [
 export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResponse | undefined }> = ({ productOfferInfo }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('productDefinition');
-  const [value, setValue] = useState('yes');
-  const [value1, setValue1] = useState('yes');
+  const [value, setValue] = useState(productOfferInfo?.serializedFlg ? 'true' : 'false');
+  const [value1, setValue1] = useState(productOfferInfo?.isSellable ? 'true' : 'false');
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const {
@@ -84,7 +78,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
 
   const [edit, setEdit] = useState(false);
 
-  const onChange = (value: any, setSelected: (value: string) => void) => {
+  const onChange = (value: any, setSelected: (value: string | number) => void) => {
     setSelected(value.target.value);
   };
 
@@ -101,7 +95,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
   };
 
   return (
-    <WidgetContainer height=''>
+    <WidgetContainer height='auto'>
       <Modal open={open}>
         <div className='flex flex-col gap-3'>
           <Title text='Confirmation' />
@@ -127,7 +121,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
         </div>
       </Modal>
       <InnerContainer>
-        <form onSubmit={handleSubmit(submitChanges)}>
+        <form className='flex flex-col gap-3' onSubmit={handleSubmit(submitChanges)}>
           <div className='flex justify-between items-center'>
             <Title text={t('productDefinition')} />
             <div className='flex gap-3'>
@@ -143,7 +137,6 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
               <ControlledTextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} editMode={edit} />
             )}
           />
-
           <div className='grid grid-cols-4 gap-3'>
             <div className='col-span-1'>
               <Controller
@@ -238,31 +231,25 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('serializable')} />
-              <RadioButtons
-                setSelected={setValue}
-                selected={productOfferInfo?.serializedFlg ? 1 : 0}
-                data={data}
-                onChange={onChange}
-                name='radio_yes'
-              />
+              <RadioButtons setSelected={setValue} selected={value} data={data} name='radio_yes' />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('orderable')} />
-              <RadioButtons setSelected={setValue1} selected={value1} data={data1} onChange={onChange} name='radio_orderable' />
+              <RadioButtons setSelected={setValue1} selected={value1} data={isSellable} name='radio_isSellable' />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('objectType')} />
-              <RadioButtons setSelected={setValue2} selected={value2} data={data2} onChange={onChange} name='radio_objType' />
+              <RadioButtons setSelected={setValue2} selected={value2} data={data2} name='radio_objType' />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2 items-center'>
               <Title text={t('restrictOptionCombis')} />
-              <RadioButtons setSelected={setValue3} selected={value3} data={data3} onChange={onChange} name='radio_combis' />
+              <RadioButtons setSelected={setValue3} selected={value3} data={data3} name='radio_combis' />
             </div>
           </SmallWidget>
         </div>
