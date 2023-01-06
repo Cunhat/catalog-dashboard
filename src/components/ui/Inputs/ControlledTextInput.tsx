@@ -1,16 +1,16 @@
 import { Text } from '@ui/Typography/Text';
 import React from 'react';
 
-type ControlledTextInputProps = { label: string; value?: string; editMode?: boolean; isLoading?: boolean };
+type ControlledTextInputProps = { label: string; value?: string; isEditing?: boolean; isLoading?: boolean };
 
-export const ControlledTextInput = React.forwardRef<any, ControlledTextInputProps>((props, ref) => {
+export const ControlledTextInput = React.forwardRef<any, ControlledTextInputProps>(({ isEditing, ...props }, ref) => {
   return (
     <div className='flex flex-col gap-1'>
       <label htmlFor={props.label} className={'text-neutral-500 dark:text-white text-sm font-bold'}>
         {props.label}
       </label>
 
-      {props.editMode ? (
+      {isEditing ? (
         <input
           type='text'
           id={props.label}

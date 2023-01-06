@@ -75,12 +75,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
     formState: { isDirty },
     control,
   } = useForm<ProductOfferingResponse>({ defaultValues: productOfferInfo });
-
   const [edit, setEdit] = useState(false);
-
-  const onChange = (value: any, setSelected: (value: string | number) => void) => {
-    setSelected(value.target.value);
-  };
 
   const primaryActionButton = () => {
     if (edit) {
@@ -134,7 +129,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
             name='name'
             control={control}
             render={({ field }) => (
-              <ControlledTextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} editMode={edit} />
+              <ControlledTextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} isEditing={edit} />
             )}
           />
           <div className='grid grid-cols-4 gap-3'>
@@ -147,7 +142,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                     {...field}
                     label={t('productCode')}
                     value={field.value ?? productOfferInfo?.charetristics.prodCode}
-                    editMode={edit}
+                    isEditing={edit}
                   />
                 )}
               />
@@ -161,7 +156,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                     {...field}
                     label={t('modelCode')}
                     value={field.value ?? productOfferInfo?.charetristics.modelCode}
-                    editMode={edit}
+                    isEditing={edit}
                   />
                 )}
               />
@@ -175,7 +170,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                     {...field}
                     label={t('modelDescription')}
                     value={field.value ?? productOfferInfo?.charetristics.modelDescription}
-                    editMode={edit}
+                    isEditing={edit}
                   />
                 )}
               />
@@ -189,7 +184,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                 {...field}
                 label={t('productDescription')}
                 value={field.value ?? productOfferInfo?.description ?? ''}
-                editMode={edit}
+                isEditing={edit}
               />
             )}
           />
@@ -197,7 +192,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
             name='comments'
             control={control}
             render={({ field }) => (
-              <TextArea {...field} label={t('comments')} value={field.value ?? productOfferInfo?.comments ?? ''} editMode={edit} />
+              <TextArea {...field} label={t('comments')} value={field.value ?? productOfferInfo?.comments ?? ''} isEditing={edit} />
             )}
           />
           <div className='grid grid-cols-2 gap-3'>
@@ -209,7 +204,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                   {...field}
                   label={t('commercialLaunchDate')}
                   value={field.value ?? productOfferInfo?.commercialLaunchDate}
-                  editMode={edit}
+                  isEditing={edit}
                 />
               )}
             />
@@ -221,7 +216,7 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
                   {...field}
                   label={t('supplier')}
                   value={field.value ?? productOfferInfo?.charetristics.supplier}
-                  editMode={edit}
+                  isEditing={edit}
                 />
               )}
             />

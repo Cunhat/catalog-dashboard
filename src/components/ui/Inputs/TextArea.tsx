@@ -1,9 +1,9 @@
 import { Text } from '@ui/Typography/Text';
 import React from 'react';
 
-type TextAreaProps = { label: string; value?: string; editMode?: boolean; isLoading?: boolean };
+type TextAreaProps = { label: string; value?: string; isEditing?: boolean; isLoading?: boolean };
 
-export const TextArea = React.forwardRef<any, TextAreaProps>((props, ref) => {
+export const TextArea = React.forwardRef<any, TextAreaProps>(({ isEditing, ...props }, ref) => {
   return (
     <div className='flex flex-col gap-1'>
       {props.label !== undefined && props.label?.length > 0 && (
@@ -11,7 +11,7 @@ export const TextArea = React.forwardRef<any, TextAreaProps>((props, ref) => {
           {props.label}
         </label>
       )}
-      {props.editMode ? (
+      {isEditing ? (
         <textarea
           rows={4}
           id={props.label}

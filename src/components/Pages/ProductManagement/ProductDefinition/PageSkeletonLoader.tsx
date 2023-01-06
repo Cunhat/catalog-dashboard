@@ -6,7 +6,7 @@ import { TextAreaSkeletonLoader } from '@ui/SkeletonLoader/TextAreaSkeletonLoade
 
 export const PageSkeletonLoader = () => {
   return (
-    <WidgetContainer height=''>
+    <WidgetContainer height='auto'>
       <InnerContainer>
         <div className='flex justify-between items-center'>
           <ContentLoader speed={2} width={110} height={15} backgroundColor='#f3f3f3' foregroundColor='#ecebeb'>

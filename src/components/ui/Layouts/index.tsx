@@ -12,7 +12,6 @@ import { Toaster } from 'react-hot-toast';
 export const darkModeAtom = atomWithStorage('darkMode', false);
 
 export const DashboardLayout: FC<PropsWithChildren<{ userInfo: any }>> = ({ children, userInfo }) => {
-  console.log(userInfo);
   const data: Array<MenuElement> = [
     {
       label: 'Log out',

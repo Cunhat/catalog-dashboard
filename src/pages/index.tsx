@@ -48,18 +48,6 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
     refetchOnWindowFocus: false,
   });
   const [open, setOpen] = useState<boolean>(false);
-
-  const variants = {
-    open: (width = 500) => ({
-      width: width,
-      transition: { duration: 1 },
-    }),
-    closed: (width = 0) => ({
-      width: width,
-      transition: { duration: 1 },
-    }),
-  };
-
   const [edit, setEdit] = useState(false);
   const { t } = useTranslation('productDefinition');
 
