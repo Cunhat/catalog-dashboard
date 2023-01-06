@@ -71,10 +71,10 @@ const UserMenu: React.FC<{
   return (
     <MenuComponent.Button className='flex gap-3 hover:cursor-pointer hover:bg-hover py-1 px-3 rounded-md items-center justify-center'>
       <div className='rounded-full bg-hover p-[6px] w-8 flex justify-center items-center border border-primary'>
-        <span className='text-sm text-primary font-bold m-0 p-0'>{props.userInfo.name[0]?.toLocaleUpperCase()}</span>
+        <span className='text-sm text-primary font-bold m-0 p-0'>{props?.userInfo?.name[0]?.toLocaleUpperCase() ?? ''}</span>
       </div>
       <div className='flex flex-col '>
-        <p className='text-xs text-neutral-500 dark:text-primary'>{props.userInfo.name}</p>
+        <p className='text-xs text-neutral-500 dark:text-primary'>{props?.userInfo?.name}</p>
       </div>
     </MenuComponent.Button>
   );

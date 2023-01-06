@@ -27,6 +27,7 @@ import { InnerContainer, WidgetContainer } from '@ui/WidgetContainer';
 import Tab from '@ui/Tab';
 import { Title } from '@ui/Typography/Title';
 import { useTranslation } from 'next-i18next';
+import { Button } from '@ui/Button';
 interface CustomJWT extends JWT {
   accessToken: string;
 }
@@ -68,7 +69,10 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
         {isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} />}
         <WidgetContainer height='auto'>
           <InnerContainer>
-            <Title text={t('productCharacterization')} />
+            <div className='flex justify-between'>
+              <Title text={t('productCharacterization')} />
+              <Button onClick={() => {}} text={'Edit'} />
+            </div>
             <Tab>
               <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
                 <Details editMode={edit} />
@@ -147,7 +151,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
 };
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <DashboardLayout userInfo={page.props.session.user}>{page}</DashboardLayout>;
+  return <DashboardLayout userInfo={page?.props?.session?.user}>{page}</DashboardLayout>;
 };
 
 export default Home;

@@ -77,12 +77,10 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const {
-    register,
     handleSubmit,
-    watch,
-    formState: { errors },
+    formState: { isDirty },
     control,
-  } = useForm<any>();
+  } = useForm<ProductOfferingResponse>({ defaultValues: productOfferInfo });
 
   const [edit, setEdit] = useState(false);
 
@@ -96,6 +94,10 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
     } else {
       setEdit(!edit);
     }
+  };
+
+  const submitChanges = (data: ProductOfferingResponse) => {
+    console.log(data);
   };
 
   return (
@@ -125,12 +127,13 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
         </div>
       </Modal>
       <InnerContainer>
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form onSubmit={handleSubmit(submitChanges)}>
           <div className='flex justify-between items-center'>
             <Title text={t('productDefinition')} />
             <div className='flex gap-3'>
               {edit && <Button onClick={() => setEdit(false)} text='Cancel' />}
-              {edit ? <Button text={'Save'} type={'submit'} /> : <Button onClick={() => primaryActionButton()} text={'Edit'} />}
+              {!edit && <Button onClick={() => primaryActionButton()} text={'Edit'} />}
+              {edit && isDirty && <Button text={'Save'} type={'submit'} />}
             </div>
           </div>
           <Controller
@@ -185,8 +188,25 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
               />
             </div>
           </div>
-          {/* <TextArea label={t('productDescription')} value={productOfferInfo?.comments ?? ''} editMode={edit} /> */}
-          {/* <TextArea label={t('comments')} value={productOfferInfo?.description ?? ''} editMode={edit} /> */}
+          <Controller
+            name='description'
+            control={control}
+            render={({ field }) => (
+              <TextArea
+                {...field}
+                label={t('productDescription')}
+                value={field.value ?? productOfferInfo?.description ?? ''}
+                editMode={edit}
+              />
+            )}
+          />
+          <Controller
+            name='comments'
+            control={control}
+            render={({ field }) => (
+              <TextArea {...field} label={t('comments')} value={field.value ?? productOfferInfo?.comments ?? ''} editMode={edit} />
+            )}
+          />
           <div className='grid grid-cols-2 gap-3'>
             <Controller
               name='commercialLaunchDate'
@@ -246,31 +266,6 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
             </div>
           </SmallWidget>
         </div>
-        {/* <WidgetContainer>
-          <InnerContainer>
-            <Title text={t('productCharacterization')} />
-            <Tab>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
-                <Details editMode={edit} />
-              </Tab.TabElement>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.pricing')}>
-                <Pricing editMode={edit}></Pricing>
-              </Tab.TabElement>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.configurationOptions')}>
-                <ConfigurationOptions></ConfigurationOptions>
-              </Tab.TabElement>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.productSpecifications')}>
-                <ProductSpecifications></ProductSpecifications>
-              </Tab.TabElement>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.telcoExt')}>
-                <span>Telco Ext.</span>
-              </Tab.TabElement>
-              <Tab.TabElement tabTitle={t('productCharacterizationTabs.financeExt')}>
-                <span>Finance Ext.</span>
-              </Tab.TabElement>
-            </Tab>
-          </InnerContainer>
-        </WidgetContainer> */}
       </InnerContainer>
     </WidgetContainer>
   );
