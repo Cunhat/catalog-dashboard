@@ -5,7 +5,7 @@ import { ProductInformation } from '@/components/Pages/ProductManagement/Widgets
 import { VersionHistory } from '@/components/Pages/ProductManagement/Widgets/VersionHistory';
 import { productOffering } from '@/server/api';
 import { NextPageWithLayout } from '@/types';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { DashboardLayout } from '@ui/Layouts';
 import { GetServerSideProps } from 'next';
 import { Session } from 'next-auth';
@@ -28,6 +28,9 @@ import Tab from '@ui/Tab';
 import { Title } from '@ui/Typography/Title';
 import { useTranslation } from 'next-i18next';
 import { Button } from '@ui/Button';
+import { updateProductOffering } from '@/server/api';
+import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
+
 interface CustomJWT extends JWT {
   accessToken: string;
 }
@@ -47,14 +50,33 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
     retry: false,
     refetchOnWindowFocus: false,
   });
+
   const [open, setOpen] = useState<boolean>(false);
   const [edit, setEdit] = useState(false);
   const { t } = useTranslation('productDefinition');
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (values: ProductOfferingResponse) => {
+      return updateProductOffering(props?.token?.accessToken, values);
+    },
+    onSuccess: () => {
+      notification('success', 'Success', 'Product updated successfully');
+      queryClient.invalidateQueries({ queryKey: ['productOffering'] });
+    },
+    onError: () => {
+      notification('error', 'Error', 'Error updating product');
+    },
+  });
+
+  const handleUpdate = (values: ProductOfferingResponse) => {
+    mutation.mutate(values);
+  };
 
   return (
     <div className='flex flex-row gap-4 h-full w-full max-w-screen-2xl'>
       <div className='flex-1 flex flex-col gap-3'>
-        {isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} />}
+        {isFetching ? <PageSkeletonLoader /> : <ProductDefinition productOfferInfo={data} handleUpdate={handleUpdate} />}
         <WidgetContainer height='auto'>
           <InnerContainer>
             <div className='flex justify-between'>

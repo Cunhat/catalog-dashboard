@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
 import { useForm, Controller } from 'react-hook-form';
 import { ControlledTextInput } from '@ui/Inputs/ControlledTextInput';
+import { removeUndefinedProps } from '@/utils/utils';
 
 const data = [
   {
@@ -63,7 +64,10 @@ const data3 = [
   },
 ];
 
-export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResponse | undefined }> = ({ productOfferInfo }) => {
+export const ProductDefinition: React.FC<{
+  productOfferInfo: ProductOfferingResponse | undefined;
+  handleUpdate: (values: ProductOfferingResponse) => void;
+}> = ({ productOfferInfo, handleUpdate }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('productDefinition');
   const [value, setValue] = useState(productOfferInfo?.serializedFlg ? 'true' : 'false');
@@ -72,9 +76,9 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
   const [value3, setValue3] = useState('free');
   const {
     handleSubmit,
-    formState: { isDirty },
+    formState: { isDirty, dirtyFields },
     control,
-  } = useForm<ProductOfferingResponse>({ defaultValues: productOfferInfo });
+  } = useForm<ProductOfferingResponse>();
   const [edit, setEdit] = useState(false);
 
   const primaryActionButton = () => {
@@ -87,6 +91,10 @@ export const ProductDefinition: React.FC<{ productOfferInfo: ProductOfferingResp
 
   const submitChanges = (data: ProductOfferingResponse) => {
     console.log(data);
+    let customData = { ...data };
+    customData = removeUndefinedProps({ ...data });
+    console.log(customData);
+    handleUpdate(customData);
   };
 
   return (
