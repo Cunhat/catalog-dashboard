@@ -106,7 +106,7 @@ export const ProductDefinition: React.FC<{
           <div className='flex gap-2 ml-auto'>
             <Button
               text='Yes'
-              type='small'
+              size='small'
               onClick={() => {
                 notification('success', 'Saved', 'Product saved successfully');
                 setTimeout(() => {
@@ -119,7 +119,7 @@ export const ProductDefinition: React.FC<{
                 setEdit(false);
               }}
             />
-            <Button text='No' type='small' onClick={() => setOpen(false)} />
+            <Button text='No' size='small' onClick={() => setOpen(false)} />
           </div>
         </div>
       </Modal>

@@ -17,15 +17,15 @@ export const Comments: React.FC = ({}) => {
           <Title text='Add comments' />
           <TextArea label='' value='' />
           <div className='flex gap-2 ml-auto'>
-            <Button text='Add' type='small' onClick={() => setOpenComments(false)} />
-            <Button text='Cancel' type='small' onClick={() => setOpenComments(false)} />
+            <Button text='Add' size='small' onClick={() => setOpenComments(false)} />
+            <Button text='Cancel' size='small' onClick={() => setOpenComments(false)} />
           </div>
         </div>
       </Modal>
       <WidgetContainer height='h-fit'>
         <InnerContainer>
           <Title text='Comments' />
-          <Button leftIcon={faCheck} onClick={() => setOpenComments(!openComments)} text='New Comment' type='small' />
+          <Button leftIcon={faCheck} onClick={() => setOpenComments(!openComments)} text='New Comment' size='small' />
           <Separator />
           <div className='flex flex-col gap-2'>
             <div className='flex justify-between'>

@@ -4,7 +4,7 @@ export const formatTitle = (title: string, open: boolean) => {
 };
 
 export const removeUndefinedProps = (obj: any) => {
-  for (var prop in obj) {
+  for (const prop in obj) {
     if (typeof obj[prop] === 'object' && obj[prop] !== null) {
       removeUndefinedProps(obj[prop]);
     } else if (obj.hasOwnProperty(prop) && obj[prop] === undefined) {

@@ -81,7 +81,7 @@ const Home: NextPageWithLayout<HomeProps> = (props) => {
           <InnerContainer>
             <div className='flex justify-between'>
               <Title text={t('productCharacterization')} />
-              <Button onClick={() => {}} text={'Edit'} />
+              <Button onClick={() => setEdit(!edit)} text={'Edit'} />
             </div>
             <Tab>
               <Tab.TabElement tabTitle={t('productCharacterizationTabs.details.title')}>
