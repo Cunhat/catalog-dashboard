@@ -12,25 +12,25 @@ export const Pricing: React.FC<{ editMode: boolean }> = ({ editMode }) => {
           <Select label='Pricing Type' editMode={editMode} />
         </div>
         <div className='col-span-3 row-start-2'>
-          <TextInput label='Standard Price' editMode={editMode} />
+          <TextInput label='Standard Price' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-2'>
-          <TextInput label='Min Sell Price' editMode={editMode} />
+          <TextInput label='Min Sell Price' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-2'>
-          <TextInput label='Max Sell Price' editMode={editMode} />
+          <TextInput label='Max Sell Price' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-2'>
-          <TextInput label='In Plan Discount' editMode={editMode} />
+          <TextInput label='In Plan Discount' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-3'>
-          <TextInput label='Standard cost' editMode={editMode} />
+          <TextInput label='Standard cost' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-3'>
-          <TextInput label='Standard Gross Margin' editMode={editMode} />
+          <TextInput label='Standard Gross Margin' isEditing={editMode} />
         </div>
         <div className='col-span-3 row-start-3'>
-          <TextInput label='Standard Net Margin' editMode={editMode} />
+          <TextInput label='Standard Net Margin' isEditing={editMode} />
         </div>
       </div>
     </div>

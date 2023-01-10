@@ -13,22 +13,22 @@ export const Details: React.FC<{ editMode: boolean }> = ({ editMode }) => {
           <Select label={t('productCharacterizationTabs.details.unitSystems')} editMode={editMode} />
         </div>
         <div className='row-start-2 col-span-1'>
-          <TextInput label={t('productCharacterizationTabs.details.itemHeight')} editMode={editMode} />
+          <TextInput label={t('productCharacterizationTabs.details.itemHeight')} isEditing={editMode} />
         </div>
         <div className='row-start-2 col-span-1'>
-          <TextInput label={t('productCharacterizationTabs.details.itemLength')} editMode={editMode} />
+          <TextInput label={t('productCharacterizationTabs.details.itemLength')} isEditing={editMode} />
         </div>
         <div className='row-start-2 col-span-1'>
-          <TextInput label={t('productCharacterizationTabs.details.itemWeight')} editMode={editMode} />
+          <TextInput label={t('productCharacterizationTabs.details.itemWeight')} isEditing={editMode} />
         </div>
         <div className='row-start-2 col-span-1'>
-          <TextInput label={t('productCharacterizationTabs.details.itemWidth')} editMode={editMode} />
+          <TextInput label={t('productCharacterizationTabs.details.itemWidth')} isEditing={editMode} />
         </div>
       </div>
       <Title text={t('productCharacterizationTabs.details.productLifecycle')} />
       <div className='grid grid-cols-4 gap-3'>
-        <TextInput label={t('productCharacterizationTabs.details.durationAfterActivation')} editMode={editMode} />
-        <TextInput label={t('productCharacterizationTabs.details.units')} editMode={editMode} />
+        <TextInput label={t('productCharacterizationTabs.details.durationAfterActivation')} isEditing={editMode} />
+        <TextInput label={t('productCharacterizationTabs.details.units')} isEditing={editMode} />
       </div>
     </div>
   );
