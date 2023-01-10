@@ -4,13 +4,15 @@ type RadioData = Array<{
   value: string;
 }>;
 
-export const RadioButtons: React.FC<{
+type RadioButtonsProps = {
   name: string;
-  // onChange: (e: any, setSelected: (value: string | number) => void) => void;
   selected: string;
   data: RadioData;
   setSelected: (value: string) => void;
-}> = ({ name, selected, data, setSelected }) => {
+  disabled?: boolean;
+};
+
+export const RadioButtons: React.FC<RadioButtonsProps> = ({ name, selected, data, setSelected, disabled = false }) => {
   return (
     <ul className='flex flex-wrap w-full'>
       {data.map((radio, index) => {
@@ -26,6 +28,7 @@ export const RadioButtons: React.FC<{
               value={radio.value}
               name={name}
               id={radio.id}
+              disabled={disabled}
             />
             <label
               className={`flex flex-1 justify-center py-2 px-3 bg-white dark:bg-dark-drops dark:text-white dark:border-[#36393f] border border-neutral-300 cursor-pointer focus:outline-none  hover:bg-hover peer-checked:bg-primary text-neutral-500 peer-checked:text-white peer-checked:border-transparent ${

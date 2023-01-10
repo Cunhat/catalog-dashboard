@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import { ProductOfferingResponse } from '@/types/CatalogApiTypes';
 import { useForm, Controller } from 'react-hook-form';
-import { ControlledTextInput } from '@ui/Inputs/ControlledTextInput';
+import { TextInput } from '@ui/Inputs/TextInput';
 import { removeUndefinedProps } from '@/utils/utils';
 
 const data = [
@@ -27,7 +27,7 @@ const data = [
   },
 ];
 
-const isSellable = [
+const isSellableData = [
   {
     id: 'data11',
     label: 'No',
@@ -70,13 +70,13 @@ export const ProductDefinition: React.FC<{
 }> = ({ productOfferInfo, handleUpdate }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('productDefinition');
-  const [value, setValue] = useState(productOfferInfo?.serializedFlg ? 'true' : 'false');
-  const [value1, setValue1] = useState(productOfferInfo?.isSellable ? 'true' : 'false');
+  const [serializedFlg, setSerializedFlg] = useState(productOfferInfo?.serializedFlg ? 'true' : 'false');
+  const [isSellable, setIsSellable] = useState(productOfferInfo?.isSellable ? 'true' : 'false');
   const [value2, setValue2] = useState('physical');
   const [value3, setValue3] = useState('free');
   const {
     handleSubmit,
-    formState: { isDirty, dirtyFields },
+    formState: { isDirty },
     control,
   } = useForm<ProductOfferingResponse>();
   const [edit, setEdit] = useState(false);
@@ -90,11 +90,29 @@ export const ProductDefinition: React.FC<{
   };
 
   const submitChanges = (data: ProductOfferingResponse) => {
-    console.log(data);
+    const serializedFlgAux = serializedFlg === 'true' ? true : false;
+    const isSellableAux = isSellable === 'true' ? true : false;
     let customData = { ...data };
     customData = removeUndefinedProps({ ...data });
-    console.log(customData);
+
+    if (serializedFlgAux !== productOfferInfo?.serializedFlg) {
+      customData = { ...customData, serializedFlg: serializedFlgAux };
+    }
+    if (isSellableAux !== productOfferInfo?.isSellable) {
+      customData = { ...customData, isSellable: isSellableAux };
+    }
+
     handleUpdate(customData);
+  };
+
+  const checkRadioButtons = () => {
+    const serializedFlgAux = serializedFlg === 'true' ? true : false;
+    const isSellableAux = isSellable === 'true' ? true : false;
+    const value2Aux = value2 === 'physical' ? true : false;
+    const value3Aux = value3 === 'free' ? true : false;
+
+    //TODO: Add the rest of the fields when the values are confirmed
+    return serializedFlgAux !== productOfferInfo?.serializedFlg || isSellableAux !== productOfferInfo?.isSellable;
   };
 
   return (
@@ -130,14 +148,14 @@ export const ProductDefinition: React.FC<{
             <div className='flex gap-3'>
               {edit && <Button onClick={() => setEdit(false)} text='Cancel' />}
               {!edit && <Button onClick={() => primaryActionButton()} text={'Edit'} />}
-              {edit && isDirty && <Button text={'Save'} type={'submit'} />}
+              {edit && (isDirty || checkRadioButtons()) && <Button text={'Save'} type={'submit'} />}
             </div>
           </div>
           <Controller
             name='name'
             control={control}
             render={({ field }) => (
-              <ControlledTextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} isEditing={edit} />
+              <TextInput {...field} label={t('productName')} value={field.value ?? productOfferInfo?.name} isEditing={edit} />
             )}
           />
           <div className='grid grid-cols-4 gap-3'>
@@ -146,7 +164,7 @@ export const ProductDefinition: React.FC<{
                 name='charetristics.prodCode'
                 control={control}
                 render={({ field }) => (
-                  <ControlledTextInput
+                  <TextInput
                     {...field}
                     label={t('productCode')}
                     value={field.value ?? productOfferInfo?.charetristics.prodCode}
@@ -160,7 +178,7 @@ export const ProductDefinition: React.FC<{
                 name='charetristics.modelCode'
                 control={control}
                 render={({ field }) => (
-                  <ControlledTextInput
+                  <TextInput
                     {...field}
                     label={t('modelCode')}
                     value={field.value ?? productOfferInfo?.charetristics.modelCode}
@@ -174,7 +192,7 @@ export const ProductDefinition: React.FC<{
                 name='charetristics.modelDescription'
                 control={control}
                 render={({ field }) => (
-                  <ControlledTextInput
+                  <TextInput
                     {...field}
                     label={t('modelDescription')}
                     value={field.value ?? productOfferInfo?.charetristics.modelDescription}
@@ -208,7 +226,7 @@ export const ProductDefinition: React.FC<{
               name='commercialLaunchDate'
               control={control}
               render={({ field }) => (
-                <ControlledTextInput
+                <TextInput
                   {...field}
                   label={t('commercialLaunchDate')}
                   value={field.value ?? productOfferInfo?.commercialLaunchDate}
@@ -220,7 +238,7 @@ export const ProductDefinition: React.FC<{
               name='charetristics.supplier'
               control={control}
               render={({ field }) => (
-                <ControlledTextInput
+                <TextInput
                   {...field}
                   label={t('supplier')}
                   value={field.value ?? productOfferInfo?.charetristics.supplier}
@@ -234,25 +252,31 @@ export const ProductDefinition: React.FC<{
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('serializable')} />
-              <RadioButtons setSelected={setValue} selected={value} data={data} name='radio_yes' />
+              <RadioButtons setSelected={setSerializedFlg} selected={serializedFlg} data={data} name='radio_yes' disabled={!edit} />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('orderable')} />
-              <RadioButtons setSelected={setValue1} selected={value1} data={isSellable} name='radio_isSellable' />
+              <RadioButtons
+                setSelected={setIsSellable}
+                selected={isSellable}
+                data={isSellableData}
+                name='radio_isSellable'
+                disabled={!edit}
+              />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2'>
               <Title text={t('objectType')} />
-              <RadioButtons setSelected={setValue2} selected={value2} data={data2} name='radio_objType' />
+              <RadioButtons setSelected={setValue2} selected={value2} data={data2} name='radio_objType' disabled={!edit} />
             </div>
           </SmallWidget>
           <SmallWidget>
             <div className='flex flex-col gap-2 items-center'>
               <Title text={t('restrictOptionCombis')} />
-              <RadioButtons setSelected={setValue3} selected={value3} data={data3} name='radio_combis' />
+              <RadioButtons setSelected={setValue3} selected={value3} data={data3} name='radio_combis' disabled={!edit} />
             </div>
           </SmallWidget>
         </div>
