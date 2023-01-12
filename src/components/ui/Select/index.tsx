@@ -3,7 +3,6 @@ import { Listbox, Transition } from '@headlessui/react';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Text } from '@ui/Typography/Text';
-import ContentLoader from 'react-content-loader';
 
 const data = ['Metric', 'Imperial'];
 
